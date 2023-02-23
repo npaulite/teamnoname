@@ -1,26 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import useJaneHopkins from './hooks/useJaneHopkins';
+import { Routes, Route, BrowserRouter} from 'react-router-dom';
+import Login from './pages/Login';
+import JaneHopkinsDoctor from './pages/JaneHopkinsDoctor';
+import JaneHopkinsAdmin from './pages/JaneHopkinsAdmin';
+import Bavaria from './pages/Bavaria';
+import FDA from './pages/FDA';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <Routes>
+    <Route exact path="/" element={<Login/>}> </Route>
+    <Route path="/JaneHopkins/doctor" element= { <JaneHopkinsDoctor/> }> </Route>
+    <Route path="/JaneHopkins/admin" element= { <JaneHopkinsAdmin/> }> </Route>
+    <Route path="/Bavaria" element={<Bavaria />} />
+    <Route path="/FDA" element={<FDA />} />
+  </Routes>
+  )
 }
 
 export default App;
