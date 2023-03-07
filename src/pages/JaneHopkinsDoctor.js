@@ -29,7 +29,7 @@ const JaneHopkinsDoctor = () => {
 
   return (
       <div className="main">
-        <h1 className="h1">JaneHopkins Doctor Page</h1>
+        <h1 className='container'>JaneHopkins Doctor Page</h1>
         <div className="add"> 
           <Button variant="contained" size="large" href="/JaneHopkinsDoctor/AddPatient">
             <Typography variant="h5">Add Patient</Typography>

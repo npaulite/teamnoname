@@ -1,8 +1,7 @@
 
 import React from 'react';
-import Navbar from './Navbar';
-import './App.css';
-// import Home from './pages/Home';
+import Navba from './Navba';
+import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import JaneHopkinsDoctor from './pages/JaneHopkinsDoctor';
@@ -16,24 +15,19 @@ function App() {
   return (
     <>
 
-        <Navbar></Navbar>
+        <Navba></Navba>
+        <div>
         <Routes>
-          {/* <Route path='/' exact/>
-          <Route path='/FDA' component={FDA} />
-          <Route path='/Bavaria' component={Bavaria} />
-          <Route path='/JaneHopkinsDoctor' component={JaneHopkinsDoctor} />
-          <Route path='/JaneHopkinsAdmin' component={JaneHopkinsAdmin} />
-          <Route path='/Login' component={Login} /> */}
-          <Route path='/' exact/>
-          <Route path='/FDA' exact element={<FDA/>} />
-          <Route path='/Bavaria' exact element={<Bavaria/>} />
-          <Route path='/JaneHopkinsDoctor' exact element={<JaneHopkinsDoctor/>} />
-          <Route path='/JaneHopkinsAdmin' exact element={<JaneHopkinsAdmin/>} />
-          <Route path='/Login' exact element={<Login/>} />
-          <Route path='/JaneHopkinsDoctor/AddPatient' exact element={<AddForm/>} />
-          <Route path='/JaneHopkinsDoctor/UpdatePatient' exact element={<UpdateForm/>} />
+          <Route path='/' element={<Home/>}/>
+          <Route path='/FDA'  element={<FDA/>} />
+          <Route path='/Bavaria'  element={<Bavaria/>} />
+          <Route path='/JaneHopkinsDoctor'  element={<JaneHopkinsDoctor/>} />
+          <Route path='/JaneHopkinsAdmin'  element={<JaneHopkinsAdmin/>} />
+          <Route path='/Login'  element={<Login/>} />
+          <Route path='/JaneHopkinsDoctor/AddPatient'  element={<AddForm/>} />
+          <Route path='/JaneHopkinsDoctor/UpdatePatient'  element={<UpdateForm/>} />
         </Routes>
-
+        </div>
     </>
   );
 }

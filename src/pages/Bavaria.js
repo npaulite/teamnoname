@@ -2,7 +2,7 @@ import useBavaria from "../hooks/useBavaria"
 
 const Bavaria = () => {
   return (
-    <div><h1>Bavaria</h1></div>
+    <div><h1 className='container'>Bavaria</h1></div>
   );
 };
 
