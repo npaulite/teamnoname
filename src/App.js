@@ -9,6 +9,8 @@ import JaneHopkinsDoctor from './pages/JaneHopkinsDoctor';
 import JaneHopkinsAdmin from './pages/JaneHopkinsAdmin';
 import Bavaria from './pages/Bavaria';
 import FDA from './pages/FDA';
+import AddForm from './pages/AddForm';
+import UpdateForm from './pages/UpdateForm';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path='/JaneHopkinsDoctor' exact element={<JaneHopkinsDoctor/>} />
           <Route path='/JaneHopkinsAdmin' exact element={<JaneHopkinsAdmin/>} />
           <Route path='/Login' exact element={<Login/>} />
+          <Route path='/JaneHopkinsDoctor/AddPatient' exact element={<AddForm/>} />
+          <Route path='/JaneHopkinsDoctor/UpdatePatient' exact element={<UpdateForm/>} />
         </Routes>
 
     </>

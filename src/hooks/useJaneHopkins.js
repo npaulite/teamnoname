@@ -1,4 +1,3 @@
-import React from 'react';
 import { createVendiaClient } from '@vendia/client'
 
 const client = createVendiaClient({
