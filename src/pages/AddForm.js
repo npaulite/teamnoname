@@ -170,9 +170,8 @@ function AddForm() {
                     }
                 ]
             }
-        });
-        console.log(addResponse);
-
+        })
+        console.log(addResponse)
     }
     
     const handleMedication = (e, index) => {
@@ -248,7 +247,7 @@ function AddForm() {
         }]);
       };
 
-    const handleSubmit= (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         if(addPatient()) {
         console.log(addPatient);
@@ -265,12 +264,10 @@ function AddForm() {
     <div className="add">
         <Box>
         <div className="return">
-            
             <Button variant="outlined" size="large" onClick={goBack}>
                 <Typography>Go Back</Typography>
                 <ArrowLeftSharp/>
             </Button>
-            
         </div>
         </Box>
         <Container>
@@ -440,7 +437,6 @@ function AddForm() {
                     />
             </div>
             <div className="currentlyEmployed">
-            
                 <Typography variant="h6">Currently Employed *</Typography>
                 <Select
                    required

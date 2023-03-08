@@ -86,8 +86,8 @@ function UpdateForm() {
             allergies: allergies,
             visits: visits
 
-        });
-        console.log(updateResponse);
+        })
+        console.log(updateResponse)
 
     }
 
