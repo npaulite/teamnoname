@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography, } from "@mui/material";
+import { Box, Button, Card, TextField, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useJaneHopkins from "../hooks/useJaneHopkins";
 import AddIcon from '@mui/icons-material/Add';
@@ -27,7 +27,7 @@ const JaneHopkinsDoctor = () => {
   const handleUpdate = (e) => {
     e.preventDefault()
     let path = `/JaneHopkinsDoctor/UpdatePatient`
-    nav(path, {state: { _id: '0186b9ca-53b4-aad1-702d-266bf242a784'}}) //_id of patient to be updated is hardcoded
+    nav(path, {state: { _id: updatePatient}}) //_id of patient to be updated is hardcoded
 
   }
 
@@ -35,19 +35,22 @@ const JaneHopkinsDoctor = () => {
       <div className="main">
         <h1 className='container'>JaneHopkins Doctor Page</h1>
         <div className="add"> 
-          <Button variant="contained" size="large" href="/JaneHopkinsDoctor/AddPatient">
+          <Button sx={{mb:2}} variant="contained" size="large" href="/JaneHopkinsDoctor/AddPatient">
             <Typography variant="h5">Add Patient</Typography>
             <AddIcon/>
           </Button>
         </div>
-        <Box component="form">
         <div className="update">
-          <Button variant="contained" size="large" onClick={handleUpdate}>
+          <TextField
+            id="update"
+            value={updatePatient || ''}
+            onChange={(e) => setUpdatePatient(e.target.value)}
+          />
+          <Button sx={{ml:2}} variant="contained" size="large" onClick={handleUpdate}>
             <Typography variant="h5">Update Patient</Typography>
             <EastIcon/>
           </Button>
         </div>
-        </Box>
 
 
 

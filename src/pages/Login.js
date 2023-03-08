@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   const register = async() => {
-    if(password == repeatPassword) {
+    if(password === repeatPassword) {
       try{
       const user = await createUserWithEmailAndPassword(auth, email, password)
       console.log(user)
