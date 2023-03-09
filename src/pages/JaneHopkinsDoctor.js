@@ -40,22 +40,6 @@ const JaneHopkinsDoctor = () => {
             <AddIcon/>
           </Button>
         </div>
-        <div className="update">
-          <TextField
-            id="update"
-            value={updatePatient || ''}
-            onChange={(e) => setUpdatePatient(e.target.value)}
-          />
-          <Button sx={{ml:2}} variant="contained" size="large" onClick={handleUpdate}>
-            <Typography variant="h5">Update Patient</Typography>
-            <EastIcon/>
-          </Button>
-        </div>
-
-
-
-
-
 
 
         {/* Grid list */}
@@ -91,7 +75,7 @@ const JaneHopkinsDoctor = () => {
           sx={{ pt: 4, pb: 6}}
           bgcolor = "black"
         >
-          <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography>
+          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
           <Box className = "wrapper">
             {patients?.map((patient, key) => {
               return( 
@@ -128,7 +112,7 @@ const JaneHopkinsDoctor = () => {
           sx={{ pt: 4, pb: 6}}
           bgcolor = "black"
         >
-          <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography>
+          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
           <Box>
 
                 <div className="app-container">
@@ -169,6 +153,18 @@ const JaneHopkinsDoctor = () => {
           </Box>
         </Box>
       )}
+
+<div className="update">
+          <TextField
+            id="update"
+            value={updatePatient || ''}
+            onChange={(e) => setUpdatePatient(e.target.value)}
+          />
+          <Button sx={{ml:2}} variant="contained" size="large" onClick={handleUpdate}>
+            <Typography variant="h5">Update Patient</Typography>
+            <EastIcon/>
+          </Button>
+        </div>
 
       </div>
   );

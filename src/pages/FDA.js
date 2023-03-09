@@ -1,5 +1,5 @@
 import useFDA from "../hooks/useFDA"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Tab = styled.button`
@@ -19,6 +19,26 @@ const Tab = styled.button`
 const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
  const FDA = () => {
   const [active, setActive] = useState(types[0]);
+
+  const { entities } = useFDA();
+  const [patients, setPatients] = useState();
+  const [drugs, setDrugs] = useState();
+
+  const listPatients = async() => {
+    let patientList = await entities.patient.list();
+    setPatients(patientList.items);
+  }
+
+  const listDrugs = async() => {
+    let drugsList = await entities.drug.list();
+    setDrugs(drugsList.items);
+  }
+
+  useEffect(() => {
+    listPatients()
+    listDrugs()
+  }, [])
+
   return (
     <>
     <div style={{ 

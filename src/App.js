@@ -12,6 +12,7 @@ import FDA from './pages/FDA';
 import AddForm from './pages/AddForm';
 import UpdateForm from './pages/UpdateForm';
 import SendDrugs from './pages/SendDrugs';
+import { Typography } from '@mui/material';
 
 function App() {
   
@@ -23,7 +24,6 @@ function App() {
 
   return (
     <>
-
         <Navba></Navba>
         <div>
         <Routes>
@@ -38,6 +38,11 @@ function App() {
           <Route path='/Bavaria/SendDrugs' element={<SendDrugs/>} />
         </Routes>
         </div>
+
+{/*}        <div>
+          <Typography>Hi, {user?.name} </Typography>
+        </div>
+  */}
     </>
   );
 }

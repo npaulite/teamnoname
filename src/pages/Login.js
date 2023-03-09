@@ -1,30 +1,46 @@
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import React, { useState} from 'react'
+import { Box, Button, Container, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
+import React, { useState,} from 'react'
 import '../cssFiles/login.css'
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword} from 'firebase/auth'
-import { auth } from '../firebase-config'
-import { useNavigate } from 'react-router';
+import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, UserCredential} from 'firebase/auth'
+import { auth, db } from '../firebase-config'
+import { collection, setDoc, doc, getDoc, DocumentSnapshot} from "firebase/firestore"
+import { useLocation, useNavigate } from 'react-router'
  
 const Login = () => {
 
   const nav = useNavigate();
+  const location = useLocation()
   const [page, setPage] = useState("Login")
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [repeatPassword, setRepeatPassword] = useState()
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [role, setRole] = useState()
+  const [showPassword, setShowPassword] = React.useState(false)
   const [user, setUser] = useState({});
+  const [id, setId] = useState();
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
   })
+
+  function getRole(documentSnapshot) {
+    return documentSnapshot.get('role')
+  }
+
   const login = async() => {
     try{
       const user = await signInWithEmailAndPassword(auth, email, password)
       console.log(user)
+      } catch (error) {
+        console.log(error.message)
+      }
+      try{
+        const userRef = doc(db, "users", email)
+        const userData = await getDoc(userRef)
+          console.log(userData.data())
       } catch (error) {
         console.log(error.message)
       }
@@ -34,11 +50,23 @@ const Login = () => {
   const register = async() => {
     if(password === repeatPassword) {
       try{
-      const user = await createUserWithEmailAndPassword(auth, email, password)
-      console.log(user)
+      const registered = await createUserWithEmailAndPassword(auth, email, password)
+      console.log(registered)
       } catch (error) {
         console.log(error.message)
       }
+      
+      try{
+        const usersRef = doc(db, "users", email)
+        const userData = {
+          role: role
+        }
+        const userRef = await setDoc(usersRef, userData)
+        console.log("User was added with ID: ", userRef)
+      }catch (error) {
+        console.log(error.message)
+      }
+      
       nav("/")
     }
   }
@@ -188,6 +216,23 @@ const Login = () => {
           )}}
           />
       </div>
+      <div>
+        <FormControl fullWidth>
+          <Typography variant='h6'>Role</Typography>
+          <Select
+            required
+            id="role"
+            label='Role'
+            value={role || ''}
+            onChange={(e) => {setRole(e.target.value);}}
+          >
+            <MenuItem value={'JaneHopkinsDoctor'}>Jane Hopkins Doctor</MenuItem>
+            <MenuItem value={'JaneHopkinsAdmin'}>Jane Hopkins Admin</MenuItem>
+            <MenuItem value={'Bavaria'}>Bavaria</MenuItem>
+            <MenuItem value={'FDA'}>FDA</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <div className='button'>
         <div>
         <Button sx={{mt: 2, mr: 83}}
@@ -213,3 +258,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
