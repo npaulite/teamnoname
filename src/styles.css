@@ -61,21 +61,32 @@
   }
 
   /* list table */
+  .appcontainer {
+    display: flex;
+    /* column-gap: 20px; */
+  }
+  
+
   .app-container {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 2rem;
+    padding: 5rem;
   }
   
   table {
     border-collapse: collapse;
     width: 100%;
   }
+
+  .table {
+    border-collapse: collapse;
+    width: 50%;
+  }
   
   th,
   td {
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     text-align: left;
     padding: 8px;
     font-size: 15px;

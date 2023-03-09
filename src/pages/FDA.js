@@ -1,6 +1,10 @@
 import useFDA from "../hooks/useFDA"
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Box, Button, Card, TextField, Typography, } from "@mui/material";
+import {CopyToClipboard} from "react-copy-to-clipboard";
+
+
 
 const Tab = styled.button`
   background-color: #9fa8da;
@@ -58,18 +62,77 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
     </div>
     <p />
     <p> Selected: {active}</p>
+    <Box
+          sx={{ pt: 4, pb: 6}}
+          bgcolor = "black"
+        >
+          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
+          <Box>
+              <div className="appcontainer">
+                <div className="box1">
+                <div className="app-container">
+                  <table className="table">
+                    <thead>
+                    <th>PATIENTS</th>
+
+                      <tr>
+                        <th>_id </th>
+                        <th>uuid </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {patients?.map((patient, key) => {
+                      return( 
+                      <tr>
+                           <CopyToClipboard text = {patient._id}>
+                            <Button> <td> {patient._id}</td></Button>
+                           </CopyToClipboard>
+                        <td> {patient.uuid}</td>
+                      </tr>
+                    ) })}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+                <div className="box2">
+                <div className="app-container">
+                  <table className="table">
+                    <thead>
+                    <th>DRUGS</th>
+
+                      <tr>
+                        <th>_id </th>
+                        <th>id </th>
+                        <th>Placebo </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {drugs?.map((drug, key) => {
+                      return( 
+                      <tr>
+                           <CopyToClipboard text = {drug._id}>
+                            <Button> <td> {drug._id}</td></Button>
+                           </CopyToClipboard>
+                        <td> {drug.id}</td>
+                        <td> {drug.placebo}</td>
+                      </tr>
+                    ) })}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+
+                </div>
+          </Box>
+        </Box>
+
     </>
   );
 }
-
-// const FDA = () => {
-//   return (
-//     <div>
-//       <h1>FDA</h1>
-
-//     </div>
-//   );
-// };
 
 
 

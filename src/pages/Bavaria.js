@@ -1,6 +1,7 @@
-import { Typography, Button } from "@mui/material"
+import { Typography, Button, Box } from "@mui/material"
 import useBavaria from "../hooks/useBavaria"
 import { useState, useEffect } from "react"
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 const Bavaria = () => {
 
@@ -31,7 +32,81 @@ const Bavaria = () => {
             <Typography variant="h5">Send Drug to FDA</Typography>
           </Button>
         </div>
+
+        <Box
+          sx={{ pt: 4, pb: 6}}
+          bgcolor = "black"
+        >
+          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
+          <Box>
+              <div className="appcontainer">
+                <div className="box1">
+                <div className="app-container">
+                  <table className="table">
+                    <thead>
+                    <th>PATIENTS</th>
+
+                      <tr>
+                        <th>_id </th>
+                        <th>uuid </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {patients?.map((patient, key) => {
+                      return( 
+                      <tr>
+                           <CopyToClipboard text = {patient._id}>
+                            <Button> <td> {patient._id}</td></Button>
+                           </CopyToClipboard>
+                        <td> {patient.uuid}</td>
+                      </tr>
+                    ) })}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+                <div className="box2">
+                <div className="app-container">
+                  <table className="table">
+                    <thead>
+                    <th>DRUGS</th>
+
+                      <tr>
+                        <th>_id </th>
+                        <th>id </th>
+                        <th>Placebo </th>
+                        <th>BatchNumber </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {drugs?.map((drug, key) => {
+                      return( 
+                      <tr>
+                           <CopyToClipboard text = {drug._id}>
+                            <Button> <td> {drug._id}</td></Button>
+                           </CopyToClipboard>
+                        <td> {drug.id}</td>
+                        <td> {drug.placebo}</td>
+                        <td> {drug.batchNumber}</td>
+                      </tr>
+                    ) })}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+
+
+                </div>
+          </Box>
+        </Box>
+
+
+
     </div>
+
   );
 };
 
