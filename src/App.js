@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Navba from './Navba';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { auth } from './firebase-config'
-import { onAuthStateChanged } from '@firebase/auth';
 import Login from './pages/Login';
 import JaneHopkinsDoctor from './pages/JaneHopkinsDoctor';
 import JaneHopkinsAdmin from './pages/JaneHopkinsAdmin';
@@ -12,15 +10,9 @@ import FDA from './pages/FDA';
 import AddForm from './pages/AddForm';
 import UpdateForm from './pages/UpdateForm';
 import SendDrugs from './pages/SendDrugs';
-import { Typography } from '@mui/material';
+
 
 function App() {
-  
-  const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  })
 
   return (
     <>
@@ -38,12 +30,7 @@ function App() {
           <Route path='/Bavaria/SendDrugs' element={<SendDrugs/>} />
         </Routes>
         </div>
-
-{/*}        <div>
-          <Typography>Hi, {user?.name} </Typography>
-        </div>
-  */}
-    </>
+   </>
   );
 }
 

@@ -4,15 +4,14 @@ import '../cssFiles/login.css'
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, UserCredential} from 'firebase/auth'
+import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword} from 'firebase/auth'
 import { auth, db } from '../firebase-config'
-import { collection, setDoc, doc, getDoc, DocumentSnapshot} from "firebase/firestore"
-import { useLocation, useNavigate } from 'react-router'
+import {setDoc, doc, getDoc} from "firebase/firestore"
+import { useNavigate } from 'react-router'
  
 const Login = () => {
 
   const nav = useNavigate();
-  const location = useLocation()
   const [page, setPage] = useState("Login")
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -26,10 +25,6 @@ const Login = () => {
     setUser(currentUser)
   })
 
-  function getRole(documentSnapshot) {
-    return documentSnapshot.get('role')
-  }
-
   const login = async() => {
     try{
       const user = await signInWithEmailAndPassword(auth, email, password)
@@ -40,11 +35,15 @@ const Login = () => {
       try{
         const userRef = doc(db, "users", email)
         const userData = await getDoc(userRef)
-          console.log(userData.data())
+        .then(documentSnapshot => {
+          let role = documentSnapshot.get('role')
+          setRole(role)
+        })
+        console.log(userData)
       } catch (error) {
         console.log(error.message)
       }
-      nav("/")
+      nav("/", {state: { role: role }})
   }
 
   const register = async() => {
@@ -66,8 +65,7 @@ const Login = () => {
       }catch (error) {
         console.log(error.message)
       }
-      
-      nav("/")
+      nav("/", {state: { role: role }})
     }
   }
 
