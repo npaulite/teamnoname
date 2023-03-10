@@ -78,6 +78,7 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
                       <tr>
                         <th>_id </th>
                         <th>uuid </th>
+                        <th>Drug Assigned</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -88,6 +89,7 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
                             <Button> <td> {patient._id}</td></Button>
                            </CopyToClipboard>
                         <td> {patient.uuid}</td>
+                        <td> {' '}</td>
                       </tr>
                     ) })}
                       
@@ -106,6 +108,7 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
                         <th>_id </th>
                         <th>id </th>
                         <th>Placebo </th>
+                        <th>BatchNumber </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -116,7 +119,8 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
                             <Button> <td> {drug._id}</td></Button>
                            </CopyToClipboard>
                         <td> {drug.id}</td>
-                        <td> {drug.placebo}</td>
+                        <td> {drug.placebo?  'Yes': 'No'}</td>
+                        <td> {drug.batchNumber}</td>
                       </tr>
                     ) })}
                       

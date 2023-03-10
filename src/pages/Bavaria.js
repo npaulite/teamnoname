@@ -8,6 +8,7 @@ const Bavaria = () => {
   const { entities } = useBavaria();
   const [patients, setPatients] = useState();
   const [drugs, setDrugs] = useState();
+  const [placebo, setPlacebo] = useState(false);
 
   const listPatients = async() => {
     let patientList = await entities.patient.list();
@@ -49,6 +50,7 @@ const Bavaria = () => {
                       <tr>
                         <th>_id </th>
                         <th>uuid </th>
+                        <th>Number of Visits</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -59,6 +61,7 @@ const Bavaria = () => {
                             <Button> <td> {patient._id}</td></Button>
                            </CopyToClipboard>
                         <td> {patient.uuid}</td>
+                        <td> {patient.visit}</td>
                       </tr>
                     ) })}
                       
@@ -88,7 +91,7 @@ const Bavaria = () => {
                             <Button> <td> {drug._id}</td></Button>
                            </CopyToClipboard>
                         <td> {drug.id}</td>
-                        <td> {drug.placebo}</td>
+                        <td> {drug.placebo?  'Yes': 'No'}</td>
                         <td> {drug.batchNumber}</td>
                       </tr>
                     ) })}
