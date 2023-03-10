@@ -1,4 +1,4 @@
-import { Box, Button, Card, TextField, Typography, } from "@mui/material";
+import { Box, Button, Card, Grid, TextField, Typography, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useJaneHopkins from "../hooks/useJaneHopkins";
 import AddIcon from '@mui/icons-material/Add';
@@ -155,15 +155,23 @@ const JaneHopkinsDoctor = () => {
       )}
 
 <div className="update">
+          <Grid container xs={12}>
+            <Grid item xs={6}>
           <TextField
             id="update"
+            label="ID of Patient"
             value={updatePatient || ''}
             onChange={(e) => setUpdatePatient(e.target.value)}
+            fullWidth
           />
+          </Grid>
+          <Grid item xs={6}>
           <Button sx={{ml:2}} variant="contained" size="large" onClick={handleUpdate}>
             <Typography variant="h5">Update Patient</Typography>
             <EastIcon/>
           </Button>
+          </Grid>
+          </Grid>
         </div>
 
       </div>

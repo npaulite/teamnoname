@@ -14,10 +14,13 @@
 }
 .add {
     margin-top: 10px;
+    margin-left: 10px;
     font-size: 20px;
 }
 
 .update {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
     font-size: 20px;
 }
