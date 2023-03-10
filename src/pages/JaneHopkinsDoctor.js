@@ -126,7 +126,16 @@ const JaneHopkinsDoctor = () => {
                         <th>WEIGHT </th>
                         <th>BLOODPRESSURE </th>
                         <th>TEMPERATURE </th>
-                        <th>OXYGENS </th>
+                        <th>OSXYGEN </th>
+                        <th>UUID </th>
+                        <th>ADDRESS </th>
+                        {/* <th>CURRENT MEDS </th> */}
+                        <th>FAM HISTORY </th>
+                        <th>EMPLOYED? </th>
+                        <th>INSURED? </th>
+                        <th>ICD CODES </th>
+                        <th>ALLERGIES </th>
+                        <th>VISITS </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -143,6 +152,15 @@ const JaneHopkinsDoctor = () => {
                         <td> {patient.bloodPressure}</td>
                         <td> {patient.temperature}</td>
                         <td> {patient.oxygenSaturation}</td>
+                        <td> {patient.uuid}</td>
+                        <td> {patient.address}</td>
+                        {/* <td> {patient.currentMedications}</td> */}
+                        <td> {patient.familyHistory}</td>
+                        <td> {patient.currentlyEmployed}</td>
+                        <td> {patient.currentlyInsured}</td>
+                        {/* <td> {patient.icdHealthCodes}</td> */}
+                        {/* <td> {patient.allergies}</td> */}
+                        {/* <td> {patient.visits}</td> */}
                       </tr>
                     ) })}
                     </tbody>
