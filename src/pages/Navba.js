@@ -1,13 +1,20 @@
 import React, {useState} from 'react';
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
-import { auth } from './firebase-config'
+import { auth } from '../firebase-config'
 import { onAuthStateChanged } from '@firebase/auth';
 import { Button } from '@mui/material';
-import { SignOut } from './App';
+import useAuth from '../hooks/useAuth';
 
 export default function Navba() {
 
   const [user, setUser] = useState()
+  const { setAuth } = useAuth()
+
+  const SignOut = () => {
+    auth.signOut()
+    setAuth(null)
+    window.location.reload(false)
+  }
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
@@ -28,7 +35,7 @@ export default function Navba() {
         {user === null ?
         <Button variant='contained' component={Link} to="/Login">Login</Button>
         :
-        <Button variant='contained' onClick={SignOut} > <Link to="/"> Logout </Link></Button>
+        <Button variant='contained' onClick={() => {SignOut(); setAuth(null)}} > <Link to="/"> Logout </Link></Button>
         }
       </ul>
     </nav>

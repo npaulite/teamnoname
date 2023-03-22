@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Typography } from '@mui/material';
-import AuthContext from '../hooks/AuthProvider';
+import AuthContext from '../components/AuthProvider';
 
 export default function Home() {
 

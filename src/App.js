@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { auth, db } from './firebase-config'
 import { onAuthStateChanged } from '@firebase/auth';
 import {doc, getDoc} from "firebase/firestore"
-import Navba from './Navba';
+import Navba from './pages/Navba';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
@@ -13,14 +13,9 @@ import FDA from './pages/FDA';
 import AddForm from './pages/AddForm';
 import UpdateForm from './pages/UpdateForm';
 import SendDrugs from './pages/SendDrugs';
-import RequireAuth from './RequireAuth';
+import RequireAuth from './components/RequireAuth'
 import useAuth from './hooks/useAuth';
-import AuthContext from './hooks/AuthProvider';
-
-export const SignOut = () => {
-  auth.signOut()
-  window.location.reload(false)
-}
+import AuthContext from './components/AuthProvider';
 
 function App() {
 
@@ -53,7 +48,6 @@ function App() {
       }}}
     )
 
-    
   return (
     <div className='app'>
       <AuthContext.Provider value={{user: user, setUser: setUser,

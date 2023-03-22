@@ -10,12 +10,7 @@ let reducer = (authorized, newAuthorized) => {
     return { ...authorized, ...newAuthorized };
   };
   
-  const initialState = {
-    email: "",
-    name: "",
-    role: ""
-    
-  };
+  const initialState = null;
   
   const localState = JSON.parse(localStorage.getItem("authorized"));
 
