@@ -8,63 +8,61 @@ import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPa
 import { auth, db } from '../firebase-config'
 import {setDoc, doc, getDoc} from "firebase/firestore"
 import { useNavigate } from 'react-router'
+import useAuth from '../hooks/useAuth';
  
 const Login = () => {
 
   const nav = useNavigate();
   const [page, setPage] = useState("Login")
+  const [name, setName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [repeatPassword, setRepeatPassword] = useState()
   const [role, setRole] = useState()
   const [showPassword, setShowPassword] = React.useState(false)
-  const [user, setUser] = useState({});
-  const [id, setId] = useState();
+  const [user, setUser] = useState({})
+  const {setAuth} = useAuth()
 
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
+    if(user){
+    setUser(currentUser)}
+    
   })
 
   const login = async() => {
-    try{
-      const user = await signInWithEmailAndPassword(auth, email, password)
-      console.log(user)
-      } catch (error) {
-        console.log(error.message)
-      }
+      await signInWithEmailAndPassword(auth, email, password).then(
+        async(result) => {
       try{
-        const userRef = doc(db, "users", email)
+        const userRef = doc(db, "users",result.user.uid)
         const userData = await getDoc(userRef)
-        .then(documentSnapshot => {
-          let role = documentSnapshot.get('role')
-          setRole(role)
-        })
         console.log(userData)
+        const email = userData.get('email')
+        const name = userData.get('name')
+        const role = userData.get('role')
+        setAuth({email, name, role})
       } catch (error) {
         console.log(error.message)
-      }
-      nav("/", {state: { role: role }})
+      }})
+      nav("/")
   }
 
   const register = async() => {
     if(password === repeatPassword) {
-      try{
-      const registered = await createUserWithEmailAndPassword(auth, email, password)
-      console.log(registered)
-      } catch (error) {
-        console.log(error.message)
-      }
-      
-      try{
-        const usersRef = doc(db, "users", email)
+      await createUserWithEmailAndPassword(auth, email, password).then(
+        async(result) => {
+        try{
+        const usersRef = doc(db, "users", result.user.uid)
         const userData = {
+          email: email,
+          name: name,
           role: role
         }
         const userRef = await setDoc(usersRef, userData)
         console.log("User was added with ID: ", userRef)
       }catch (error) {
         console.log(error.message)
-      }
+      }}
+      )
       nav("/", {state: { role: role }})
     }
   }
@@ -79,6 +77,7 @@ const Login = () => {
     setPage("Register")
     setEmail("")
     setPassword("")
+    setName("")
     setRepeatPassword("")
   }
 
@@ -94,7 +93,7 @@ const Login = () => {
     <div className='loginPage'>
       <Container maxWidth="md">
       {page === "Login" ? 
-      <Box component="form" mt={2} sx={2} onSubmit={login}>
+      <Box component="form" mt={2} onSubmit={login}>
       <div className='login'>
       <Typography variant="h3">Login</Typography> 
       <div>
@@ -151,11 +150,11 @@ const Login = () => {
       </div>
       </Box>
       : 
-      <Box component="form" mt={2} sx={2} onSubmit={register}>
+      <Box component="form" mt={2} onSubmit={register}>
       <div className='register'>
       <Typography variant="h3">Register</Typography>
       <div>
-        <Typography variant='h6'>User Email Address</Typography>
+        <Typography variant='h6'>Email Address</Typography>
         <TextField
           required
           id="email"
@@ -164,6 +163,17 @@ const Login = () => {
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
+                />
+      </div>
+      <div>
+        <Typography variant='h6'>Full Name</Typography>
+        <TextField
+          required
+          id="name"
+          label="Full Name"
+          value={name || ''}
+          onChange={(e) => {setName(e.target.value);}}
+          fullWidth
                 />
       </div>
       <div>

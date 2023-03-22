@@ -13,7 +13,7 @@ const JaneHopkinsDoctor = () => {
   const [format, setFormat] = useState("list")
   const [patients, setPatients] = useState();
   const nav = useNavigate()
-  const [updatePatient, setUpdatePatient] = useState() // id for updating patient needs to be taken from list of patient
+  const [updatePatient, setUpdatePatient] = useState()
 
   const listPatients = async() => {
     let patientList = await entities.patient.list();
@@ -27,7 +27,7 @@ const JaneHopkinsDoctor = () => {
   const handleUpdate = (e) => {
     e.preventDefault()
     let path = `/JaneHopkinsDoctor/UpdatePatient`
-    nav(path, {state: { _id: updatePatient}}) //_id of patient to be updated is hardcoded
+    nav(path, {state: { _id: updatePatient}})
 
   }
 

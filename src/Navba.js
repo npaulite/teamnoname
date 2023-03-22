@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { Link, useLocation, useMatch, useResolvedPath } from "react-router-dom"
+import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import { auth } from './firebase-config'
 import { onAuthStateChanged } from '@firebase/auth';
 import { Button } from '@mui/material';
+import { SignOut } from './App';
 
 export default function Navba() {
 
@@ -11,10 +12,6 @@ export default function Navba() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
   })
-
-  const signOut = () => {
-    auth.signOut()
-  }
 
   return (
     <nav className="nav">
@@ -31,7 +28,7 @@ export default function Navba() {
         {user === null ?
         <Button variant='contained' component={Link} to="/Login">Login</Button>
         :
-        <Button variant='contained' onClick={signOut}>Logout</Button>
+        <Button variant='contained' onClick={SignOut} > <Link to="/"> Logout </Link></Button>
         }
       </ul>
     </nav>
