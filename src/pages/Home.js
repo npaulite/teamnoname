@@ -1,14 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { auth, db } from '../firebase-config'
-import { onAuthStateChanged } from '@firebase/auth';
-import {doc, getDoc} from "firebase/firestore";
-import { UserContent } from '../App';
+import React, { useContext } from 'react';
 import { Typography } from '@mui/material';
+import AuthContext from '../hooks/AuthProvider';
 
 export default function Home() {
 
-  const {user} = useContext(UserContent)
-  const {userDetail} = useContext(UserContent)
+  const {user} = useContext(AuthContext)
+  const {authorized} = useContext(AuthContext)
 
   return (
     <h1 className='container'>
@@ -16,8 +13,8 @@ export default function Home() {
           <Typography variant='h2'>HOME PAGE</Typography>
           {user == null ? <></>: 
           <div className='user'>
-            <Typography variant='h5'>Hi, {userDetail.name} </Typography>
-            <Typography variant='h5'>Role: {userDetail.role} </Typography>
+            <Typography variant='h5'>Hi, {authorized.name} </Typography>
+            <Typography variant='h5'>Role: {authorized.role} </Typography>
             </div>
           }
         </div>

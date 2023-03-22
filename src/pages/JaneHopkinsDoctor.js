@@ -35,7 +35,7 @@ const JaneHopkinsDoctor = () => {
       <div className="main">
         <h1 className='container'>JaneHopkins Doctor Page</h1>
         <div className="add"> 
-          <Button sx={{mb:2}} variant="contained" size="large" href="/JaneHopkinsDoctor/AddPatient">
+          <Button sx={{mb:2}} variant="contained" size="large" href={"JaneHopkinsDoctor/AddPatient"}>
             <Typography variant="h5">Add Patient</Typography>
             <AddIcon/>
           </Button>

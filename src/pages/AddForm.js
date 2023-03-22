@@ -33,6 +33,7 @@ function AddForm() {
         notes: "",
         hivViralLoad: ""
     }])
+    const [eligibility, setEligibility] = useState(false)
 
     const addPatient = async() => {
 
@@ -54,7 +55,8 @@ function AddForm() {
             currentlyInsured: currentlyInsured,
             icdHealthCodes: icdHealthCodes,
             allergies: allergies,
-            visits: visits
+            visits: visits,
+            eligibility: eligibility
         },
         {
             aclInput: {
@@ -128,16 +130,14 @@ function AddForm() {
                         },
                         operations: ["READ"],
                         path: "familyHistory"
-                    }
-                    ,
+                    },
                     {
                         principal: {
                             nodes: ["Bavaria", "FDA"]
                         },
                         operations: ["READ"],
                         path: "currentlyEmployed"
-                    }
-                    ,
+                    },
                     {
                         principal: {
                             nodes: ["Bavaria", "FDA"]
@@ -151,22 +151,27 @@ function AddForm() {
                         },
                         operations: ["READ"],
                         path: "icdHealthCodes"
-                    }
-                    ,
+                    },
                     {
                         principal: {
                             nodes: ["Bavaria", "FDA"]
                         },
                         operations: ["READ"],
                         path: "allergies"
-                    }
-                    ,
+                    },
                     {
                         principal: {
                             nodes: ["Bavaria", "FDA"]
                         },
                         operations: ["READ"],
                         path: "visits"
+                    },
+                    {
+                        principal: {
+                            nodes: ["Bavaria", "FDA"]
+                        },
+                        operations: ["READ"],
+                        path: "eligibility"
                     }
                 ]
             }
@@ -247,8 +252,22 @@ function AddForm() {
         }]);
       };
 
+
+
+    const handleEligibility = () => {
+        const date = new Date("2005-01-01")
+        let birth = dob.split('-')
+        const birthday = new Date(birth[0], birth[1] - 1, birth[2])
+        console.log(birthday.toDateString())
+        console.log(date.toDateString())
+        if (birthday <= date) {
+            setEligibility(true)}
+        else {
+            setEligibility(false)}
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if(addPatient()) {
         console.log(addPatient);
         nav("/JaneHopkinsDoctor");
@@ -273,7 +292,7 @@ function AddForm() {
         <Container>
         <Typography component="h1" variant="h3">Add Patient</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
-        <Box component="form" mt={2} sx={2} onSubmit={handleSubmit}>
+        <Box component="form" mt={2} onSubmit={handleSubmit}>
             <div className="patientName" m={2} >
                 <Typography variant="h6">Patient Name *</Typography>
                 <TextField
@@ -391,8 +410,6 @@ function AddForm() {
                         fullWidth
                     />
             </div>
-
-    
             <div className="address">
                 <Typography variant="h6">Address *</Typography>
                 <TextField
@@ -408,7 +425,7 @@ function AddForm() {
                 <Typography variant="h6">Current Medications</Typography>
                 {currentMedications.map((x, i) => {
                     return(
-                    <div className="medications">
+                    <div className="medications" key={i}>
                         <TextField
                             name="medication"
                             label="Medications"
@@ -468,7 +485,7 @@ function AddForm() {
             <Typography variant="h6">ICD Health Code</Typography>
                 {icdHealthCodes.map((x, i) => {
                     return(
-                    <div className="icd">
+                    <div className="icd" key={i}>
                         <TextField
                             name="code"
                             label="ICD Health Code"
@@ -491,7 +508,7 @@ function AddForm() {
             <Typography variant="h6">Allergies</Typography>
                 {allergies.map((x, i) => {
                     return(
-                    <div className="allergy">
+                    <div className="allergy" key={i}>
                         <TextField
                             name="allergy"
                             label="Allergy"
@@ -513,7 +530,7 @@ function AddForm() {
                 <Typography variant="h6">Visits</Typography>
                 {visits.map((x, i) => {
                     return(
-                    <div className="visit">
+                    <div className="visit" key={i}>
                         <TextField
                             name="patient"
                             label="Patient Name"
@@ -553,8 +570,8 @@ function AddForm() {
                     );
                 })}
             </div>
-            <div>
-                <Button
+            <div className="submitButton">
+                <Button onClick={handleEligibility}
                 variant="contained"  
                 type="submit"
                 fullWidth

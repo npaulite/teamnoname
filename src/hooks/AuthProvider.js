@@ -1,12 +1,34 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useEffect} from "react";
 
-const AuthContext = createContext({});
+const AuthContext = createContext();
+
+let reducer = (authorized, newAuthorized) => {
+    if (newAuthorized === null) {
+      localStorage.removeItem("authorized");
+      return initialState;
+    }
+    return { ...authorized, ...newAuthorized };
+  };
+  
+  const initialState = {
+    email: "",
+    name: "",
+    role: ""
+    
+  };
+  
+  const localState = JSON.parse(localStorage.getItem("authorized"));
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({});
-    console.log(auth)
+    const [authorized, setAuth] = useReducer(reducer, localState || initialState);
+    console.log(authorized)
+
+    useEffect(() => {
+        localStorage.setItem("authorized", JSON.stringify(authorized));
+      }, [authorized]);
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ authorized, setAuth }}>
             {children}
         </AuthContext.Provider>
     )

@@ -357,6 +357,7 @@ input Self_Patient_ConditionInput_ {
   currentlyEmployed: Vendia_ModelStringInput_
   currentlyInsured: Vendia_ModelStringInput_
   dob: Vendia_ModelStringInput_
+  eligibility: Vendia_ModelBooleanInput_
   familyHistory: Vendia_ModelStringInput_
   height: Vendia_ModelStringInput_
   _icdHealthCodesItem: Self_Patient_icdHealthCodes_icdHealthCodesItem_ConditionInput_
@@ -382,6 +383,7 @@ input Self_Patient_FilterInput_ {
   currentlyEmployed: Vendia_ModelStringInput_
   currentlyInsured: Vendia_ModelStringInput_
   dob: Vendia_ModelStringInput_
+  eligibility: Vendia_ModelBooleanInput_
   familyHistory: Vendia_ModelStringInput_
   height: Vendia_ModelStringInput_
   _icdHealthCodesItem: Self_Patient_icdHealthCodes_icdHealthCodesItem_FilterInput_
@@ -411,6 +413,7 @@ type Self_Patient {
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  eligibility: Boolean
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem]
@@ -435,6 +438,7 @@ type Self_Patient_Partial_ {
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  eligibility: Boolean
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_Partial_]
@@ -479,6 +483,7 @@ input Self_Patient_Input_ {
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  eligibility: Boolean
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_Input_]
@@ -500,6 +505,7 @@ input Self_Patient_UpdateInput_ {
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  eligibility: Boolean
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_UpdateInput_]
@@ -521,6 +527,7 @@ input Self_Patient_PartialInput_ {
   currentlyEmployed: String
   currentlyInsured: String
   dob: String
+  eligibility: Boolean
   familyHistory: String
   height: String
   icdHealthCodes: [Self_Patient_icdHealthCodes_icdHealthCodesItem_PartialInput_]

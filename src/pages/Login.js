@@ -63,7 +63,7 @@ const Login = () => {
         console.log(error.message)
       }}
       )
-      nav("/", {state: { role: role }})
+      nav("/")
     }
   }
 
@@ -170,7 +170,7 @@ const Login = () => {
         <TextField
           required
           id="name"
-          label="Full Name"
+          label="fullName"
           value={name || ''}
           onChange={(e) => {setName(e.target.value);}}
           fullWidth

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import { auth, db } from './firebase-config'
 import { onAuthStateChanged } from '@firebase/auth';
 import {doc, getDoc} from "firebase/firestore"
@@ -14,8 +14,8 @@ import AddForm from './pages/AddForm';
 import UpdateForm from './pages/UpdateForm';
 import SendDrugs from './pages/SendDrugs';
 import RequireAuth from './RequireAuth';
-
-export const UserContent = createContext(null);
+import useAuth from './hooks/useAuth';
+import AuthContext from './hooks/AuthProvider';
 
 export const SignOut = () => {
   auth.signOut()
@@ -24,6 +24,7 @@ export const SignOut = () => {
 
 function App() {
 
+  const {authorized, setAuth} = useAuth()
   const [user, setUser] = useState()
   const [id, setID] = useState()
   const [userDetail, setUserDetail] = useState({
@@ -55,13 +56,16 @@ function App() {
     
   return (
     <div className='app'>
-      <UserContent.Provider value={{user: user, setUser: setUser,
-        id: id, setID: setID, userDetail: userDetail, setUserDetail: setUserDetail
+      <AuthContext.Provider value={{user: user, setUser: setUser,
+        id: id, setID: setID, userDetail: userDetail, setUserDetail: setUserDetail,
+        authorized: authorized, setAuth: setAuth
       }}>
+
         <Navba></Navba>
         <div>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/Login'  element={<Login/>} />
           <Route element={<RequireAuth allowedRoles={['FDA', 'Admin']} />}>
           <Route path='/FDA'  element={<FDA/>} />
           </Route>
@@ -74,13 +78,19 @@ function App() {
           <Route element={<RequireAuth allowedRoles={['JaneHopkinsAdmin', 'Admin']} />}>
           <Route path='/JaneHopkinsAdmin'  element={<JaneHopkinsAdmin/>} />
           </Route>
-          <Route path='/Login'  element={<Login/>} />
+          <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
           <Route path='/JaneHopkinsDoctor/AddPatient'  element={<AddForm/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
           <Route path='/JaneHopkinsDoctor/UpdatePatient'  element={<UpdateForm/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['Bavaria', 'Admin']} />}>
           <Route path='/Bavaria/SendDrugs' element={<SendDrugs/>} />
+          </Route>
         </Routes>
         </div>
-        </UserContent.Provider>
+
+        </AuthContext.Provider>
    </div>
   );
 }
