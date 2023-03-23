@@ -8,15 +8,15 @@ import useAuth from '../hooks/useAuth';
 export default function Navba() {
 
   const [user, setUser] = useState()
-  const { setAuth } = useAuth()
+  const {authorized, setAuth } = useAuth()
 
   const SignOut = () => {
     auth.signOut()
-    setAuth(null)
     window.location.reload(false)
   }
 
   onAuthStateChanged(auth, (currentUser) => {
+    if(user)
     setUser(currentUser)
   })
 
@@ -32,10 +32,10 @@ export default function Navba() {
         <CustomLink to="/JaneHopkinsAdmin">JaneHopkinsAdmin</CustomLink>
         <CustomLink to="/JaneHopkinsDoctor">JaneHopkinsDoctor</CustomLink>
         <CustomLink to="/">Home</CustomLink>
-        {user === null ?
+        {authorized === null ?
         <Button variant='contained' component={Link} to="/Login">Login</Button>
         :
-        <Button variant='contained' onClick={() => {SignOut(); setAuth(null)}} > <Link to="/"> Logout </Link></Button>
+        <Button variant='contained' component={Link} to="/" onClick={() => {SignOut(); setAuth(null)}}> Logout</Button>
         }
       </ul>
     </nav>

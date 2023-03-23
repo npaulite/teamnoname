@@ -170,7 +170,7 @@ const Login = () => {
         <TextField
           required
           id="name"
-          label="fullName"
+          label="Full Name"
           value={name || ''}
           onChange={(e) => {setName(e.target.value);}}
           fullWidth

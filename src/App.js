@@ -22,37 +22,17 @@ function App() {
   const {authorized, setAuth} = useAuth()
   const [user, setUser] = useState()
   const [id, setID] = useState()
-  const [userDetail, setUserDetail] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    role: ""
-  })
-
-  const getUserDetails = (id) => {
-    const usersRef = doc(db, 'users', id)
-    return getDoc(usersRef)
-  }
 
   onAuthStateChanged(auth, (currentUser) => {
     if(currentUser) {
     setUser(currentUser)
     setID(currentUser.uid)
-    if(id) {
-      getUserDetails(id)
-      .then(user => {
-        if(user.exists) {
-          setUserDetail(user.data())
-        }
-      })
-      }}}
-    )
+    }})
 
   return (
     <div className='app'>
       <AuthContext.Provider value={{user: user, setUser: setUser,
-        id: id, setID: setID, userDetail: userDetail, setUserDetail: setUserDetail,
-        authorized: authorized, setAuth: setAuth
+        id: id, setID: setID, authorized: authorized, setAuth: setAuth
       }}>
 
         <Navba></Navba>
