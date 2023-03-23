@@ -192,7 +192,7 @@ function UpdateForm() {
         <Container>
         <Typography component="h1" variant="h3">Update Patient</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
-        <Box component="form" mt={2} sx={2} onSubmit={handleSubmit}>
+        <Box component="form" mt={2} onSubmit={handleSubmit}>
             <div className="patientName" m={2} >
                 <Typography variant="h6">Patient Name *</Typography>
                 <TextField
@@ -327,7 +327,7 @@ function UpdateForm() {
                 <Typography variant="h6">Current Medications</Typography>
                 {currentMedications.map((x, i) => {
                     return(
-                    <div className="medications">
+                    <div className="medications" key={i}>
                         <TextField
                             name="medication"
                             label="Medications"
@@ -388,11 +388,10 @@ function UpdateForm() {
             <Typography variant="h6">ICD Health Code</Typography>
                 {icdHealthCodes.map((x, i) => {
                     return(
-                    <div className="icd">
+                    <div className="icd" key={i}>
                         <TextField
                             name="code"
                             label="ICD Health Code"
-                            type="number"
                             value={x.code}
                             onChange={e => handleICD(e, i)}
                             fullWidth
@@ -411,7 +410,7 @@ function UpdateForm() {
             <Typography variant="h6">Allergies</Typography>
                 {allergies.map((x, i) => {
                     return(
-                    <div className="allergy">
+                    <div className="allergy" key={i}>
                         <TextField
                             name="allergy"
                             label="Allergy"
@@ -433,7 +432,7 @@ function UpdateForm() {
                 <Typography variant="h6">Visits</Typography>
                 {visits.map((x, i) => {
                     return(
-                    <div className="visit">
+                    <div className="visit" key={i}>
                         <TextField
                             name="patient"
                             label="Patient Name"

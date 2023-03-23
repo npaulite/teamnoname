@@ -8,8 +8,8 @@
     "drugACL": {
       "type": "Drug"
     },
-    "mapACL": {
-      "type": "Map"
+    "doctorACL": {
+      "type": "Doctor"
     }
   },
   "type": "object",
@@ -137,15 +137,15 @@
         }
       }
     },
-    "Map": {
+    "Doctor": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "patientUUID": {
+          "name": {
             "type": "string"
           },
-          "drug": {
+          "picture": {
             "type": "string"
           }
         }

@@ -79,7 +79,7 @@ function SendDrugs() {
             <Container>
                 <Typography component="h1" variant="h3">Send Drugs</Typography>
                 <Typography component="h5">Asterisk(*) is required</Typography>
-            <Box component="form" mt={2} sx={2} onSubmit={handleSubmit}>
+            <Box component="form" mt={2} onSubmit={handleSubmit}>
                 <div className="placebo">
                     <FormGroup>
                         <FormControlLabel 
@@ -123,7 +123,7 @@ function SendDrugs() {
                         autoFocus
                     />    
                 </div>
-                <div>
+                <div className="btn">
                     <Button
                     variant="contained"  
                     type="submit"

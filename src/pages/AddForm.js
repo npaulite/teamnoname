@@ -489,7 +489,6 @@ function AddForm() {
                         <TextField
                             name="code"
                             label="ICD Health Code"
-                            type="number"
                             value={x.code}
                             onChange={e => handleICD(e, i)}
                             fullWidth
