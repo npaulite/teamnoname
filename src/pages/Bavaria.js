@@ -33,7 +33,7 @@ const Bavaria = () => {
 
   return (
     <div className='container'>
-      <Typography variant="h3">Bavaria</Typography>
+      <h1>Bavaria</h1>
       <div className="add"> 
           <Button sx={{mb:2}} variant="contained" size="large" href="/Bavaria/SendDrugs">
             <Typography variant="h5">Send Drug to FDA</Typography>
@@ -48,7 +48,7 @@ const Bavaria = () => {
               <div className="appcontainer">
                 <div className="box1">
                 <div className="app-container">
-                  <h2>PATIENTS (FOR ONGOING TRIALS)</h2>
+                  <h3>PATIENTS (FOR ONGOING TRIALS)</h3>
                   <table className="table">
                   
                     <thead>
@@ -75,7 +75,7 @@ const Bavaria = () => {
 
                 <div className="box2">
                 <div className="app-container">
-                  <h2>Drugs</h2>
+                  <h3>Drugs</h3>
                   <table className="table">
                     <thead>
                       <tr>
