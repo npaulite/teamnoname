@@ -11,7 +11,13 @@ const Bavaria = () => {
   const [placebo, setPlacebo] = useState(false);
 
   const listPatients = async() => {
-    let patientList = await entities.patient.list();
+    let patientList = await entities.patient.list({
+      filter: {
+        eligibility: {
+          eq: true
+        }
+      }
+    });
     setPatients(patientList.items);
   }
 
@@ -38,30 +44,27 @@ const Bavaria = () => {
           sx={{ pt: 4, pb: 6}}
           bgcolor = "black"
         >
-          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
           <Box>
               <div className="appcontainer">
                 <div className="box1">
                 <div className="app-container">
+                  <h2>PATIENTS (FOR ONGOING TRIALS)</h2>
                   <table className="table">
+                  
                     <thead>
-                    <th>PATIENTS</th>
-
                       <tr>
-                        <th>_id </th>
-                        <th>uuid </th>
+                        <th>Patient ID </th>
+                        <th>Eligibility </th>
                         <th>Number of Visits</th>
                       </tr>
                     </thead>
                     <tbody>
                     {patients?.map((patient, key) => {
                       return( 
-                      <tr>
-                           <CopyToClipboard text = {patient._id}>
-                            <Button> <td> {patient._id}</td></Button>
-                           </CopyToClipboard>
-                        <td> {patient.uuid}</td>
-                        <td> {patient.visit}</td>
+                      <tr key={key}>
+                        <td> {patient._id} </td>
+                        <td> {patient.eligibility? "Yes": "No"}</td>
+                        <td> {patient.visits.length} / 5</td>
                       </tr>
                     ) })}
                       
@@ -72,13 +75,11 @@ const Bavaria = () => {
 
                 <div className="box2">
                 <div className="app-container">
+                  <h2>Drugs</h2>
                   <table className="table">
                     <thead>
-                    <th>DRUGS</th>
-
                       <tr>
                         <th>_id </th>
-                        <th>id </th>
                         <th>Placebo </th>
                         <th>BatchNumber </th>
                       </tr>
@@ -86,11 +87,8 @@ const Bavaria = () => {
                     <tbody>
                     {drugs?.map((drug, key) => {
                       return( 
-                      <tr>
-                           <CopyToClipboard text = {drug._id}>
-                            <Button> <td> {drug._id}</td></Button>
-                           </CopyToClipboard>
-                        <td> {drug.id}</td>
+                      <tr key={key}>
+                        <td> {drug._id}</td>
                         <td> {drug.placebo?  'Yes': 'No'}</td>
                         <td> {drug.batchNumber}</td>
                       </tr>

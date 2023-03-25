@@ -1,8 +1,6 @@
-import { Box, Button, Card, Grid, TextField, Typography, } from "@mui/material";
+import { Box, Button, Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useJaneHopkins from "../hooks/useJaneHopkins";
-import AddIcon from '@mui/icons-material/Add';
-import EastIcon from '@mui/icons-material/East';
 import '../cssFiles/janeHopkinsDoctor.css'
 import { useState, useEffect } from "react";
 import { Stack } from "@mui/system";
@@ -11,12 +9,11 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins()
   const [format, setFormat] = useState("list")
-  const [patients, setPatients] = useState();
+  const [patients, setPatients] = useState()
   const nav = useNavigate()
-  const [updatePatient, setUpdatePatient] = useState()
 
   const listPatients = async() => {
-    let patientList = await entities.patient.list();
+    let patientList = await entities.patient.list({});
     setPatients(patientList.items);
   }
 
@@ -24,24 +21,18 @@ const JaneHopkinsDoctor = () => {
     listPatients();
   }, [])
   
-  const handleUpdate = (e) => {
-    e.preventDefault()
+  function handleUpdate(p) {
     let path = `/JaneHopkinsDoctor/UpdatePatient`
-    nav(path, {state: { _id: updatePatient}})
+    nav(path, {state: { _id: p}})
+  }
 
+  function handleAddVisit(p) {
+    let path = `/JaneHopkinsDoctor/AddPatientVisit`
+    nav(path, {state: { _id: p}})
   }
 
   return (
       <div className="main">
-        <h1 className='container'>JaneHopkins Doctor Page</h1>
-        <div className="add"> 
-          <Button sx={{mb:2}} variant="contained" size="large" href={"JaneHopkinsDoctor/AddPatient"}>
-            <Typography variant="h5">Add Patient</Typography>
-            <AddIcon/>
-          </Button>
-        </div>
-
-
         {/* Grid list */}
       {format ==="list" ? (
 
@@ -119,80 +110,56 @@ const JaneHopkinsDoctor = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>_id </th>
                         <th>Name </th>
-                        <th>INSURANCE </th>
-                        <th>HEIGHT </th>
-                        <th>WEIGHT </th>
-                        <th>BLOODPRESSURE </th>
-                        <th>TEMPERATURE </th>
-                        <th>OSXYGEN </th>
-                        <th>UUID </th>
-                        <th>ADDRESS </th>
-                        {/* <th>CURRENT MEDS </th> */}
-                        <th>FAM HISTORY </th>
-                        <th>EMPLOYED? </th>
-                        <th>INSURED? </th>
-                        <th>ICD CODES </th>
-                        <th>ALLERGIES </th>
-                        <th>VISITS </th>
+                        <th>Date of Birth</th>
+                        <th>Address </th>
+                        <th>Insurance </th>
+                        <th>Insured? </th>
+                        <th>ICD Health Codes </th>
+                        <th>Trial Eligibility</th>
+                        <th>Visits </th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                     {patients?.map((patient, key) => {
                       return( 
-                      <tr>
-                           <CopyToClipboard text = {patient._id}>
-                            <Button> <td> {patient._id}</td></Button>
-                           </CopyToClipboard>
+                      <tr key={key}>
                         <td> {patient.name}</td>
-                        <td> {patient.insuranceNumber}</td>
-                        <td> {patient.height}</td>
-                        <td> {patient.weight}</td>
-                        <td> {patient.bloodPressure}</td>
-                        <td> {patient.temperature}</td>
-                        <td> {patient.oxygenSaturation}</td>
-                        <td> {patient.uuid}</td>
+                        <td> {patient.dob}</td>
                         <td> {patient.address}</td>
-                        {/* <td> {patient.currentMedications}</td> */}
-                        <td> {patient.familyHistory}</td>
-                        <td> {patient.currentlyEmployed}</td>
+                        <td> {patient.insuranceNumber}</td>
                         <td> {patient.currentlyInsured}</td>
-                        {/* <td> {patient.icdHealthCodes}</td> */}
-                        {/* <td> {patient.allergies}</td> */}
-                        {/* <td> {patient.visits}</td> */}
+                        <td> {patient?.icdHealthCodes.map((codes, key) => {
+                            return(
+                              <p key={key}>{codes.code}</p>
+                            )
+                        })}
+                        </td> 
+                        <td> {patient?.eligibility? "Yes" : "No"} </td>
+                         <td> {patient?.visits.length} / 5</td>
+                         <td>
+                          <Button variant="contained" sx={{m:1}} onClick={() => handleUpdate(patient._id)}>View / Edit Patient Information</Button>
+                          {patient.eligibility ? (
+                            (patient?.visits.length < 5 ?
+                             ( <Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)}>Add Visit</Button>)
+                            :
+                             ( <Button variant="contained" sx={{m:1}}  disabled >Add Visit</Button>)
+                            )
+                          )
+                          :
+                          <Button variant="contained" sx={{m:1}} disabled>Non-Eligible</Button>
+                          }
+                         </td>
                       </tr>
                     ) })}
                     </tbody>
                   </table>
                 </div>
-              );
-
           </Box>
         </Box>
       )}
-
-<div className="update">
-          <Grid container xs={12}>
-            <Grid item xs={6}>
-          <TextField
-            id="update"
-            label="ID of Patient"
-            value={updatePatient || ''}
-            onChange={(e) => setUpdatePatient(e.target.value)}
-            fullWidth
-          />
-          </Grid>
-          <Grid item xs={6}>
-          <Button sx={{ml:2}} variant="contained" size="large" onClick={handleUpdate}>
-            <Typography variant="h5">Update Patient</Typography>
-            <EastIcon/>
-          </Button>
-          </Grid>
-          </Grid>
-        </div>
-
-      </div>
+    </div>
   );
 };
 

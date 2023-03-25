@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { auth, db } from './firebase-config'
+import { auth } from './firebase-config'
 import { onAuthStateChanged } from '@firebase/auth';
-import {doc, getDoc} from "firebase/firestore"
 import Navba from './pages/Navba';
 import Home from './pages/Home';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import JaneHopkinsDoctor from './pages/JaneHopkinsDoctor';
 import JaneHopkinsAdmin from './pages/JaneHopkinsAdmin';
@@ -13,9 +12,11 @@ import FDA from './pages/FDA';
 import AddForm from './pages/AddForm';
 import UpdateForm from './pages/UpdateForm';
 import SendDrugs from './pages/SendDrugs';
+import AssignDrug from './pages/AssignDrug';
 import RequireAuth from './components/RequireAuth'
 import useAuth from './hooks/useAuth';
 import AuthContext from './components/AuthProvider';
+import AddVisit from './pages/AddVisit';
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
           <Route element={<RequireAuth allowedRoles={['FDA', 'Admin']} />}>
           <Route path='/FDA'  element={<FDA/>} />
           </Route>
+          <Route element={<RequireAuth allowedRoles={['FDA', 'Admin']} />}>
+          <Route path='/FDA/AssignDrug'  element={<AssignDrug/>} />
+          </Route>
           <Route element={<RequireAuth allowedRoles={['Bavaria', 'Admin']} />}>
           <Route path='/Bavaria'  element={<Bavaria/>} />
           </Route>
@@ -52,11 +56,14 @@ function App() {
           <Route element={<RequireAuth allowedRoles={['JaneHopkinsAdmin', 'Admin']} />}>
           <Route path='/JaneHopkinsAdmin'  element={<JaneHopkinsAdmin/>} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
-          <Route path='/JaneHopkinsDoctor/AddPatient'  element={<AddForm/>} />
+          <Route element={<RequireAuth allowedRoles={['JaneHopkinsAdmin', 'Admin']} />}>
+          <Route path='/JaneHopkinsAdmin/AddPatient'  element={<AddForm/>} />
           </Route>
           <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
           <Route path='/JaneHopkinsDoctor/UpdatePatient'  element={<UpdateForm/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
+          <Route path='/JaneHopkinsDoctor/AddPatientVisit'  element={<AddVisit/>} />
           </Route>
           <Route element={<RequireAuth allowedRoles={['Bavaria', 'Admin']} />}>
           <Route path='/Bavaria/SendDrugs' element={<SendDrugs/>} />

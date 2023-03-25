@@ -81,7 +81,7 @@
 
   .table {
     border-collapse: collapse;
-    width: 50%;
+    width: 100%;
   }
   
   th,
@@ -114,3 +114,7 @@
     font-size: 28px;
   }
   /*  */
+  
+  h2 {
+    color:#fff;
+  }

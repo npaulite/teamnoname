@@ -1,4 +1,3 @@
-
 import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -9,7 +8,7 @@ function SendDrugs() {
 
     const { entities } = useBavaria()
     const nav = useNavigate()
-    const [placebo, setPlacebo] = useState(false)
+    const [placebo, setPlacebo] = useState(true)
     const [batchNumber, setBatchNumber] = useState(0)
     const [id, setId] = useState()
 
@@ -51,6 +50,7 @@ function SendDrugs() {
 
     const checkPlacebo = () => {
         setPlacebo(placebo => !placebo)
+        console.log(placebo)
     }
 
     const handleSubmit = (e) => {
@@ -89,13 +89,9 @@ function SendDrugs() {
                             id="placebo"
                             label="placebo"
                             onChange={(e) => checkPlacebo()}
-                    />}
-
-                    
-                    />
-                    
+                            />}
+                            />
                     </FormGroup>
-
                 </div>
                 <div className="batchNumber" m={2} >
                     <Typography variant="h6">Batch Number*</Typography>

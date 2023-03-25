@@ -19,7 +19,6 @@ function AddForm() {
     const [bloodPressure, setBloodPressure] = useState()
     const [temperature, setTemperature] = useState()
     const [oxygenSaturation, setOxygenSaturation] = useState()
-    const [uuid, setUuid] = useState()
     const [address, setAddress] = useState()
     const [currentMedications, setCurrentMedications] = useState([{medication: ""}]);
     const [familyHistory, setFamilyHistory] = useState()
@@ -27,13 +26,10 @@ function AddForm() {
     const [currentlyInsured, setCurrentlyInsured] = useState('No')
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
-    const [visits, setVisits] = useState([{
-        patient: "",
-        dateTime: "",
-        notes: "",
-        hivViralLoad: ""
-    }])
+    const [visits, setVisits] = useState([])
     const [eligibility, setEligibility] = useState(false)
+    const [startingHIVLoad, setStartingHIVLoad] = useState()
+    const [addFirstVisit, setAddFirstVisit] = useState(false)
 
     const addPatient = async() => {
 
@@ -47,7 +43,6 @@ function AddForm() {
             bloodPressure: bloodPressure,
             temperature: temperature + ' C',
             oxygenSaturation: oxygenSaturation + "%",
-            uuid: uuid,
             address: address,
             currentMedications: currentMedications,
             familyHistory: familyHistory,
@@ -56,7 +51,8 @@ function AddForm() {
             icdHealthCodes: icdHealthCodes,
             allergies: allergies,
             visits: visits,
-            eligibility: eligibility
+            eligibility: eligibility,
+            startingHIVLoad: startingHIVLoad
         },
         {
             aclInput: {
@@ -164,6 +160,13 @@ function AddForm() {
                             nodes: ["Bavaria", "FDA"]
                         },
                         operations: ["READ"],
+                        path: "startingHIVLoad"
+                    },
+                    {
+                        principal: {
+                            nodes: ["Bavaria", "FDA"]
+                        },
+                        operations: ["READ"],
                         path: "visits"
                     },
                     {
@@ -229,7 +232,7 @@ function AddForm() {
     const handleAddAllergy = () => {
         setAllergies([...allergies, {allergy: "" }]);
       };
-
+/*
     const handleVisit = (e, index) => {
         const { name, value } = e.target;
         const list = [...visits];
@@ -251,8 +254,7 @@ function AddForm() {
             hivViralLoad: ""
         }]);
       };
-
-
+*/
 
     const handleEligibility = () => {
         const date = new Date("2005-01-01")
@@ -264,18 +266,22 @@ function AddForm() {
             setEligibility(true)}
         else {
             setEligibility(false)}
+        icdHealthCodes.map((codes) => {
+            if(codes.code.indexOf('O') > -1) {
+                setEligibility(false)}
+        })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if(addPatient()) {
         console.log(addPatient);
-        nav("/JaneHopkinsDoctor");
+        nav("/JaneHopkinsAdmin");
         }
     }
 
     const goBack = () =>{ 
-        let path = `/JaneHopkinsDoctor`; 
+        let path = `/JaneHopkinsAdmin`; 
         nav(path);
     }
 
@@ -398,18 +404,6 @@ function AddForm() {
                         fullWidth
                     />
             </div>
-            <div className="uuid">
-                <Typography variant="h6">UUID *</Typography>
-                <TextField
-                        required
-                        id="uuid"
-                        type="number"
-                        label="UUID "
-                        value={uuid || ''}
-                        onChange={(e) => setUuid(e.target.value)}
-                        fullWidth
-                    />
-            </div>
             <div className="address">
                 <Typography variant="h6">Address *</Typography>
                 <TextField
@@ -503,6 +497,18 @@ function AddForm() {
                     );
                 })}
             </div>
+            <div className="uuid">
+                <Typography variant="h6">Starting HIV Load *</Typography>
+                <TextField
+                        required
+                        id="hivLoad"
+                        type="number"
+                        label="HIV LOAD "
+                        value={startingHIVLoad || ''}
+                        onChange={(e) => setStartingHIVLoad(e.target.value)}
+                        fullWidth
+                    />
+            </div>
             <div className="allergies">
             <Typography variant="h6">Allergies</Typography>
                 {allergies.map((x, i) => {
@@ -525,8 +531,16 @@ function AddForm() {
                     );
                 })}
             </div>
+            {/*
             <div className="visits">
                 <Typography variant="h6">Visits</Typography>
+                {addFirstVisit === false? 
+                    <div className="addVisitButton">
+                        <Button variant="outlined" onClick={() => setAddFirstVisit(true)}>Add First Visit</Button>
+                    </div>
+                : 
+                <div className="addVisit">
+                <Typography variant="subtitle1"> Add First Visit</Typography>
                 {visits.map((x, i) => {
                     return(
                     <div className="visit" key={i}>
@@ -568,7 +582,10 @@ function AddForm() {
                     </div>
                     );
                 })}
+                </div>
+                }
             </div>
+            */}
             <div className="submitButton">
                 <Button onClick={handleEligibility}
                 variant="contained"  
@@ -583,7 +600,5 @@ function AddForm() {
       </div>
     );
 }
-
-
   
 export default AddForm;

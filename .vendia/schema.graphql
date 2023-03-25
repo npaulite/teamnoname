@@ -196,6 +196,79 @@ enum Vendia_SyncMode {
   ASYNC
 }
 
+input Self_Doctor_ConditionInput_ {
+  name: Vendia_ModelStringInput_
+  picture: Vendia_ModelStringInput_
+  _and: [Self_Doctor_ConditionInput_]
+  _or: [Self_Doctor_ConditionInput_]
+  _not: Self_Doctor_ConditionInput_
+}
+
+input Self_Doctor_FilterInput_ {
+  _owner: Vendia_ModelStringInput_
+  name: Vendia_ModelStringInput_
+  picture: Vendia_ModelStringInput_
+  _and: [Self_Doctor_FilterInput_]
+  _or: [Self_Doctor_FilterInput_]
+  _not: Self_Doctor_FilterInput_
+}
+
+input Self_Doctor_OrderInput_ {
+  _id: Vendia_ModelSortDirection
+}
+
+type Self_Doctor {
+  _id: ID!
+  name: String
+  picture: String
+  _acl: [Vendia_Acl!]
+  _owner: String
+}
+
+type Self_Doctor_Partial_ {
+  _id: ID!
+  name: String
+  picture: String
+  _acl: [Vendia_Acl!]
+  _owner: String
+}
+
+union Self_Doctor_PartialUnion_ = Self_Doctor | Self_Doctor_Partial_
+
+type Self_Doctor_Result_ {
+  error: String
+  result: Self_Doctor
+}
+
+type Self_Doctor_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+  result: Self_Doctor_PartialUnion_
+}
+
+type Self_Doctor_Delete_Transaction_Result_ {
+  transaction: Vendia_Transaction!
+}
+
+type Self_Doctor_Connection_ {
+  _DoctorItems: [Self_Doctor_PartialUnion_]
+  nextToken: String
+}
+
+input Self_Doctor_Input_ {
+  name: String
+  picture: String
+}
+
+input Self_Doctor_UpdateInput_ {
+  name: String
+  picture: String
+}
+
+input Self_Doctor_PartialInput_ {
+  name: String
+  picture: String
+}
+
 input Self_Drug_ConditionInput_ {
   batchNumber: Vendia_ModelStringInput_
   id: Vendia_ModelStringInput_
@@ -277,8 +350,9 @@ input Self_Drug_PartialInput_ {
 }
 
 input Self_Map_ConditionInput_ {
-  drug: Vendia_ModelStringInput_
+  drugUUID: Vendia_ModelStringInput_
   patientUUID: Vendia_ModelStringInput_
+  placebo: Vendia_ModelBooleanInput_
   _and: [Self_Map_ConditionInput_]
   _or: [Self_Map_ConditionInput_]
   _not: Self_Map_ConditionInput_
@@ -286,8 +360,9 @@ input Self_Map_ConditionInput_ {
 
 input Self_Map_FilterInput_ {
   _owner: Vendia_ModelStringInput_
-  drug: Vendia_ModelStringInput_
+  drugUUID: Vendia_ModelStringInput_
   patientUUID: Vendia_ModelStringInput_
+  placebo: Vendia_ModelBooleanInput_
   _and: [Self_Map_FilterInput_]
   _or: [Self_Map_FilterInput_]
   _not: Self_Map_FilterInput_
@@ -299,16 +374,18 @@ input Self_Map_OrderInput_ {
 
 type Self_Map {
   _id: ID!
-  drug: String
+  drugUUID: String
   patientUUID: String
+  placebo: Boolean
   _acl: [Vendia_Acl!]
   _owner: String
 }
 
 type Self_Map_Partial_ {
   _id: ID!
-  drug: String
+  drugUUID: String
   patientUUID: String
+  placebo: Boolean
   _acl: [Vendia_Acl!]
   _owner: String
 }
@@ -335,18 +412,21 @@ type Self_Map_Connection_ {
 }
 
 input Self_Map_Input_ {
-  drug: String
+  drugUUID: String
   patientUUID: String
+  placebo: Boolean
 }
 
 input Self_Map_UpdateInput_ {
-  drug: String
+  drugUUID: String
   patientUUID: String
+  placebo: Boolean
 }
 
 input Self_Map_PartialInput_ {
-  drug: String
+  drugUUID: String
   patientUUID: String
+  placebo: Boolean
 }
 
 input Self_Patient_ConditionInput_ {
@@ -365,6 +445,7 @@ input Self_Patient_ConditionInput_ {
   name: Vendia_ModelStringInput_
   oxygenSaturation: Vendia_ModelStringInput_
   patientPicture: Vendia_ModelStringInput_
+  startingHIVLoad: Vendia_ModelStringInput_
   temperature: Vendia_ModelStringInput_
   uuid: Vendia_ModelStringInput_
   _visitsItem: Self_Patient_visits_visitsItem_ConditionInput_
@@ -391,6 +472,7 @@ input Self_Patient_FilterInput_ {
   name: Vendia_ModelStringInput_
   oxygenSaturation: Vendia_ModelStringInput_
   patientPicture: Vendia_ModelStringInput_
+  startingHIVLoad: Vendia_ModelStringInput_
   temperature: Vendia_ModelStringInput_
   uuid: Vendia_ModelStringInput_
   _visitsItem: Self_Patient_visits_visitsItem_FilterInput_
@@ -421,6 +503,7 @@ type Self_Patient {
   name: String
   oxygenSaturation: String
   patientPicture: String
+  startingHIVLoad: String
   temperature: String
   uuid: String
   visits: [Self_Patient_visits_visitsItem]
@@ -446,6 +529,7 @@ type Self_Patient_Partial_ {
   name: String
   oxygenSaturation: String
   patientPicture: String
+  startingHIVLoad: String
   temperature: String
   uuid: String
   visits: [Self_Patient_visits_visitsItem_Partial_]
@@ -491,6 +575,7 @@ input Self_Patient_Input_ {
   name: String
   oxygenSaturation: String
   patientPicture: String
+  startingHIVLoad: String
   temperature: String
   uuid: String
   visits: [Self_Patient_visits_visitsItem_Input_]
@@ -513,6 +598,7 @@ input Self_Patient_UpdateInput_ {
   name: String
   oxygenSaturation: String
   patientPicture: String
+  startingHIVLoad: String
   temperature: String
   uuid: String
   visits: [Self_Patient_visits_visitsItem_UpdateInput_]
@@ -535,6 +621,7 @@ input Self_Patient_PartialInput_ {
   name: String
   oxygenSaturation: String
   patientPicture: String
+  startingHIVLoad: String
   temperature: String
   uuid: String
   visits: [Self_Patient_visits_visitsItem_PartialInput_]
@@ -3216,6 +3303,9 @@ input Vendia_Contract_InvokeInput_ {
 }
 
 type Query {
+  get_Doctor(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Doctor_PartialUnion_
+  list_DoctorItems(filter: Self_Doctor_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Doctor_OrderInput_!], limit: Int, nextToken: String): Self_Doctor_Connection_
+  list_DoctorVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
   get_Drug(id: ID!, version: Int, readMode: Vendia_ReadMode = NODE_COMMITTED): Self_Drug_PartialUnion_
   list_DrugItems(filter: Self_Drug_FilterInput_, readMode: Vendia_ReadMode = NODE_COMMITTED, order: [Self_Drug_OrderInput_!], limit: Int, nextToken: String): Self_Drug_Connection_
   list_DrugVersions(id: ID!, limit: Int, nextToken: String): Vendia_Version_Connection_
@@ -3251,6 +3341,10 @@ type Query {
 }
 
 type Mutation {
+  add_Doctor(input: Self_Doctor_Input_!, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Doctor_Transaction_Result_
+  put_Doctor(id: ID!, input: Self_Doctor_Input_!, condition: Self_Doctor_ConditionInput_, aclInput: Vendia_Acls_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Doctor_Transaction_Result_
+  update_Doctor(id: ID!, input: Self_Doctor_UpdateInput_!, condition: Self_Doctor_ConditionInput_, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Doctor_Transaction_Result_
+  remove_Doctor(id: ID!, condition: Self_Doctor_ConditionInput_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Doctor_Delete_Transaction_Result_
   add_Drug(input: Self_Drug_Input_!, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Drug_Transaction_Result_
   put_Drug(id: ID!, input: Self_Drug_Input_!, condition: Self_Drug_ConditionInput_, aclInput: Vendia_Acls_Input_!, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Drug_Transaction_Result_
   update_Drug(id: ID!, input: Self_Drug_UpdateInput_!, condition: Self_Drug_ConditionInput_, aclInput: Vendia_Acls_Input_, syncMode: Vendia_SyncMode = NODE_COMMITTED): Self_Drug_Transaction_Result_
@@ -3283,6 +3377,10 @@ type Mutation {
 }
 
 type Subscription {
+  onAdd_Doctor: Self_Doctor_Result_
+  onUpdate_Doctor: Self_Doctor_Result_
+  onPut_Doctor: Self_Doctor_Result_
+  onRemove_Doctor: Self_Doctor_Result_
   onAdd_Drug: Self_Drug_Result_
   onUpdate_Drug: Self_Drug_Result_
   onPut_Drug: Self_Drug_Result_

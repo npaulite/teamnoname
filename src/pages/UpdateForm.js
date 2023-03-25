@@ -21,7 +21,6 @@ function UpdateForm() {
     const [bloodPressure, setBloodPressure] = useState()
     const [temperature, setTemperature] = useState()
     const [oxygenSaturation, setOxygenSaturation] = useState()
-    const [uuid, setUuid] = useState()
     const [address, setAddress] = useState()
     const [currentMedications, setCurrentMedications] = useState([{medication: ""}]);
     const [familyHistory, setFamilyHistory] = useState()
@@ -47,7 +46,6 @@ function UpdateForm() {
         setBloodPressure(getResponse.bloodPressure.replace(/\D/g,''))
         setTemperature(getResponse.temperature.replace(/\D/g,''))
         setOxygenSaturation(getResponse.oxygenSaturation.replace(/\D/g,''))
-        setUuid(getResponse.uuid)
         setAddress(getResponse.address)
         setCurrentMedications(getResponse.currentMedications)
         setFamilyHistory(getResponse.familyHistory)
@@ -60,7 +58,7 @@ function UpdateForm() {
     }
 
     useEffect(() => {
-      getPatient();
+      getPatient()
     }, [])
     
     
@@ -76,7 +74,6 @@ function UpdateForm() {
             bloodPressure: bloodPressure,
             temperature: temperature + ' C',
             oxygenSaturation: oxygenSaturation + "%",
-            uuid: uuid,
             address: address,
             currentMedications: currentMedications,
             familyHistory: familyHistory,
@@ -157,7 +154,7 @@ function UpdateForm() {
        
     const handleAddVisit = () => {
         setVisits([...visits, {
-            patient: "",
+            patient: patientName,
             dateTime: "",
             notes: "",
             hivViralLoad: ""
@@ -190,7 +187,7 @@ function UpdateForm() {
         </div>
         </Box>
         <Container>
-        <Typography component="h1" variant="h3">Update Patient</Typography>
+        <Typography component="h1" variant="h3">Update Patient Information</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
         <Box component="form" mt={2} onSubmit={handleSubmit}>
             <div className="patientName" m={2} >
@@ -298,20 +295,6 @@ function UpdateForm() {
                         fullWidth
                     />
             </div>
-            <div className="uuid">
-                <Typography variant="h6">UUID *</Typography>
-                <TextField
-                        required
-                        id="uuid"
-                        type="number"
-                        label="UUID "
-                        value={uuid || ''}
-                        onChange={(e) => setUuid(e.target.value)}
-                        fullWidth
-                    />
-            </div>
-
-    
             <div className="address">
                 <Typography variant="h6">Address *</Typography>
                 <TextField
@@ -428,33 +411,36 @@ function UpdateForm() {
                     );
                 })}
             </div>
+            
             <div className="visits">
                 <Typography variant="h6">Visits</Typography>
                 {visits.map((x, i) => {
                     return(
                     <div className="visit" key={i}>
-                        <TextField
+                        <Typography variant="subtitle1"> Visit #{i+1}</Typography>
+                        <TextField sx={{mt:1, mb:1}}
                             name="patient"
                             label="Patient Name"
-                            value={x.patient}
+                            value={patientName || ''}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
+                            disabled
                             />
-                        <TextField
+                        <TextField sx={{mb:1}}
                             name="dateTime"
                             type='date'
                             value={x.dateTime}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             />
-                        <TextField
+                        <TextField sx={{mb:1}}
                             name="notes"
                             label="Notes"
                             value={x.notes}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             />
-                        <TextField
+                        <TextField sx={{mb:1}}
                             name="hivViralLoad"
                             type="number"
                             label="HIV Viral Load"
@@ -465,7 +451,7 @@ function UpdateForm() {
                         <div className="visitButtons">
                         {visits.length !== 1 && <Button variant="outlined"
                             onClick={() => handleRemoveVisit(i)}>Remove</Button>}
-                        {visits.length - 1 === i && <Button variant="outlined" 
+                        {(visits.length - 1 === i  && visits.length < 5) && <Button variant="outlined" 
                             onClick={handleAddVisit}>Add</Button>}
                     </div>
                     </div>

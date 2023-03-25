@@ -9,7 +9,8 @@ import { auth, db } from '../firebase-config'
 import {setDoc, doc, getDoc} from "firebase/firestore"
 import { useNavigate } from 'react-router'
 import useAuth from '../hooks/useAuth';
- 
+import useJaneHopkins from "../hooks/useJaneHopkins";
+
 const Login = () => {
 
   const nav = useNavigate();
@@ -21,7 +22,8 @@ const Login = () => {
   const [role, setRole] = useState()
   const [showPassword, setShowPassword] = React.useState(false)
   const [user, setUser] = useState({})
-  const {setAuth} = useAuth()
+  const { setAuth } = useAuth()
+  const { entities } = useJaneHopkins();
 
   onAuthStateChanged(auth, (currentUser) => {
     if(user){
@@ -61,10 +63,25 @@ const Login = () => {
         console.log("User was added with ID: ", userRef)
       }catch (error) {
         console.log(error.message)
-      }}
-      )
+      }
+      try {
+        if(role === "JaneHopkinsDoctor") {
+          if(addDoctor())
+            console.log(addDoctor)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+      })
       nav("/")
     }
+  }
+
+  const addDoctor = async() => {
+    const doctorResponse = await entities.doctor.add({
+      name: name
+    })
+    console.log(doctorResponse)
   }
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

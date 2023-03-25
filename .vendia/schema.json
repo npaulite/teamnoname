@@ -10,6 +10,9 @@
     },
     "doctorACL": {
       "type": "Doctor"
+    },
+    "mapACL": {
+      "type": "Map"
     }
   },
   "type": "object",
@@ -116,6 +119,9 @@
           },
           "eligibility": {
             "type": "boolean"
+          },
+          "startingHIVLoad": {
+            "type": "string"
           }
         }
       }
@@ -147,6 +153,23 @@
           },
           "picture": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "Map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "patientUUID": {
+            "type": "string"
+          },
+          "drugUUID": {
+            "type": "string"
+          },
+          "placebo": {
+            "type": "boolean"
           }
         }
       }
