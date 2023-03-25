@@ -37,7 +37,6 @@ const Login = () => {
       try{
         const userRef = doc(db, "users",result.user.uid)
         const userData = await getDoc(userRef)
-        console.log(userData)
         const email = userData.get('email')
         const name = userData.get('name')
         const role = userData.get('role')
@@ -112,7 +111,7 @@ const Login = () => {
       {page === "Login" ? 
       <Box component="form" mt={2} onSubmit={login}>
       <div className='login'>
-      <Typography variant="h3">Login</Typography> 
+      <Typography variant="h2">Login</Typography> 
       <div>
         <Typography variant='h6'>User Email Address</Typography>
         <TextField
@@ -169,7 +168,7 @@ const Login = () => {
       : 
       <Box component="form" mt={2} onSubmit={register}>
       <div className='register'>
-      <Typography variant="h3">Register</Typography>
+      <Typography variant="h2">Register</Typography>
       <div>
         <Typography variant='h6'>Email Address</Typography>
         <TextField

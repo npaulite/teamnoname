@@ -16,7 +16,6 @@ let reducer = (authorized, newAuthorized) => {
 
 export const AuthProvider = ({ children }) => {
     const [authorized, setAuth] = useReducer(reducer, localState || initialState);
-    console.log(authorized)
 
     useEffect(() => {
         localStorage.setItem("authorized", JSON.stringify(authorized));
