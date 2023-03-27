@@ -1,4 +1,5 @@
 import { Typography, Button, Box } from "@mui/material"
+import '../cssFiles/bavaria.css'
 import useBavaria from "../hooks/useBavaria"
 import { useState, useEffect } from "react"
 import {CopyToClipboard} from "react-copy-to-clipboard";
@@ -32,9 +33,9 @@ const Bavaria = () => {
   }, [])
 
   return (
-    <div className='container'>
-      <h1>Bavaria</h1>
-      <div className="add"> 
+    <div className='main'>
+      <h1 className="container">Bavaria</h1>
+      <div className="send"> 
           <Button sx={{mb:2}} variant="contained" size="large" href="/Bavaria/SendDrugs">
             <Typography variant="h5">Send Drug to FDA</Typography>
           </Button>
@@ -79,9 +80,9 @@ const Bavaria = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>_id </th>
-                        <th>Placebo </th>
-                        <th>BatchNumber </th>
+                        <th>ID </th>
+                        <th>Type of Drug</th>
+                        <th>Batch Number </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -89,7 +90,7 @@ const Bavaria = () => {
                       return( 
                       <tr key={key}>
                         <td> {drug._id}</td>
-                        <td> {drug.placebo?  'Yes': 'No'}</td>
+                        <td> {drug.placebo?  'Placebo': 'Bavaria'}</td>
                         <td> {drug.batchNumber}</td>
                       </tr>
                     ) })}

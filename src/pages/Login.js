@@ -12,7 +12,7 @@ import useAuth from '../hooks/useAuth';
 import useJaneHopkins from "../hooks/useJaneHopkins";
 
 const Login = () => {
-
+  
   const nav = useNavigate();
   const [page, setPage] = useState("Login")
   const [name, setName] = useState()
@@ -40,7 +40,8 @@ const Login = () => {
         const email = userData.get('email')
         const name = userData.get('name')
         const role = userData.get('role')
-        setAuth({email, name, role})
+        const id = userData.get('id')
+        setAuth({email, name, role, id})
       } catch (error) {
         console.log(error.message)
       }})
@@ -52,25 +53,25 @@ const Login = () => {
       await createUserWithEmailAndPassword(auth, email, password).then(
         async(result) => {
         try{
+          try {
+            if(role === "JaneHopkinsDoctor") {
+              addDoctor()
+            }
+          } catch (error) {
+            console.log(error.message)
+          }
         const usersRef = doc(db, "users", result.user.uid)
         const userData = {
           email: email,
           name: name,
-          role: role
+          role: role,
         }
         const userRef = await setDoc(usersRef, userData)
-        console.log("User was added with ID: ", userRef)
+        console.log(userRef)
       }catch (error) {
         console.log(error.message)
       }
-      try {
-        if(role === "JaneHopkinsDoctor") {
-          if(addDoctor())
-            console.log(addDoctor)
-        }
-      } catch (error) {
-        console.log(error.message)
-      }
+      
       })
       nav("/")
     }

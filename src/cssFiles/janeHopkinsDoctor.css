@@ -24,3 +24,80 @@
     margin-bottom: 20px;
     font-size: 20px;
 }
+
+.patientsList {
+    display: flex;
+    padding: 50px;
+}
+
+.patientsGrid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-auto-rows: auto;
+    column-gap: 1px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+  }
+  
+  .return {
+      margin-top: 10px;
+      margin-left: 30px;
+  }
+  
+  .patientName {
+      margin-bottom: 10px;
+  }
+  .patientPicture {
+      margin-bottom: 10px;
+  }
+  .dob {
+      margin-bottom: 10px;
+  }
+  .insuranceNumber {
+      margin-bottom: 10px;
+  }
+  .height {
+      margin-bottom: 10px;
+  }
+  .weight {
+      margin-bottom: 10px;
+  }
+  .bloodPressure {
+      margin-bottom: 10px;
+  }
+  .temperature {
+      margin-bottom: 10px;
+  }
+  .oxygenSaturation {
+      margin-bottom: 10px;
+  }
+  .uuid {
+      margin-bottom: 10px;
+  }
+  .address {
+      margin-bottom: 10px;
+  }
+  .currentMedications {
+      margin-bottom: 10px;
+  }
+  .familyHistory {
+      margin-bottom: 10px;
+  }
+  .currentlyEmployed {
+      margin-bottom: 10px;
+  }
+  .currentlyInsured {
+      margin-bottom: 10px;
+  }
+  .icdHealthCodes {
+      margin-bottom: 10px;
+  }
+  .Allergies {
+      margin-bottom: 10px;
+  }
+  

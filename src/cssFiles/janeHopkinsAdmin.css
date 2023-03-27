@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+  }
+
+.main {
+    margin-top: 10px;
+}
+
+.add {
+    text-align: center;
+}
+
+.patientsList {
+    display: flex;
+    padding: 50px;
+}

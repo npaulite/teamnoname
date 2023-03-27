@@ -1,5 +1,6 @@
 import useFDA from "../hooks/useFDA"
 import React, { useState, useEffect } from 'react';
+import '../cssFiles/fda.css'
 import styled from 'styled-components';
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -88,12 +89,10 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
     </div>
     <p />
     <p> Selected: {active}</p>
-    <Box
-          sx={{ pt: 4, pb: 6}}
-          bgcolor = "black"
-        >
-          <Box>
-              <div className="appcontainer">
+    <div className="main">
+      <Box sx={{ pt: 4, pb: 6}}
+          bgcolor = "black">
+
                 <div className="box1">
                 <div className="app-container">
                   <table className="table">
@@ -173,11 +172,10 @@ const types = ['Profile', 'Reports', 'Results', 'Drugs', 'Order', 'Patients'];
                 </div>
                 </div>                      
 */}
-            </div>
 
-          </Box>
+
         </Box>
-
+      </div>
     </>
   );
 }

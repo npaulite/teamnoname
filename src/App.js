@@ -17,6 +17,7 @@ import RequireAuth from './components/RequireAuth'
 import useAuth from './hooks/useAuth';
 import AuthContext from './components/AuthProvider';
 import AddVisit from './pages/AddVisit';
+import AssignDoctor from './pages/AssignDoctor';
 
 function App() {
 
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route element={<RequireAuth allowedRoles={['JaneHopkinsAdmin', 'Admin']} />}>
           <Route path='/JaneHopkinsAdmin/AddPatient'  element={<AddForm/>} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={['JaneHopkinsAdmin', 'Admin']} />}>
+          <Route path='/JaneHopkinsAdmin/AssignDoctor'  element={<AssignDoctor/>} />
           </Route>
           <Route element={<RequireAuth allowedRoles={['JaneHopkinsDoctor', 'Admin']} />}>
           <Route path='/JaneHopkinsDoctor/UpdatePatient'  element={<UpdateForm/>} />

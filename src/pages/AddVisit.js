@@ -69,7 +69,7 @@ function AddVisit() {
         e.preventDefault();
         if(updatePatient()) {
         console.log(updatePatient);
-        nav("/JaneHopkinsDoctor");
+        setTimeout(() => {nav("/JaneHopkinsDoctor")}, 1000)
         }
     }
 

@@ -3,7 +3,7 @@ import useJaneHopkins from "../hooks/useJaneHopkins";
 import { Box, Button, Container, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../cssFiles/addForm.css'
+import '../cssFiles/janeHopkinsDoctor.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
 
 function UpdateForm() {
@@ -165,7 +165,7 @@ function UpdateForm() {
         e.preventDefault();
         if(updatePatient()) {
         console.log(updatePatient);
-        nav("/JaneHopkinsDoctor");
+        setTimeout(() => {nav("/JaneHopkinsDoctor")}, 1000)
         }
     }
 
@@ -175,7 +175,7 @@ function UpdateForm() {
     }
 
     return (
-    <div className="add">
+    <div className="update">
         <Box>
         <div className="return">
             

@@ -276,7 +276,7 @@ function AddForm() {
         e.preventDefault()
         if(addPatient()) {
         console.log(addPatient);
-        nav("/JaneHopkinsAdmin");
+        setTimeout(() => {nav("/JaneHopkinsAdmin")}, 1000)
         }
     }
 
@@ -286,15 +286,16 @@ function AddForm() {
     }
 
     return (
-    <div className="add">
-        <Box>
+    <div className="main">
         <div className="return">
-            <Button variant="outlined" size="large" onClick={goBack}>
-                <Typography>Go Back</Typography>
-                <ArrowLeftSharp/>
-            </Button>
+            <Box>
+                <Button variant="outlined" size="large" onClick={goBack}>
+                    <Typography>Go Back</Typography>
+                    <ArrowLeftSharp/>
+                </Button>
+            </Box>
         </div>
-        </Box>
+        <div className="addForm">
         <Container>
         <Typography component="h1" variant="h3">Add Patient</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
@@ -597,7 +598,9 @@ function AddForm() {
             </div>
         </Box>
         </Container>
+        </div>
       </div>
+
     );
 }
   
