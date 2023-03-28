@@ -15,8 +15,6 @@ function AssignDrug() {
     const [selection, setSelection] = useState(true)
     const [placeboDrugs, setPlaceboDrugs] = useState()
     const [bavariaDrugs, setBavariaDrugs] = useState()
-    const [value, setValue] = useState();
-    const [inputValue, setInputValue] = useState();
         
     useEffect(() => {
         getMap()
@@ -85,7 +83,7 @@ function AssignDrug() {
         e.preventDefault();
         if(assignDrug()) {
         console.log(assignDrug);
-        nav("/FDA");
+        setTimeout(() => {nav("/FDA")}, 1000)
         }
     }
     const checkPlacebo = () => {
@@ -192,14 +190,14 @@ function AssignDrug() {
                 </div>
                 }
                 <div className="submitButton">
-                <Button
-                    variant="contained"  
-                    type="submit"
-                    fullWidth
-                    sx={{mt: 5, mb: 8}}>
-                    Assign Drug
-                </Button>
-            </div>
+                    <Button
+                        variant="contained"  
+                        type="submit"
+                        fullWidth
+                        sx={{mt: 5, mb: 8}}>
+                        Assign Drug
+                    </Button>
+                </div>
                 </Box>
             </Container>    
         </div>

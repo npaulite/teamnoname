@@ -1,4 +1,5 @@
 import { Typography, Button, Box } from "@mui/material";
+import "../cssFiles/bavaria.css";
 import useBavaria from "../hooks/useBavaria";
 import { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -31,9 +32,9 @@ const Bavaria = () => {
   }, []);
 
   return (
-    <div className="container1">
-      <h1>Bavaria</h1>
-      <div className="add">
+    <div className="main1">
+      <h1 className="container">Bavaria</h1>
+      <div className="send">
         <Button
           sx={{ mb: 2 }}
           variant="contained"

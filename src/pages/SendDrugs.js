@@ -10,13 +10,11 @@ function SendDrugs() {
     const nav = useNavigate()
     const [placebo, setPlacebo] = useState(true)
     const [batchNumber, setBatchNumber] = useState(0)
-    const [id, setId] = useState()
 
     const sendDrugs = async() => {
         const sendResponse = await entities.drug.add( {
             placebo: placebo,
-            batchNumber: batchNumber,
-            id: id
+            batchNumber: batchNumber
         },
         {
             aclInput: {
@@ -57,7 +55,7 @@ function SendDrugs() {
         e.preventDefault();
         if(sendDrugs()) {
         console.log(sendDrugs);
-        nav("/Bavaria");
+        setTimeout(() => {nav("/Bavaria")}, 1000)
         }
     }
 
@@ -102,19 +100,6 @@ function SendDrugs() {
                         label="Batch Number"
                         value={batchNumber || ''}
                         onChange={(e) => {setBatchNumber(e.target.value);}}
-                        fullWidth
-                        autoFocus
-                    />    
-                </div>
-                <div className="id" m={2} >
-                    <Typography variant="h6">Drug ID*</Typography>
-                    <TextField
-                        required
-                        id="id"
-                        type="number"
-                        label="Drug ID"
-                        value={id || ''}
-                        onChange={(e) => {setId(e.target.value);}}
                         fullWidth
                         autoFocus
                     />    

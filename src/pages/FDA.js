@@ -1,6 +1,7 @@
 import useFDA from "../hooks/useFDA";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import "../cssFiles/fda.css";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 

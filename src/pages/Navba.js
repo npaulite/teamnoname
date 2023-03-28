@@ -6,17 +6,12 @@ import { Button } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 
 export default function Navba() {
-  const [user, setUser] = useState();
   const { authorized, setAuth } = useAuth();
 
   const SignOut = () => {
     auth.signOut();
     window.location.reload(false);
   };
-
-  onAuthStateChanged(auth, (currentUser) => {
-    if (user) setUser(currentUser);
-  });
 
   return (
     <nav className="nav">
