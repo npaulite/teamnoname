@@ -12,9 +12,14 @@
     height: 100%;
   }
   
+  .body{
+    background-color: #555;
+  }
+
   .nav {
-    background-color: #333;
-    color: white;
+    /* background-color: #333; */
+    background-image: url(./assets1/images/background-image.jpg);
+    color: rgb(212, 212, 212);
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -64,6 +69,10 @@
   .appcontainer {
     display: flex;
     /* column-gap: 20px; */
+  }
+
+  .center{
+    display: center;
   }
   
 
