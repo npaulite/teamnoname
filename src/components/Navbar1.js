@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../assets1/css/style.css";
-import "../assets1/css/bootstrap.css";
+// import "../assets1/css/bootstrap.css";
 import "../assets1/css/responsive.css";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged } from "@firebase/auth";

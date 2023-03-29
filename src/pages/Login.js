@@ -112,9 +112,9 @@ const Login = () => {
       {page === "Login" ? 
       <Box component="form" mt={2} onSubmit={login}>
       <div className='login'>
-      <Typography variant="h2">Login</Typography> 
+      <Typography variant="h3 mb-3 fw-normal">Please Login</Typography>  
       <div>
-        <Typography variant='h6'>User Email Address</Typography>
+        {/* <Typography variant='h6'>User Email Address</Typography> */}
         <TextField
           required
           id="email"
@@ -126,7 +126,7 @@ const Login = () => {
                 />
       </div>
       <div>
-        <Typography variant='h6'>Password</Typography>
+        {/* <Typography variant='h6'>Password</Typography> */}
         <TextField
           required
           id="password"

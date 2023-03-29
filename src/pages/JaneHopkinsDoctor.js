@@ -186,8 +186,8 @@ const JaneHopkinsDoctor = () => {
                     <div>EMPLOYED?: {patient.currentlyEmployed}</div>
                     <div>INSURED?: {patient.currentlyInsured}</div>
                   </div>
-                  {/* <div>IDHC: {patient.icdHealthCodes}</div>
-                <div>ALLERGIES: {patient.allergies}</div>
+                  {/* <div>IDHC: {patient.icdHealthCodes}</div> */}
+                {/* <div>ALLERGIES: {patient.allergies}</div>
                 <div>VISITS: {patient.visits}</div> */}
               </Card>
               </div>
@@ -258,7 +258,7 @@ const JaneHopkinsDoctor = () => {
               </div>
               </Box>
               </Box>
-      </div>
+      // </div>
       )}
     </div>
   );
