@@ -29,6 +29,7 @@ function UpdateForm() {
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
     const [visits, setVisits] = useState([{}])
+    const [startingHIVLoad, setStartingHIVLoad] = useState([{}])
     
     
     useEffect(() => {
@@ -52,6 +53,7 @@ function UpdateForm() {
             setAllergies(getResponse.allergies)
             setVisits(getResponse.visits)
             setID(getResponse._id)
+            setStartingHIVLoad(getResponse.startingHIVLoad)
         }
     
       getPatient()
@@ -77,7 +79,8 @@ function UpdateForm() {
             currentlyInsured: currentlyInsured,
             icdHealthCodes: icdHealthCodes,
             allergies: allergies,
-            visits: visits
+            visits: visits,
+            startingHIVLoad: startingHIVLoad
 
         })
         console.log(updateResponse)

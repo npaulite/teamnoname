@@ -2,14 +2,12 @@ import { Typography, Button, Box } from "@mui/material";
 import "../cssFiles/bavaria.css";
 import useBavaria from "../hooks/useBavaria";
 import { useState, useEffect } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import "../cssFiles/styles.css";
 
 const Bavaria = () => {
-  const { entities } = useBavaria();
-  const [patients, setPatients] = useState();
-  const [drugs, setDrugs] = useState();
-  const [placebo, setPlacebo] = useState(false);
+  const { entities } = useBavaria()
+  const [patients, setPatients] = useState()
+  const [drugs, setDrugs] = useState()
+  const [maps, setMaps] = useState()
 
   const listPatients = async () => {
     let patientList = await entities.patient.list({
@@ -28,16 +26,23 @@ const Bavaria = () => {
   };
 
   function noOfVisit(p) {
-    if (p.visits[0].patient == "") return 0;
+    if (p.visits[0].dateTime === "") return 0;
     else {
       return p.visits.length;
     }
   }
 
+  const getMap = async () => {
+    const getMapResponse = await entities.map.list()
+    setMaps(getMapResponse.items)
+  }
+
+
   useEffect(() => {
-    listPatients();
-    listDrugs();
-  }, []);
+    listPatients()
+    listDrugs()
+    getMap()
+  }, [])
 
   return (
     <div className="main">
@@ -51,12 +56,13 @@ const Bavaria = () => {
                 <div className="appcontainer">
                   <div className="box1">
                     <div className="app-container">
-                      <h3>PATIENTS (FOR ONGOING TRIALS)</h3>
+                      <h2>PATIENTS (FOR ONGOING TRIALS)</h2>
                       <table className="table-striped">
                         <thead>
                           <tr>
                             <th>Patient ID </th>
                             <th>Eligibility </th>
+                            <th>Drug Assigned by FDA</th>
                             <th>Dosage</th>
                           </tr>
                         </thead>
@@ -66,6 +72,20 @@ const Bavaria = () => {
                               <tr key={key}>
                                 <td> {patient._id} </td>
                                 <td> {patient.eligibility ? "Yes" : "No"}</td>
+                                <td>
+                                  {maps?.map((map, i) => {
+                                    {
+                                      if (patient._id === map.patientUUID) {
+                                        return (
+                                          <span key={i}>
+                                            {map.patientUUID ? "Yes" : "No"}
+                                          </span>
+                                        );
+                                      }
+                                    }
+                                    return "";
+                                  })}
+                        </td>
                                 <td> {noOfVisit(patient)} / 5</td>
                               </tr>
                             );
@@ -77,7 +97,7 @@ const Bavaria = () => {
 
                   <div className="box2">
                     <div className="app-container">
-                      <h3>Drugs</h3>
+                      <h2>Drugs</h2>
                       <table className="table-striped">
                         <thead>
                           <tr>

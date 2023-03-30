@@ -1,12 +1,11 @@
 import useFDA from "../hooks/useFDA";
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+//import styled from "styled-components";
 import "../cssFiles/fda.css";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "../cssFiles/styles.css";
 
-const Tab = styled.button`
+/*const Tab = styled.button`
   background-color: #9fa8da;
   padding: 10px 80px;
   cursor: pointer;
@@ -18,14 +17,14 @@ const Tab = styled.button`
   opacity: 2;
   `}
 `;
-
+*/
 // const types = ["Profile", "Reports", "Results", "Drugs", "Order", "Patients"];
 const FDA = () => {
   const nav = useNavigate();
   // const [active, setActive] = useState(types[0]);
   const { entities } = useFDA();
   const [patients, setPatients] = useState();
-  const [drugs, setDrugs] = useState();
+  //const [drugs, setDrugs] = useState();
   const [maps, setMaps] = useState();
 
   const listPatients = async () => {
@@ -39,11 +38,11 @@ const FDA = () => {
     setPatients(patientList.items);
   };
 
-  const listDrugs = async () => {
+/*  const listDrugs = async () => {
     let drugsList = await entities.drug.list();
     setDrugs(drugsList.items);
   };
-
+*/
   const mapDrugs = async () => {
     let mapList = await entities.map.list();
     setMaps(mapList.items);
@@ -61,7 +60,7 @@ const FDA = () => {
   }
 
   function noOfVisit(p) {
-    if (p.visits[0].patient == "") return 0;
+    if (p.visits[0].dateTime === "") return 0;
     else {
       return p.visits.length;
     }
@@ -69,7 +68,7 @@ const FDA = () => {
 
   useEffect(() => {
     listPatients();
-    listDrugs();
+    //listDrugs();
     mapDrugs();
   }, []);
 

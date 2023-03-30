@@ -49,11 +49,9 @@ function App() {
           setAuth: setAuth,
         }}
       >
-        {/* <Navbar1></Navbar1> */}
+        <Navba/>
         <Sidebar1>
-          <Navba> </Navba>
-
-          <div>
+          <div className="routes">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Login" element={<Login />} />

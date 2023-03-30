@@ -54,7 +54,7 @@ function AddVisit() {
        
     const handleAddVisit = () => {
         setVisits([...visits, {
-            patient: patientName,
+            patient: "",
             dateTime: "",
             notes: "",
             hivViralLoad: ""

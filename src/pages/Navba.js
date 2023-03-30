@@ -5,7 +5,6 @@ import "../cssFiles/navba.css";
 import { Button } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import "../assets/css/demo_1/style.css";
-import "../cssFiles/styles.css";
 
 export default function Navba() {
   const { authorized, setAuth } = useAuth();

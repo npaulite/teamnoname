@@ -26,11 +26,7 @@ function AddForm() {
     const [currentlyInsured, setCurrentlyInsured] = useState('No')
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
-    const [visits, setVisits] = useState([{
-        patient: "",
-        dateTime: "",
-        notes: "",
-        hivViralLoad: ""}])
+    const [visits, setVisits] = useState([])
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
     const [addFirstVisit, setAddFirstVisit] = useState(false)
@@ -179,6 +175,13 @@ function AddForm() {
                         },
                         operations: ["READ"],
                         path: "eligibility"
+                    },
+                    {
+                        principal: {
+                            nodes: ["Bavaria", "FDA"]
+                        },
+                        operations: ["READ"],
+                        path: "startingHIVLoad"
                     }
                 ]
             }
@@ -261,8 +264,6 @@ function AddForm() {
         const date = new Date("2005-01-01")
         let birth = dob.split('-')
         const birthday = new Date(birth[0], birth[1] - 1, birth[2])
-        console.log(birthday.toDateString())
-        console.log(date.toDateString())
         if (birthday <= date) {
             setEligibility(true)}
         else {
@@ -426,11 +427,7 @@ function AddForm() {
                             required
                             name="medication"
                             label="Medications"
-<<<<<<< HEAD
                             value={x.medication} pattern = "/^[a-zA-Z\d]+$/"
-=======
-                            value={x.medication || ''}
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
                             onChange={e => handleMedication(e, i)}
                             fullWidth
                             />
@@ -450,7 +447,7 @@ function AddForm() {
                         required
                         id="familyHistory"
                         label="Family History"
-                        value={familyHistory || ''} required pattern = "/^[a-zA-Z\d]+$/"
+                        value={familyHistory || ''}  pattern = "/^[a-zA-Z\d]+$/"
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
                     />
@@ -492,7 +489,7 @@ function AddForm() {
                             required
                             name="code"
                             label="ICD Health Code"
-                            value={x.code} required pattern = "/^\d+$/"
+                            value={x.code}  pattern = "/^\d+$/"
                             onChange={e => handleICD(e, i)}
                             fullWidth
                             />
@@ -526,11 +523,7 @@ function AddForm() {
                         <TextField
                             name="allergy"
                             label="Allergy"
-<<<<<<< HEAD
-                            value={x.allergy} required pattern = "/^[a-zA-Z]+$/"
-=======
-                            value={x.allergy || ''}
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
+                            value={x.allergy || ''} required pattern = "/^[a-zA-Z]+$/"
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
                             />

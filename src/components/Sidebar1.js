@@ -11,7 +11,6 @@ import {
 import { NavLink } from "react-router-dom";
 import "../cssFiles/app.css";
 import useAuth from "../hooks/useAuth";
-import { auth } from "../firebase-config";
 import "../assets/css/demo_1/style.css";
 
 const Sidebar1 = ({ children }) => {
