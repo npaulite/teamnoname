@@ -78,28 +78,11 @@ function App() {
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
                 <Route path="/JaneHopkinsAdmin/AddPatient" element={<AddForm /> }/>
               </Route>
-              <Route
-                element={
-                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
-                }
-              >
-                <Route
-                  path="/JaneHopkinsAdmin/AddPatient"
-                  element={<AddForm />}
-                />
-              </Route>
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
                 <Route path="/JaneHopkinsDoctor/UpdatePatient" element={<UpdateForm />} />
               </Route>
-              <Route
-                element={
-                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-                }
-              >
-                <Route
-                  path="/JaneHopkinsDoctor/AddPatientVisit"
-                  element={<AddVisit />}
-                />
+              <Route element={ <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
+                <Route path="/JaneHopkinsDoctor/AddPatientVisit" element={<AddVisit /> }/>
               </Route>
               <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} /> }>
                 <Route path="/Bavaria/SendDrugs" element={<SendDrugs />} />
