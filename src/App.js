@@ -99,6 +99,16 @@ function App() {
               </Route>
               <Route
                 element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin/AssignDoctor"
+                  element={<AssignDoctor />}
+                />
+              </Route>
+              <Route
+                element={
                   <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
                 }
               >
