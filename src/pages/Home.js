@@ -5,13 +5,11 @@ import { Container } from "@mui/material";
 function Home() {
   return (
     <div className="main">
-      <div className="container">
-        <div className="img">
+      <div className="img">
           <a href="https://www.vendia.com/">
             <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/cpuf13twbf75y9bjau7h.png" />
           </a>
         </div>
-      </div>
       <div className="myBox">
         <Container>
           <h1 className="vendia">Vendia: Bring trust to data</h1>
