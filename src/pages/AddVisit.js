@@ -18,6 +18,7 @@ function AddVisit() {
         notes: "",
         hivViralLoad: ""
     }])
+
     
     const getPatient = async() => {
         const getResponse = await entities.patient.get(location.state._id)
@@ -100,7 +101,8 @@ function AddVisit() {
                     </div>
                     <div className="visit" m={2} >
                         <Typography variant="h6">Patient Visits</Typography>
-                        {visits.map((x, i) => {
+                        {visits.length === 0 ? <Button variant="outlined" onClick={() => handleAddVisit()}> Add First Visit</Button> :
+                        (visits.map((x, i) => {
                             return(
                                 <div className="visit" key={i}>
                                     <Typography variant="subtitle1"> Visit #{i+1}</Typography>
@@ -142,7 +144,8 @@ function AddVisit() {
                                     </div>
                                 </div>
                             );
-                        })}
+                        })
+                        )}
                     </div>
                     <div>
                         <Button

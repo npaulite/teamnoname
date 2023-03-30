@@ -26,7 +26,11 @@ function AddForm() {
     const [currentlyInsured, setCurrentlyInsured] = useState('No')
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
-    const [visits, setVisits] = useState([])
+    const [visits, setVisits] = useState([{
+        patient: "",
+        dateTime: "",
+        notes: "",
+        hivViralLoad: ""}])
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
     const [addFirstVisit, setAddFirstVisit] = useState(false)
@@ -49,7 +53,7 @@ function AddForm() {
             currentlyEmployed: currentlyEmployed,
             currentlyInsured: currentlyInsured,
             icdHealthCodes: icdHealthCodes,
-            allergies: allergies,
+            allergies: allergies || "N/A",
             visits: visits,
             eligibility: eligibility,
             startingHIVLoad: startingHIVLoad
@@ -232,7 +236,6 @@ function AddForm() {
     const handleAddAllergy = () => {
         setAllergies([...allergies, {allergy: "" }]);
       };
-/*
     const handleVisit = (e, index) => {
         const { name, value } = e.target;
         const list = [...visits];
@@ -254,8 +257,6 @@ function AddForm() {
             hivViralLoad: ""
         }]);
       };
-*/
-
     const handleEligibility = () => {
         const date = new Date("2005-01-01")
         let birth = dob.split('-')
@@ -417,14 +418,19 @@ function AddForm() {
                     />  
             </div>            
             <div className="currentMedication">
-                <Typography variant="h6">Current Medications</Typography>
+                <Typography variant="h6">Current Medications *</Typography>
                 {currentMedications.map((x, i) => {
                     return(
                     <div className="medications" key={i}>
                         <TextField
+                            required
                             name="medication"
                             label="Medications"
+<<<<<<< HEAD
                             value={x.medication} pattern = "/^[a-zA-Z\d]+$/"
+=======
+                            value={x.medication || ''}
+>>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
                             onChange={e => handleMedication(e, i)}
                             fullWidth
                             />
@@ -439,8 +445,9 @@ function AddForm() {
                 })}
             </div>
             <div className="familyHistory">
-                <Typography variant="h6">Family History</Typography>
+                <Typography variant="h6">Family History *</Typography>
                 <TextField
+                        required
                         id="familyHistory"
                         label="Family History"
                         value={familyHistory || ''} required pattern = "/^[a-zA-Z\d]+$/"
@@ -477,11 +484,12 @@ function AddForm() {
                 </Select>
             </div>
             <div className="icdHealthCodes">
-            <Typography variant="h6">ICD Health Code</Typography>
+            <Typography variant="h6">ICD Health Code *</Typography>
                 {icdHealthCodes.map((x, i) => {
                     return(
                     <div className="icd" key={i}>
                         <TextField
+                            required
                             name="code"
                             label="ICD Health Code"
                             value={x.code} required pattern = "/^\d+$/"
@@ -511,14 +519,18 @@ function AddForm() {
                     />
             </div>
             <div className="allergies">
-            <Typography variant="h6">Allergies</Typography>
+            <Typography variant="h6">Allergies *</Typography>
                 {allergies.map((x, i) => {
                     return(
                     <div className="allergy" key={i}>
                         <TextField
                             name="allergy"
                             label="Allergy"
+<<<<<<< HEAD
                             value={x.allergy} required pattern = "/^[a-zA-Z]+$/"
+=======
+                            value={x.allergy || ''}
+>>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
                             />
@@ -532,7 +544,6 @@ function AddForm() {
                     );
                 })}
             </div>
-            {/*
             <div className="visits">
                 <Typography variant="h6">Visits</Typography>
                 {addFirstVisit === false? 
@@ -586,7 +597,6 @@ function AddForm() {
                 </div>
                 }
             </div>
-            */}
             <div className="submitButton">
                 <Button onClick={handleEligibility}
                 variant="contained"  

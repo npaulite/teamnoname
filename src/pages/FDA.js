@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "../cssFiles/fda.css";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "../cssFiles/styles.css";
 
 const Tab = styled.button`
   background-color: #9fa8da;
@@ -59,6 +60,13 @@ const FDA = () => {
     nav(path, { state: { _id: id } });
   }
 
+  function noOfVisit(p) {
+    if (p.visits[0].patient == "") return 0;
+    else {
+      return p.visits.length;
+    }
+  }
+
   useEffect(() => {
     listPatients();
     listDrugs();
@@ -95,13 +103,16 @@ const FDA = () => {
                   <div className="center">
                     <div className="box1">
                       <div className="app-container">
-                        <table className="table">
+                        <table className="table-striped">
                           <thead>
                             <tr>
                               <th>Patient UUID </th>
                               <th>Eligible </th>
                               <th>Drug UUID</th>
                               <th>Placebo</th>
+                              <th>
+                                Number of Hospital Visits/Drugs Administered
+                              </th>
                               <th>Actions</th>
                             </tr>
                           </thead>
@@ -131,7 +142,6 @@ const FDA = () => {
                                         if (patient._id === map.patientUUID) {
                                           return (
                                             <p key={i}>
-                                              {" "}
                                               {map.placebo
                                                 ? "Placebo"
                                                 : "Bavaria"}{" "}
@@ -141,6 +151,8 @@ const FDA = () => {
                                       }
                                     })}
                                   </td>
+
+                                  <td>{noOfVisit(patient)} / 5</td>
                                   <td>
                                     {assigned(patient._id) ? (
                                       <Button
