@@ -92,8 +92,8 @@ function AddVisit() {
                                 required
                                 id="patientName"
                                 label="Name"
-                                value={patientName || ''}
-                                onChange={(e) => {setPatientName(e.target.value);}}
+                                value={patientName || ''} pattern = "/^[a-zA-Z]+$/"
+                                onChange={(e) => {setPatientName(e.target.value);}} 
                                 fullWidth
                                 disabled
                         />    
@@ -105,9 +105,9 @@ function AddVisit() {
                                 <div className="visit" key={i}>
                                     <Typography variant="subtitle1"> Visit #{i+1}</Typography>
                                     <TextField
-                                        name="patient"
-                                        label="Patient Name"
-                                        value={patientName || ''}
+                                        name="patient" 
+                                        label="Patient Name" 
+                                        value={patientName  || ''} required pattern = "/^[a-zA-Z]+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         disabled
@@ -115,14 +115,14 @@ function AddVisit() {
                                     <TextField
                                         name="dateTime"
                                         type='date'
-                                        value={x.dateTime}
+                                        value={x.dateTime} required pattern = "/^\d{2}-\d{2}-\d{4}$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         />
                                     <TextField
                                         name="notes"
                                         label="Notes"
-                                        value={x.notes}
+                                        value={x.notes} required pattern = "/^[a-zA-Z]+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         />
@@ -130,7 +130,7 @@ function AddVisit() {
                                         name="hivViralLoad"
                                         type="number"
                                         label="HIV Viral Load"
-                                        value={x.hivViralLoad}
+                                        value={x.hivViralLoad} required pattern = "/^\d+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         />

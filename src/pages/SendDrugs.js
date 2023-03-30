@@ -86,7 +86,7 @@ function SendDrugs() {
                                 <Checkbox
                             id="placebo"
                             label="placebo"
-                            onChange={(e) => checkPlacebo()}
+                            onChange={(e) => checkPlacebo()} required pattern="/^[a-zA-Z]+$/"
                             />}
                             />
                     </FormGroup>
@@ -98,7 +98,7 @@ function SendDrugs() {
                         id="batchNumber"
                         type="number"
                         label="Batch Number"
-                        value={batchNumber || ''}
+                        value={batchNumber || ''} pattern = "/^\d+$/"
                         onChange={(e) => {setBatchNumber(e.target.value);}}
                         fullWidth
                         autoFocus

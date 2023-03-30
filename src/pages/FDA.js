@@ -155,7 +155,7 @@ const FDA = () => {
                                         variant="contained"
                                         sx={{ m: 1, mr: 3 }}
                                         onClick={() => {
-                                          assignDrug(patient._id);
+                                          assignDrug(patient._id); 
                                         }}
                                       >
                                         Assign Drug

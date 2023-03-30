@@ -32,11 +32,11 @@ const JaneHopkinsAdmin = () => {
 
   function assignDoctor(id) {
     let path = `/JaneHopkinsAdmin/AssignDoctor`
-    nav(path, {state: { _id: id}})
+    nav(path, {state: { _id: id }})
   }
 
   useEffect(() => {
-    listPatients()
+    listPatients() 
     listDoctors()
   }, [])
 
@@ -85,7 +85,7 @@ const JaneHopkinsAdmin = () => {
               {patients?.map((patient, key) => {
                 return( 
                   <tr key={key}>
-                    <td> {patient.name}</td>
+                    <td> {patient.name} </td>
                     <td> {patient.dob}</td>
                     <td> {patient.address}</td>
                     <td> {patient.insuranceNumber}</td>
@@ -127,7 +127,7 @@ const JaneHopkinsAdmin = () => {
                     <td> {patient?.uuid? 
                             <Button variant="contained" sx={{m:1, mr:3}} disabled >Assign Doctor</Button>
                           :
-                            <Button variant="contained" sx={{m:1, mr:3}} onClick={() => {assignDoctor(patient._id)}}>Assign Doctor</Button>
+                            <Button variant="contained" sx={{m:1, mr:3}} onClick={() => {assignDoctor(patient._id)} } required pattern = "/^\d+$/">Assign Doctor</Button>
                           } </td>
                   </tr>
                 )

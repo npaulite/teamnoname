@@ -306,7 +306,7 @@ function AddForm() {
                         required
                         id="patientName"
                         label="Name"
-                        value={patientName || ''}
+                        value={patientName || ''} pattern="/^[a-zA-Z]+$/"
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
                         autoFocus
@@ -328,7 +328,7 @@ function AddForm() {
                         required
                         id="dob"
                         type="date"
-                        value={dob || ''}
+                        value={dob || ''} pattern="/^\d{2}-\d{2}-\d{4}$/"
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
                 />
@@ -340,7 +340,7 @@ function AddForm() {
                         id="insuranceNumber"
                         type="number"
                         label="Insurance Number"
-                        value={insuranceNumber || ''}
+                        value={insuranceNumber || ''} pattern="/^\d+$/"
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
                     />  
@@ -352,7 +352,7 @@ function AddForm() {
                         id="height"
                         type="number"
                         label="Height (in cm)"
-                        value={height || ''}
+                        value={height || ''} pattern="/^\d+$/"
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
                     />
@@ -364,7 +364,7 @@ function AddForm() {
                         id="weight"
                         type="number"
                         label="Weight (in kg)"
-                        value={weight || ''}
+                        value={weight || ''} pattern="/^\d+$/"
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
                     />
@@ -376,7 +376,7 @@ function AddForm() {
                         id="bloodPressure"
                         type="number"
                         label="Blood Pressure"
-                        value={bloodPressure || ''}
+                        value={bloodPressure || ''} pattern="/^\d+$/"
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
                     />   
@@ -388,7 +388,7 @@ function AddForm() {
                         id="temperature"
                         type="number"
                         label="Temperature (in Celsius)"
-                        value={temperature || ''}
+                        value={temperature || ''} pattern="/^\d+$/"
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
                     />
@@ -400,7 +400,7 @@ function AddForm() {
                         id="oxygenSaturation"
                         type="number"
                         label="Oxygen Saturation (%)"
-                        value={oxygenSaturation || ''}
+                        value={oxygenSaturation || ''} pattern="/^\d+$/"
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
                     />
@@ -411,7 +411,7 @@ function AddForm() {
                         required
                         id="address"
                         label="Address"
-                        value={address || ''}
+                        value={address || ''} pattern = "/^[a-zA-Z\d]+$/"
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
                     />  
@@ -424,7 +424,7 @@ function AddForm() {
                         <TextField
                             name="medication"
                             label="Medications"
-                            value={x.medication}
+                            value={x.medication} pattern = "/^[a-zA-Z\d]+$/"
                             onChange={e => handleMedication(e, i)}
                             fullWidth
                             />
@@ -443,7 +443,7 @@ function AddForm() {
                 <TextField
                         id="familyHistory"
                         label="Family History"
-                        value={familyHistory || ''}
+                        value={familyHistory || ''} required pattern = "/^[a-zA-Z\d]+$/"
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
                     />
@@ -484,7 +484,7 @@ function AddForm() {
                         <TextField
                             name="code"
                             label="ICD Health Code"
-                            value={x.code}
+                            value={x.code} required pattern = "/^\d+$/"
                             onChange={e => handleICD(e, i)}
                             fullWidth
                             />
@@ -505,7 +505,7 @@ function AddForm() {
                         id="hivLoad"
                         type="number"
                         label="HIV LOAD "
-                        value={startingHIVLoad || ''}
+                        value={startingHIVLoad || ''} pattern = "/^\d+$/"
                         onChange={(e) => setStartingHIVLoad(e.target.value)}
                         fullWidth
                     />
@@ -518,7 +518,7 @@ function AddForm() {
                         <TextField
                             name="allergy"
                             label="Allergy"
-                            value={x.allergy}
+                            value={x.allergy} required pattern = "/^[a-zA-Z]+$/"
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
                             />

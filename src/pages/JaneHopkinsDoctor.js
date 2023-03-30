@@ -13,7 +13,7 @@ const JaneHopkinsDoctor = () => {
   const [format, setFormat] = useState("list");
   const [patients, setPatients] = useState();
   const [doct, setDoct] = useState()
-  const [doctorID, setDoctorID] = useState()
+  const [doctorID, setDoctorID] = useState() 
   const nav = useNavigate();
   
   const listDoctors = async() => {
@@ -21,12 +21,12 @@ const JaneHopkinsDoctor = () => {
     let docResponse = await entities.doctor.list({
       filter: {
         name: {
-          eq: authorized.name
+          eq: authorized.name 
         }
       }
     })
     if(docResponse)
-      setDoctorID(docResponse.items[0]._id)
+      setDoctorID(docResponse.items[0]._id) 
     }
     else {
       let docResponse = await entities.doctor.list()
@@ -39,7 +39,7 @@ const JaneHopkinsDoctor = () => {
     let patientResponse = await entities.patient.list({
       filter: {
         uuid: {
-          eq: doctorID
+          eq: doctorID 
         },
         bloodPressure: {
           gt: "1"
@@ -68,7 +68,7 @@ const JaneHopkinsDoctor = () => {
 
   useEffect(() => {
     getPatients()
-  }, [doctorID]);
+  }, [doctorID] );
 
   function handleUpdate(p) {
     let path = `/JaneHopkinsDoctor/UpdatePatient`;
@@ -146,14 +146,14 @@ const JaneHopkinsDoctor = () => {
                   <Button>{patient._id}</Button>
                 </CopyToClipboard>
                 <div>
-                  <div>IN: {patient.insuranceNumber}</div>
+                  <div>IN: {patient.insuranceNumber }</div>
                   <div>DOB: {patient.dob}</div>
                   <div>HEIGHT: {patient.height}</div>
                   <div>WEIGHT: {patient.weight}</div>
                   <div>BP: {patient.bloodPressure}</div>
                   <div>TEMP: {patient.temperature}</div>
                   <div>OS: {patient.oxygenSaturation}</div>
-                  <div>UUID: {patient.uuid}</div>
+                  <div>UUID: {patient.uuid} </div>
                   <div>ADDRESS: {patient.address}</div>
                   <div>EMPLOYED?: {patient.currentlyEmployed}</div>
                   <div>INSURED?: {patient.currentlyInsured}</div>
@@ -218,10 +218,10 @@ const JaneHopkinsDoctor = () => {
                   {patients?.map((patient, key) => {
                     return (
                       <tr key={key}>
-                        <td> {patient.name}</td>
+                        <td> {patient.name} </td>
                         <td> {patient.dob}</td>
                         <td> {patient.address}</td>
-                        <td> {patient.insuranceNumber}</td>
+                        <td> {patient.insuranceNumber} </td>
                         <td> {patient.currentlyInsured}</td>
                         <td>
                           {" "}
@@ -235,13 +235,13 @@ const JaneHopkinsDoctor = () => {
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
-                            onClick={() => handleUpdate(patient._id)}
+                            onClick={() => handleUpdate(patient._id) } required pattern = "/^\d+$/"
                           >
                             View / Edit Patient Information
                           </Button>
                           {patient.eligibility ? (
                               (patient?.visits.length < 5 ?
-                              ( <Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)}>Add Visit</Button>)
+                              ( <Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)} required pattern = "/^\d+$/">Add Visit</Button>)
                               :
                               ( <Button variant="contained" sx={{m:1}}  disabled >Add Visit</Button>)
                               )
@@ -258,7 +258,7 @@ const JaneHopkinsDoctor = () => {
               </div>
               </Box>
               </Box>
-      </div>
+      
       )}
     </div>
   );

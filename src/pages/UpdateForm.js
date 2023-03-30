@@ -196,7 +196,7 @@ function UpdateForm() {
                         required
                         id="patientName"
                         label="Name"
-                        value={patientName || ''}
+                        value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
                         autoFocus

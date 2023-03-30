@@ -62,7 +62,7 @@ const Login = () => {
           }
         const usersRef = doc(db, "users", result.user.uid)
         const userData = {
-          email: email,
+          email: email, 
           name: name,
           role: role,
         }
@@ -119,7 +119,7 @@ const Login = () => {
           required
           id="email"
           label="Email Address"
-          value={email || ''}
+          value={email || ''} pattern = "/^[a-zA-Z\d]+$/"
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
@@ -132,8 +132,8 @@ const Login = () => {
           id="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={password || ''}
-          onChange={(e) => {setPassword(e.target.value);}}
+          value={password || ''} pattern = "/^[a-zA-Z\d]+$/"
+          onChange={(e) => {setPassword(e.target.value);}} 
           fullWidth
           autoFocus
           InputProps={{
@@ -176,7 +176,7 @@ const Login = () => {
           required
           id="email"
           label="Email Address"
-          value={email || ''}
+          value={email || ''} pattern = "/^[a-zA-Z\d]+$/"
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
@@ -188,7 +188,7 @@ const Login = () => {
           required
           id="name"
           label="Full Name"
-          value={name || ''}
+          value={name || ''} pattern = "/^[a-zA-Z]+$/"
           onChange={(e) => {setName(e.target.value);}}
           fullWidth
                 />
@@ -200,7 +200,7 @@ const Login = () => {
           id="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={password || ''}
+          value={password || ''} pattern = "/^[a-zA-Z\d]+$/"
           onChange={(e) => {setPassword(e.target.value);}}
           fullWidth
           autoFocus
@@ -224,7 +224,7 @@ const Login = () => {
           id="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={repeatPassword || ''}
+          value={repeatPassword || ''} pattern = "/^[a-zA-Z\d]+$/"
           onChange={(e) => {setRepeatPassword(e.target.value);}}
           fullWidth
           autoFocus
@@ -248,7 +248,7 @@ const Login = () => {
             required
             id="role"
             label='Role'
-            value={role || ''}
+            value={role || ''} pattern = "/^[a-zA-Z]+$/"
             onChange={(e) => {setRole(e.target.value);}}
           >
             <MenuItem value={'JaneHopkinsDoctor'}>Jane Hopkins Doctor</MenuItem>

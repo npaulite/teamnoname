@@ -121,7 +121,7 @@ function AssignDrug() {
                             disabled
                             id="patientUUID"
                             label="Patient UUID"
-                            value={patient || ''}
+                            value={patient || ''} required pattern="/^\d+$/"
                             onChange={(e) => {setPatient(e.target.value);}}
                             fullWidth
                             
@@ -148,10 +148,10 @@ function AssignDrug() {
                             id="placebo"
                             label="Placebo"
                             clearOnEscape
-                            inputValue={drug || ''}
+                            inputValue={drug || ''} required pattern="/^[a-zA-Z]+$/"
                             onInputChange={(e, newValue) => setDrug(newValue)}
-                            options={placeboDrugs || []}
-                            getOptionLabel={option => option._id}
+                            options={placeboDrugs || []} 
+                            getOptionLabel={option => option._id} 
                             renderInput={(params) => 
                             <TextField 
                                 {...params}
@@ -172,7 +172,7 @@ function AssignDrug() {
                             id="placebo"
                             label="Bavaria"
                             clearOnEscape
-                            inputValue={drug || ''}
+                            inputValue={drug || ''} required pattern="/^[a-zA-Z]+$/"
                             onInputChange={(e, newValue) => setDrug(newValue)}
                             options={bavariaDrugs || []}
                             getOptionLabel={option => option._id}

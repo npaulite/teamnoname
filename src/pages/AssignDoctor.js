@@ -87,7 +87,7 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                               disabled
                               id="patientUUID"
                               label="Patient UUID"
-                              value={id || ''}
+                              value={id || ''} required pattern="/^\d+$/"
                               onChange={(e) => {setID(e.target.value);}}
                               fullWidth
                               
@@ -99,7 +99,7 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                               disabled
                               id="patientName"
                               label="Patient Name"
-                              value={name || ''}
+                              value={name || ''} required pattern="/^[a-zA-Z]+$/"
                               onChange={(e) => {setName(e.target.value);}}
                               fullWidth
                               
@@ -114,7 +114,7 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                             id="doctor"
                             label="Doctor"
                             clearOnEscape
-                            inputValue={doctor || ''}
+                            inputValue={doctor || ''} required pattern="/^[a-zA-Z]+$/"
                             onInputChange={(e, newValue) => setDoctor(newValue)}
                             options={doctors || []}
                             getOptionLabel={option => option.name}
