@@ -106,7 +106,6 @@ const Login = () => {
   }
 
   return (
-    
     <div className='loginPage'>
       <Container maxWidth="md">
       {page === "Login" ? 
@@ -260,7 +259,7 @@ const Login = () => {
       </div>
       <div className='button'>
         <div>
-        <Button sx={{mt: 2, mr: 83}}
+        <Button sx={{mt: 2, mr: 74}}
         variant="contained" 
         onClick={() => register()} 
         
@@ -269,7 +268,7 @@ const Login = () => {
         <Button  sx={{mt: 2}}
         variant="contained" 
         onClick={() => setPageLogin()} >
-          Login
+          Go Back to Login
         </Button>
         </div>
       </div>

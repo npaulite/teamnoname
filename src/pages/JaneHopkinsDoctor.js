@@ -10,11 +10,11 @@ import AuthContext from "../components/AuthProvider";
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();
   const { authorized } = useContext(AuthContext)
-  const [format, setFormat] = useState("list");
-  const [patients, setPatients] = useState();
-  const [doct, setDoct] = useState()
+  const [format, setFormat] = useState("list")
+  const [patients, setPatients] = useState()
   const [doctorID, setDoctorID] = useState()
-  const nav = useNavigate();
+  const nav = useNavigate()
+  const [maps, setMaps] = useState()
   
   const listDoctors = async() => {
     if(authorized.role === "JaneHopkinsDoctor") {
@@ -29,7 +29,7 @@ const JaneHopkinsDoctor = () => {
       setDoctorID(docResponse.items[0]._id)
     }
     else {
-      let docResponse = await entities.doctor.list()
+      await entities.doctor.list()
       setDoctorID(null)
     }
   }
@@ -66,8 +66,20 @@ const JaneHopkinsDoctor = () => {
   
   };
 
+  const getMap = async() => {
+    const getMapResponse = await entities.map.list()
+    setMaps(getMapResponse.items)
+  }
+
+  const assigned = [];
+  
+  function assign(id) {maps?.map(function(p) {
+    return (p.patientUUID).indexOf(id)
+  })}
+
   useEffect(() => {
     getPatients()
+    getMap()
   }, [doctorID]);
 
   function handleUpdate(p) {
@@ -210,6 +222,7 @@ const JaneHopkinsDoctor = () => {
                     <th>Insured? </th>
                     <th>ICD Health Codes </th>
                     <th>Trial Eligibility</th>
+                    <th>Drug Assigned</th>
                     <th>Visits </th>
                     <th>Actions</th>
                   </tr>
@@ -224,13 +237,24 @@ const JaneHopkinsDoctor = () => {
                         <td> {patient.insuranceNumber}</td>
                         <td> {patient.currentlyInsured}</td>
                         <td>
-                          {" "}
                           {patient?.icdHealthCodes.map((codes, key) => {
-                            return <p key={key}>{codes.code}</p>;
+                            return <span key={key}>{codes.code}</span>;
                           })}
                         </td>
                         <td> {patient?.eligibility ? "Yes" : "No"} </td>
-                        <td> {patient?.visits.length} / 5</td>
+                        <td>
+                          {maps?.map((map, i) => {
+                            {if (patient._id === map.patientUUID) {
+                              return (
+                                <span key={i}>
+                                    {map.patientUUID? "Yes" : "No"}
+                                  </span>
+                              );
+                            }}
+                            return("")
+                          })}
+                          </td>
+                        <td> {patient?.visits.length } / 5</td>
                         <td>
                           <Button
                             variant="contained"
@@ -240,10 +264,15 @@ const JaneHopkinsDoctor = () => {
                             View / Edit Patient Information
                           </Button>
                           {patient.eligibility ? (
-                              (patient?.visits.length < 5 ?
-                              ( <Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)}>Add Visit</Button>)
+                              (patient?.visits.length !== 5 ? (
+                              (maps?.map((map, i) => {
+                                if(patient._id === map.patientUUID) return( <span key={i}><Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)}>Add Visit</Button></span>)
+                                return ("");
+                              }))
+                              //(assign(patient._id) > 1? ( <span><Button variant="contained" sx={{m:1}}  disabled >No Drug Assigned</Button></span>) : " ")
+                              )
                               :
-                              ( <Button variant="contained" sx={{m:1}}  disabled >Add Visit</Button>)
+                              (<Button variant="contained" sx={{m:1}}  disabled >5 Visits Reached</Button>)
                               )
                             )
                           :
@@ -258,7 +287,7 @@ const JaneHopkinsDoctor = () => {
               </div>
               </Box>
               </Box>
-      </div>
+
       )}
     </div>
   );

@@ -48,7 +48,6 @@ import { ArrowLeftSharp } from "@mui/icons-material";
       doctors?.map((doc) => {
         console.log(doc._id)
         if(doc.name === doctor) {
-          console.log("found")
           setDoctorID(doc._id)
         }
       })
@@ -64,7 +63,7 @@ import { ArrowLeftSharp } from "@mui/icons-material";
 }
 
   const goBack = () =>{ 
-    let path = `/JaneHopkinsAdmin`; 
+    let path = "/JaneHopkinsAdmin"; 
     nav(path);
 }
 

@@ -28,38 +28,34 @@ function UpdateForm() {
     const [currentlyInsured, setCurrentlyInsured] = useState('No')
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
-    const [visits, setVisits] = useState([{
-        patient: "",
-        dateTime: "",
-        notes: "",
-        hivViralLoad: ""
-    }])
+    const [visits, setVisits] = useState([{}])
     
-    const getPatient = async() => {
-        const getResponse = await entities.patient.get(location.state._id)
-        setPatientName(getResponse.name)
-        setPatientPicture(getResponse.patientPicture)
-        setDob(getResponse.dob)
-        setInsuranceNumber(getResponse.insuranceNumber)
-        setHeight(getResponse.height.replace(/\D/g,''))
-        setWeight(getResponse.weight.replace(/\D/g,''))
-        setBloodPressure(getResponse.bloodPressure.replace(/\D/g,''))
-        setTemperature(getResponse.temperature.replace(/\D/g,''))
-        setOxygenSaturation(getResponse.oxygenSaturation.replace(/\D/g,''))
-        setAddress(getResponse.address)
-        setCurrentMedications(getResponse.currentMedications)
-        setFamilyHistory(getResponse.familyHistory)
-        setCurrentlyEmployed(getResponse.currentlyEmployed)
-        setCurrentlyInsured(getResponse.currentlyInsured)
-        setIcdHealthCodes(getResponse.icdHealthCodes)
-        setAllergies(getResponse.allergies)
-        setVisits(getResponse.visits)
-        setID(getResponse._id)
-    }
-
+    
     useEffect(() => {
+        const getPatient = async() => {
+            const getResponse = await entities.patient.get(location.state._id)
+            setPatientName(getResponse.name)
+            setPatientPicture(getResponse.patientPicture)
+            setDob(getResponse.dob)
+            setInsuranceNumber(getResponse.insuranceNumber)
+            setHeight(getResponse.height.replace(/\D/g,''))
+            setWeight(getResponse.weight.replace(/\D/g,''))
+            setBloodPressure(getResponse.bloodPressure.replace(/\D/g,''))
+            setTemperature(getResponse.temperature.replace(/\D/g,''))
+            setOxygenSaturation(getResponse.oxygenSaturation.replace(/\D/g,''))
+            setAddress(getResponse.address)
+            setCurrentMedications(getResponse.currentMedications)
+            setFamilyHistory(getResponse.familyHistory)
+            setCurrentlyEmployed(getResponse.currentlyEmployed)
+            setCurrentlyInsured(getResponse.currentlyInsured)
+            setIcdHealthCodes(getResponse.icdHealthCodes)
+            setAllergies(getResponse.allergies)
+            setVisits(getResponse.visits)
+            setID(getResponse._id)
+        }
+    
       getPatient()
-    }, [])
+    }, [entities, location])
     
     
     const updatePatient = async() => {
@@ -154,7 +150,7 @@ function UpdateForm() {
        
     const handleAddVisit = () => {
         setVisits([...visits, {
-            patient: patientName,
+            patient: "",
             dateTime: "",
             notes: "",
             hivViralLoad: ""
@@ -421,7 +417,7 @@ function UpdateForm() {
                         <TextField sx={{mt:1, mb:1}}
                             name="patient"
                             label="Patient Name"
-                            value={patientName || ''}
+                            value={x.patient || patientName}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             disabled

@@ -18,7 +18,7 @@
 
   .nav {
     /* background-color: #333; */
-    background-image: url(./assets1/images/background-image.jpg);
+    background-image: url(../assets1/images/background-image.jpg);
     color: rgb(212, 212, 212);
     display: flex;
     justify-content: space-between;

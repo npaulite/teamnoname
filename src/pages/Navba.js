@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { auth } from "../firebase-config";
-import { onAuthStateChanged } from "@firebase/auth";
+import "../cssFiles/navba.css";
 import { Button } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 
@@ -21,10 +21,7 @@ export default function Navba() {
       <ul>
         <form className="form-inline">
           {authorized == null ? (
-            <div className="nav-profile-text">
-              <p className="text-black font-weight-semibold m-0">LOGIN</p>
-              <span className="font-13 online-color">Role: LOGIN</span>
-            </div>
+           <></>
           ) : (
             <div className="nav-profile-text">
               <p className="text-white font-weight-semibold m-0">

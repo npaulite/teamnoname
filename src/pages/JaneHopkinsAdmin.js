@@ -22,14 +22,6 @@ const JaneHopkinsAdmin = () => {
     setDoctors(doctorList.items);
   }
 
-  function assigned(p) {
-    let x = patients?.some((e) => e.uuid === p)
-    if(x === true) 
-      return true
-    else 
-      return false
-  }
-
   function assignDoctor(id) {
     let path = `/JaneHopkinsAdmin/AssignDoctor`
     nav(path, {state: { _id: id}})
@@ -74,9 +66,9 @@ const JaneHopkinsAdmin = () => {
                 <th>Family History</th>
                 <th>Current Medications</th>
                 <th>Allergies</th>
-                <th>Doctor Assigned</th>
                 <th>ICD Health Codes </th>
                 <th>Trial Eligibility</th>
+                <th>Doctor Assigned</th>
                 <th>Visits </th>
                 <th>Actions</th>
               </tr>
@@ -98,31 +90,32 @@ const JaneHopkinsAdmin = () => {
                     <td> {patient.familyHistory}</td>
                     <td> {patient?.currentMedications.map((meds, key) => {
                           return(
-                            <p key={key}>{meds.medication}</p>
+                            <span key={key}>{meds.medication}</span>
                             )
                         })}
                       </td> 
                     <td> {patient?.allergies.map((all, key) => {
                           return(
-                            <p key={key}>{all.allergy}</p>
+                            <span key={key}>{all.allergy}</span>
                             )
                         })}
                       </td>
-                    <td>{doctors?.map((doctor, i) => {
-                            {if (patient.uuid === doctor._id) {
-                              return (
-                                <p key={i}> {doctor.name} </p>
-                              )
-                            }}
-                          })}
-                      </td>
+                    
                     <td> {patient?.icdHealthCodes.map((codes, key) => {
                         return(
-                          <p key={key}>{codes.code}</p>
+                          <span key={key}>{codes.code}</span>
                           )
                       })}
                     </td> 
                     <td> {patient?.eligibility? "Yes" : "No"} </td>
+                    <td>{doctors?.map((doctor, i) => {
+                            {if (patient.uuid === doctor._id) {
+                              return (
+                                <span key={i}> {doctor.name} </span>
+                              )
+                            }}
+                          })}
+                      </td>
                     <td> {patient?.visits.length} / 5</td>
                     <td> {patient?.uuid? 
                             <Button variant="contained" sx={{m:1, mr:3}} disabled >Assign Doctor</Button>

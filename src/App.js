@@ -21,6 +21,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Table from "./components/Table";
 import Navbar1 from "./components/Navbar1";
+import AssignDoctor from "./pages/AssignDoctor";
 
 function App() {
   const { authorized, setAuth } = useAuth();
@@ -60,61 +61,28 @@ function App() {
             <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
               <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
             </Route>
-            <Route
-              element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
-            >
+            <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}>
               <Route path="/Bavaria" element={<Bavaria />} />
             </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
-              <Route
-                path="/JaneHopkinsDoctor"
-                element={<JaneHopkinsDoctor />}
-              />
+            <Route element={<RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />}>
+              <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
             </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
-              }
-            >
+            <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />}>
               <Route path="/JaneHopkinsAdmin" element={<JaneHopkinsAdmin />} />
             </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
-              }
-            >
-              <Route
-                path="/JaneHopkinsAdmin/AddPatient"
-                element={<AddForm />}
-              />
+            <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />}>
+              <Route path="/JaneHopkinsAdmin/AddPatient" element={<AddForm />} />
             </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
-              <Route
-                path="/JaneHopkinsDoctor/UpdatePatient"
-                element={<UpdateForm />}
-              />
+            <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />}>
+              <Route path="/JaneHopkinsAdmin/AssignDoctor" element={<AssignDoctor />} />
             </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
-              <Route
-                path="/JaneHopkinsDoctor/AddPatientVisit"
-                element={<AddVisit />}
-              />
+            <Route element={<RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
+              <Route path="/JaneHopkinsDoctor/UpdatePatient" element={<UpdateForm />} />
             </Route>
-            <Route
-              element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
-            >
+            <Route element={ <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
+              <Route path="/JaneHopkinsDoctor/AddPatientVisit" element={<AddVisit />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} /> }>
               <Route path="/Bavaria/SendDrugs" element={<SendDrugs />} />
             </Route>
           </Routes>
