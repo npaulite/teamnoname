@@ -1,10 +1,5 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'PT Sans', sans-serif;
-  }
-
 .loginPage {
+    position: relative;
     margin-top: 10%;
+    margin-bottom: 1000px;
 }

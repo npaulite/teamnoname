@@ -22,6 +22,7 @@ import Footer from "./components/Footer";
 import Table from "./components/Table";
 import Navbar1 from "./components/Navbar1";
 import Sidebar1 from "./components/Sidebar1";
+import AssignDoctor from "./pages/AssignDoctor";
 
 function App() {
   const { authorized, setAuth } = useAuth();

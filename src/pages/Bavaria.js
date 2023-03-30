@@ -27,24 +27,21 @@ const Bavaria = () => {
     setDrugs(drugsList.items);
   };
 
+  function noOfVisit(p) {
+    if (p.visits[0].patient == "") return 0;
+    else {
+      return p.visits.length;
+    }
+  }
+
   useEffect(() => {
     listPatients();
     listDrugs();
   }, []);
 
   return (
-    <div className="main1">
+    <div className="main">
       <h1 className="container">Bavaria</h1>
-      <div className="send">
-        <Button
-          sx={{ mb: 2 }}
-          variant="contained"
-          size="large"
-          href="/Bavaria/SendDrugs"
-        >
-          <Typography variant="h5">Send Drug to FDA</Typography>
-        </Button>
-      </div>
 
       <Box sx={{ pt: 4, pb: 6 }} bgcolor="grey">
         <Box>
@@ -60,7 +57,7 @@ const Bavaria = () => {
                           <tr>
                             <th>Patient ID </th>
                             <th>Eligibility </th>
-                            <th>Number of Visits</th>
+                            <th>Dosage</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -69,7 +66,7 @@ const Bavaria = () => {
                               <tr key={key}>
                                 <td> {patient._id} </td>
                                 <td> {patient.eligibility ? "Yes" : "No"}</td>
-                                <td> {patient.visits.length} / 5</td>
+                                <td> {noOfVisit(patient)} / 5</td>
                               </tr>
                             );
                           })}
@@ -84,7 +81,7 @@ const Bavaria = () => {
                       <table className="table-striped">
                         <thead>
                           <tr>
-                            <th>_id </th>
+                            <th>Drug ID sent to FDA </th>
                             <th>Placebo </th>
                             <th>BatchNumber </th>
                           </tr>
@@ -94,12 +91,24 @@ const Bavaria = () => {
                             return (
                               <tr key={key}>
                                 <td> {drug._id}</td>
-                                <td> {drug.placebo ? "Yes" : "No"}</td>
+                                <td> {drug.placebo ? "Placebo" : "Bavaria"}</td>
                                 <td> {drug.batchNumber}</td>
                               </tr>
                             );
                           })}
                         </tbody>
+                        <div className="send">
+                          <Button
+                            sx={{ mt: 2 }}
+                            variant="contained"
+                            size="large"
+                            href="/Bavaria/SendDrugs"
+                          >
+                            <Typography variant="h6">
+                              Send Drug to FDA
+                            </Typography>
+                          </Button>
+                        </div>
                       </table>
                     </div>
                   </div>

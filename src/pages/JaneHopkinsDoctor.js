@@ -13,9 +13,9 @@ const JaneHopkinsDoctor = () => {
   const { authorized } = useContext(AuthContext);
   const [format, setFormat] = useState("list");
   const [patients, setPatients] = useState();
-  const [doct, setDoct] = useState();
   const [doctorID, setDoctorID] = useState();
   const nav = useNavigate();
+  const [maps, setMaps] = useState();
 
   const listDoctors = async () => {
     if (authorized.role === "JaneHopkinsDoctor") {
@@ -28,7 +28,7 @@ const JaneHopkinsDoctor = () => {
       });
       if (docResponse) setDoctorID(docResponse.items[0]._id);
     } else {
-      let docResponse = await entities.doctor.list();
+      await entities.doctor.list();
       setDoctorID(null);
     }
   };
@@ -62,8 +62,22 @@ const JaneHopkinsDoctor = () => {
     }
   }
 
+  const getMap = async () => {
+    const getMapResponse = await entities.map.list();
+    setMaps(getMapResponse.items);
+  };
+
+  const assigned = [];
+
+  function assign(id) {
+    maps?.map(function (p) {
+      return p.patientUUID.indexOf(id);
+    });
+  }
+
   useEffect(() => {
     getPatients();
+    getMap();
   }, [doctorID]);
 
   function handleUpdate(p) {
@@ -172,74 +186,106 @@ const JaneHopkinsDoctor = () => {
           </div>
         </Box>
       ) : (
-        <div className="list">
-          <Box className="patientsList" sx={{ pt: 4, pb: 6 }} bgcolor="black">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name </th>
-                  <th>Date of Birth</th>
-                  <th>Address </th>
-                  <th>Insurance </th>
-                  <th>Insured? </th>
-                  <th>ICD Health Codes </th>
-                  <th>Trial Eligibility</th>
-                  <th>Visits </th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {patients?.map((patient, key) => {
-                  return (
-                    <tr key={key}>
-                      <td> {patient.name}</td>
-                      <td> {patient.dob}</td>
-                      <td> {patient.address}</td>
-                      <td> {patient.insuranceNumber}</td>
-                      <td> {patient.currentlyInsured}</td>
-                      <td>
-                        {" "}
-                        {patient?.icdHealthCodes.map((codes, key) => {
-                          return <p key={key}>{codes.code}</p>;
-                        })}
-                      </td>
-                      <td> {patient?.eligibility ? "Yes" : "No"} </td>
-                      <td> {patient?.visits.length} / 5</td>
-                      <td>
-                        <Button
-                          variant="contained"
-                          sx={{ m: 1 }}
-                          onClick={() => handleUpdate(patient._id)}
-                        >
-                          View / Edit Patient Information
-                        </Button>
-                        {patient.eligibility ? (
-                          patient?.visits.length < 5 ? (
-                            <Button
-                              variant="contained"
-                              sx={{ m: 1 }}
-                              onClick={() => handleAddVisit(patient._id)}
-                            >
-                              Add Visit
-                            </Button>
+        <Box sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
+          <Box>
+            <div className="app-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name </th>
+                    <th>Date of Birth</th>
+                    <th>Address </th>
+                    <th>Insurance </th>
+                    <th>Insured? </th>
+                    <th>ICD Health Codes </th>
+                    <th>Trial Eligibility</th>
+                    <th>Drug Assigned</th>
+                    <th>Visits </th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {patients?.map((patient, key) => {
+                    return (
+                      <tr key={key}>
+                        <td> {patient.name}</td>
+                        <td> {patient.dob}</td>
+                        <td> {patient.address}</td>
+                        <td> {patient.insuranceNumber}</td>
+                        <td> {patient.currentlyInsured}</td>
+                        <td>
+                          {patient?.icdHealthCodes.map((codes, key) => {
+                            return <span key={key}>{codes.code}</span>;
+                          })}
+                        </td>
+                        <td> {patient?.eligibility ? "Yes" : "No"} </td>
+                        <td>
+                          {maps?.map((map, i) => {
+                            {
+                              if (patient._id === map.patientUUID) {
+                                return (
+                                  <span key={i}>
+                                    {map.patientUUID ? "Yes" : "No"}
+                                  </span>
+                                );
+                              }
+                            }
+                            return "";
+                          })}
+                        </td>
+                        <td> {patient?.visits.length} / 5</td>
+                        <td>
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            onClick={() => handleUpdate(patient._id)}
+                          >
+                            View / Edit Patient Information
+                          </Button>
+                          {patient.eligibility ? (
+                            patient?.visits.length !== 5 ? (
+                              maps?.map((map, i) => {
+                                if (patient._id === map.patientUUID)
+                                  return (
+                                    <span key={i}>
+                                      <Button
+                                        variant="contained"
+                                        sx={{ m: 1 }}
+                                        onClick={() =>
+                                          handleAddVisit(patient._id)
+                                        }
+                                      >
+                                        Add Visit
+                                      </Button>
+                                    </span>
+                                  );
+                                return "";
+                              })
+                            ) : (
+                              //(assign(patient._id) > 1? ( <span><Button variant="contained" sx={{m:1}}  disabled >No Drug Assigned</Button></span>) : " ")
+                              <Button
+                                variant="contained"
+                                sx={{ m: 1 }}
+                                disabled
+                              >
+                                5 Visits Reached
+                              </Button>
+                            )
                           ) : (
                             <Button variant="contained" sx={{ m: 1 }} disabled>
-                              Add Visit
+                              Non-Eligible
                             </Button>
-                          )
-                        ) : (
-                          <Button variant="contained" sx={{ m: 1 }} disabled>
-                            Non-Eligible
-                          </Button>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </Box>
-        </div>
+        </Box>
       )}
     </div>
   );

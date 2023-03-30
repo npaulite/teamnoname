@@ -60,6 +60,13 @@ const FDA = () => {
     nav(path, { state: { _id: id } });
   }
 
+  function noOfVisit(p) {
+    if (p.visits[0].patient == "") return 0;
+    else {
+      return p.visits.length;
+    }
+  }
+
   useEffect(() => {
     listPatients();
     listDrugs();
@@ -103,6 +110,9 @@ const FDA = () => {
                               <th>Eligible </th>
                               <th>Drug UUID</th>
                               <th>Placebo</th>
+                              <th>
+                                Number of Hospital Visits/Drugs Administered
+                              </th>
                               <th>Actions</th>
                             </tr>
                           </thead>
@@ -132,7 +142,6 @@ const FDA = () => {
                                         if (patient._id === map.patientUUID) {
                                           return (
                                             <p key={i}>
-                                              {" "}
                                               {map.placebo
                                                 ? "Placebo"
                                                 : "Bavaria"}{" "}
@@ -142,6 +151,8 @@ const FDA = () => {
                                       }
                                     })}
                                   </td>
+
+                                  <td>{noOfVisit(patient)} / 5</td>
                                   <td>
                                     {assigned(patient._id) ? (
                                       <Button
