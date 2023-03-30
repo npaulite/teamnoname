@@ -3,6 +3,7 @@ import "../cssFiles/bavaria.css";
 import useBavaria from "../hooks/useBavaria";
 import { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import "../cssFiles/styles.css";
 
 const Bavaria = () => {
   const { entities } = useBavaria();
@@ -54,7 +55,7 @@ const Bavaria = () => {
                   <div className="box1">
                     <div className="app-container">
                       <h3>PATIENTS (FOR ONGOING TRIALS)</h3>
-                      <table className="table">
+                      <table className="table-striped">
                         <thead>
                           <tr>
                             <th>Patient ID </th>
@@ -80,7 +81,7 @@ const Bavaria = () => {
                   <div className="box2">
                     <div className="app-container">
                       <h3>Drugs</h3>
-                      <table className="table">
+                      <table className="table-striped">
                         <thead>
                           <tr>
                             <th>_id </th>

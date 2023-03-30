@@ -1,4 +1,5 @@
 import React from "react";
+import "../cssFiles/styles.css";
 
 export default function () {
   return (
@@ -10,10 +11,12 @@ export default function () {
             <div className="row">
               <div className="col-md-3">
                 <div className="info_logo">
-                  <h3>Seotech</h3>
+                  <h3>Vendia</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor indidunt ut labore et dolore magna
+                    Bring trust and a single source of truth to partner data
+                    sharing and secure, compliant, real-time collaboration — no
+                    matter your partners’ geographies, stack of systems, data
+                    architecture, or clouds.
                   </p>
                 </div>
               </div>
@@ -22,24 +25,22 @@ export default function () {
                   <h4>BASIC LINKS</h4>
                   <ul className="  ">
                     <li className=" ">
-                      <a className href="index.html">
+                      <a className href="/">
                         Home <span className="sr-only">(current)</span>
                       </a>
                     </li>
-                    <li className="active">
-                      <a className href="about.html">
-                        {" "}
+                    <li className="">
+                      <a className href="https://www.vendia.com/about">
                         About
                       </a>
                     </li>
                     <li className>
-                      <a className href="service.html">
-                        {" "}
-                        Services{" "}
+                      <a className href="https://www.vendia.com/pricing">
+                        Services
                       </a>
                     </li>
                     <li className>
-                      <a className href="#contactLink">
+                      <a className href="https://www.vendia.com/contact-us">
                         Contact Us
                       </a>
                     </li>

@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { Stack } from "@mui/system";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import AuthContext from "../components/AuthProvider";
+import "../cssFiles/styles.css";
 
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();

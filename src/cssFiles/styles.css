@@ -18,7 +18,7 @@
 
   .nav {
     /* background-color: #333; */
-    background-image: url(./assets1/images/background-image.jpg);
+    background-image: url(../assets1/images/background-image.jpg);
     color: rgb(212, 212, 212);
     display: flex;
     justify-content: space-between;
@@ -95,7 +95,7 @@
   
   th,
   td {
-    border: 1px solid #ffffff;
+    border: 3px solid #0e0a0a;
     text-align: left;
     padding: 8px;
     font-size: 15px;

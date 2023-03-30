@@ -21,6 +21,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Table from "./components/Table";
 import Navbar1 from "./components/Navbar1";
+import Sidebar1 from "./components/Sidebar1";
 
 function App() {
   const { authorized, setAuth } = useAuth();
@@ -47,79 +48,83 @@ function App() {
         }}
       >
         {/* <Navbar1></Navbar1> */}
-        <Navba></Navba>
-        {/* <Navbar></Navbar> */}
+        <Sidebar1>
+          <Navba> </Navba>
 
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Login" element={<Login />} />
-            <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
-              <Route path="/FDA" element={<FDA />} />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
-              <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
-            </Route>
-            <Route
-              element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
-            >
-              <Route path="/Bavaria" element={<Bavaria />} />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Login" element={<Login />} />
+              <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
+                <Route path="/FDA" element={<FDA />} />
+              </Route>
+              <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
+                <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
+              </Route>
               <Route
-                path="/JaneHopkinsDoctor"
-                element={<JaneHopkinsDoctor />}
-              />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
-              }
-            >
-              <Route path="/JaneHopkinsAdmin" element={<JaneHopkinsAdmin />} />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
-              }
-            >
+                element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
+              >
+                <Route path="/Bavaria" element={<Bavaria />} />
+              </Route>
               <Route
-                path="/JaneHopkinsAdmin/AddPatient"
-                element={<AddForm />}
-              />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor"
+                  element={<JaneHopkinsDoctor />}
+                />
+              </Route>
               <Route
-                path="/JaneHopkinsDoctor/UpdatePatient"
-                element={<UpdateForm />}
-              />
-            </Route>
-            <Route
-              element={
-                <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
-              }
-            >
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin"
+                  element={<JaneHopkinsAdmin />}
+                />
+              </Route>
               <Route
-                path="/JaneHopkinsDoctor/AddPatientVisit"
-                element={<AddVisit />}
-              />
-            </Route>
-            <Route
-              element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
-            >
-              <Route path="/Bavaria/SendDrugs" element={<SendDrugs />} />
-            </Route>
-          </Routes>
-          <Footer></Footer>
-        </div>
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin/AddPatient"
+                  element={<AddForm />}
+                />
+              </Route>
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor/UpdatePatient"
+                  element={<UpdateForm />}
+                />
+              </Route>
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor/AddPatientVisit"
+                  element={<AddVisit />}
+                />
+              </Route>
+              <Route
+                element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
+              >
+                <Route path="/Bavaria/SendDrugs" element={<SendDrugs />} />
+              </Route>
+            </Routes>
+          </div>
+        </Sidebar1>
+        <Footer></Footer>
       </AuthContext.Provider>
     </div>
   );

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "../cssFiles/fda.css";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "../cssFiles/styles.css";
 
 const Tab = styled.button`
   background-color: #9fa8da;
@@ -95,7 +96,7 @@ const FDA = () => {
                   <div className="center">
                     <div className="box1">
                       <div className="app-container">
-                        <table className="table">
+                        <table className="table-striped">
                           <thead>
                             <tr>
                               <th>Patient UUID </th>
