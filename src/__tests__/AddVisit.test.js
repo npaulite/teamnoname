@@ -18,6 +18,7 @@ it('Add Patient Visit', async() => {
 
     const patient = await entities.patient.get("01871054-ae14-26db-9af3-b3e6b8195b63").then(
         async() => {
+            .
             setVisits(patient.visits)
             addVisit();
             await entities.patient.update({

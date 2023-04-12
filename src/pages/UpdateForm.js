@@ -30,6 +30,7 @@ function UpdateForm() {
     const [allergies, setAllergies] = useState([{allergy: ""}])
     const [visits, setVisits] = useState([{}])
     const [startingHIVLoad, setStartingHIVLoad] = useState([{}])
+    const [trialStatus, setTrialStatus] = useState()
     
     
     useEffect(() => {
@@ -54,6 +55,7 @@ function UpdateForm() {
             setVisits(getResponse.visits)
             setID(getResponse._id)
             setStartingHIVLoad(getResponse.startingHIVLoad)
+            setTrialStatus(getResponse.trialStatus)
         }
     
       getPatient()
@@ -80,8 +82,8 @@ function UpdateForm() {
             icdHealthCodes: icdHealthCodes,
             allergies: allergies,
             visits: visits,
-            startingHIVLoad: startingHIVLoad
-
+            startingHIVLoad: startingHIVLoad,
+            trialStatus: trialStatus
         })
         console.log(updateResponse)
 
@@ -263,7 +265,6 @@ function UpdateForm() {
                 <TextField
                         required
                         id="bloodPressure"
-                        type="number"
                         label="Blood Pressure"
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
