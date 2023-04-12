@@ -18,6 +18,7 @@ function AddVisit() {
         notes: "",
         hivViralLoad: ""
     }])
+    const [trialStatus, setTrialStatus] = useState()
 
     
     const getPatient = async() => {
@@ -25,6 +26,7 @@ function AddVisit() {
         setID(getResponse._id)
         setPatientName(getResponse.name)
         setVisits(getResponse.visits)
+        setTrialStatus(getResponse.trialStatus)
     }
 
     useEffect(() => {
@@ -69,7 +71,11 @@ function AddVisit() {
     const handleSubmit= (e) => {
         e.preventDefault();
         if(updatePatient()) {
-        console.log(updatePatient);
+            console.log(updatePatient)
+        if(visits.length === 5) {
+            if(trialStatus !== "Completed")
+                setTrialStatus("Completed")
+        }
         setTimeout(() => {nav("/JaneHopkinsDoctor")}, 1000)
         }
     }

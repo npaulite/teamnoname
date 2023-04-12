@@ -30,6 +30,7 @@ function AddForm() {
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
     const [addFirstVisit, setAddFirstVisit] = useState(false)
+    const [trialStatus, setTrialStatus] = useState()
 
     const addPatient = async() => {
 
@@ -49,10 +50,11 @@ function AddForm() {
             currentlyEmployed: currentlyEmployed,
             currentlyInsured: currentlyInsured,
             icdHealthCodes: icdHealthCodes,
-            allergies: allergies || "N/A",
+            allergies: allergies,
             visits: visits,
             eligibility: eligibility,
-            startingHIVLoad: startingHIVLoad
+            startingHIVLoad: startingHIVLoad,
+            trialStatus: trialStatus
         },
         {
             aclInput: {
@@ -182,6 +184,13 @@ function AddForm() {
                         },
                         operations: ["READ"],
                         path: "startingHIVLoad"
+                    },
+                    {
+                        principal: {
+                            nodes: ["Bavaria", "FDA"]
+                        },
+                        operations: ["READ"],
+                        path: "trialStatus"
                     }
                 ]
             }
@@ -265,12 +274,16 @@ function AddForm() {
         let birth = dob.split('-')
         const birthday = new Date(birth[0], birth[1] - 1, birth[2])
         if (birthday <= date) {
-            setEligibility(true)}
+            setEligibility(true)
+            setTrialStatus("Ongoing")}
         else {
-            setEligibility(false)}
+            setEligibility(false)
+            setTrialStatus("Non-Eligible")
+        }
         icdHealthCodes.map((codes) => {
             if(codes.code.indexOf('O') > -1) {
-                setEligibility(false)}
+                setEligibility(false)
+                setTrialStatus("Non-Eligible")}
         })
     }
 
@@ -376,7 +389,6 @@ function AddForm() {
                 <TextField
                         required
                         id="bloodPressure"
-                        type="number"
                         label="Blood Pressure"
                         value={bloodPressure || ''} pattern="/^\d+$/"
                         onChange={(e) => setBloodPressure(e.target.value)}

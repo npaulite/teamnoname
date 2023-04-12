@@ -44,14 +44,12 @@ import { ArrowLeftSharp } from "@mui/icons-material";
   }
   
   const getDoctor = () => {
-      console.log(doctor)
       doctors?.map((doc) => {
         console.log(doc._id)
         if(doc.name === doctor) {
           setDoctorID(doc._id)
         }
       })
-      
   }
   
   const handleSubmit= (e) => {

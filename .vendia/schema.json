@@ -122,6 +122,9 @@
           },
           "startingHIVLoad": {
             "type": "string"
+          },
+          "trialStatus": {
+            "type": "string"
           }
         }
       }
@@ -170,6 +173,9 @@
           },
           "placebo": {
             "type": "boolean"
+          },
+          "postStudy": {
+            "type": "string"
           }
         }
       }

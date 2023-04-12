@@ -15,6 +15,7 @@ function AssignDrug() {
     const [selection, setSelection] = useState(true)
     const [placeboDrugs, setPlaceboDrugs] = useState()
     const [bavariaDrugs, setBavariaDrugs] = useState()
+    const [postStudy, setPostStudy] = useState()
         
     useEffect(() => {
         getMap()
@@ -53,7 +54,8 @@ function AssignDrug() {
         const assignResponse = await entities.map.add({
             patientUUID: patient,
             drugUUID: drug,
-            placebo: placebo
+            placebo: placebo,
+            postStudy: postStudy
         },
         {
             aclInput: {
@@ -71,6 +73,13 @@ function AssignDrug() {
                         },
                         operations: ["READ"],
                         path: "drugUUID"
+                    },
+                    {
+                        principal: {
+                            nodes: ["JaneHopkins", "Bavaria"]
+                        },
+                        operations: ["READ"],
+                        path: "postStudy"
                     }
                 ]
             }
@@ -81,6 +90,7 @@ function AssignDrug() {
 
     const handleSubmit= (e) => {
         e.preventDefault();
+        setPostStudy("No")
         if(assignDrug()) {
         console.log(assignDrug);
         setTimeout(() => {nav("/FDA")}, 1000)
