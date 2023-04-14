@@ -86,7 +86,7 @@ function SendDrugs() {
                                 <Checkbox
                             id="placebo"
                             label="placebo"
-                            onChange={(e) => checkPlacebo()} required pattern="/^[a-zA-Z]+$/"
+                            onChange={() => checkPlacebo()}
                             />}
                             />
                     </FormGroup>

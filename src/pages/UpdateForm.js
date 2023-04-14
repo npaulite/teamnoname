@@ -265,7 +265,7 @@ function UpdateForm() {
                 <TextField
                         required
                         id="bloodPressure"
-                        label="Blood Pressure"
+                        label="Systolic/Diastolic"
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth

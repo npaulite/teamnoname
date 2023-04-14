@@ -1,10 +1,12 @@
-import { useState } from "react"
+import React from "react"
 import useJaneHopkins from "../hooks/useJaneHopkins"
 
 const { entities } = useJaneHopkins()
+const setVisits = jest.fn()
 
 it('Add Patient Visit', async() => {
-    const[ visits, setVisits] = useState([])
+    const visitsSpy = jest.spyOn(React, 'useState')
+    visitsSpy.mockImplementation((visits) => [visits, setVisits])
     const visit = {
         patient: "",
         dateTime: "2023-04-01",
@@ -13,21 +15,18 @@ it('Add Patient Visit', async() => {
     }
 
     const addVisit = () => {
-        setVisits([...visits, visit]);
+        visitsSpy(visit)
     };
 
-    const patient = await entities.patient.get("01871054-ae14-26db-9af3-b3e6b8195b63").then(
+    const patient = await entities.patient.get("01877854-7f06-db60-7999-fd54ab408ddc")
         async() => {
-            .
-            setVisits(patient.visits)
+            visitsSpy(patient.visits)
             addVisit();
             await entities.patient.update({
                 _id: patient._id,
-                visits: visits
+                visits: visitsSpy
             })
         }
-    )
+    
 
-}
-
-)
+}, 20000)

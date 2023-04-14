@@ -26,7 +26,7 @@ const Bavaria = () => {
   };
 
   function noOfVisit(p) {
-    if (p.visits[0].dateTime === "") return 0;
+    if (p.visits = "") return 0;
     else {
       return p.visits.length;
     }

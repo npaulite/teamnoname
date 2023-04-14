@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import '../cssFiles/addForm.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
 
+
 function AddForm() {
 
     const nav = useNavigate()
@@ -197,7 +198,7 @@ function AddForm() {
         })
         console.log(addResponse)
     }
-    
+
     const handleMedication = (e, index) => {
         const { name, value } = e.target;
         const list = [...currentMedications];
@@ -389,7 +390,7 @@ function AddForm() {
                 <TextField
                         required
                         id="bloodPressure"
-                        label="Blood Pressure"
+                        label="Systolic/Diastolic"
                         value={bloodPressure || ''} pattern="/^\d+$/"
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
@@ -617,6 +618,7 @@ function AddForm() {
       </div>
 
     );
+
 }
-  
+
 export default AddForm;

@@ -1,9 +1,12 @@
 import useJaneHopkins from '../hooks/useJaneHopkins';
-
 const { entities } = useJaneHopkins()
 
+jest.mock('Add', () => {
+    
+})
+
 it('Add Eligible Patient', async() => {
-    const user = {
+    const patient = {
         name: "John Doe",
         patientPicture: "",
         dob: new Date(1990,1,1),
@@ -25,7 +28,7 @@ it('Add Eligible Patient', async() => {
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
     }
-    const addPatient = entities.patient.add(user)
+    const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
             entities.patient.remove((await addPatient).transaction._id)
@@ -34,7 +37,7 @@ it('Add Eligible Patient', async() => {
 }, 20000)
 
 it('Add Non-Eligible Patient', async() => {
-    const user = {
+    const patient = {
         name: "Jane Doe",
         patientPicture: "",
         dob: new Date(2005,1,1),
@@ -56,7 +59,7 @@ it('Add Non-Eligible Patient', async() => {
         startingHIVLoad: "100000",
         trialStatus: "Non-Eligible"
     }
-    const addPatient = entities.patient.add(user)
+    const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
             entities.patient.remove((await addPatient).transaction._id)

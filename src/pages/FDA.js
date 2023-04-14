@@ -60,7 +60,7 @@ const FDA = () => {
   }
 
   function noOfVisit(p) {
-    if (p.visits[0].dateTime === "") return 0;
+    if (p.visits = "") return 0;
     else {
       return p.visits.length;
     }
@@ -129,7 +129,7 @@ const FDA = () => {
                                       {
                                         if (patient._id === map.patientUUID) {
                                           return (
-                                            <p key={i}> {map.drugUUID} </p>
+                                            <span key={i}> {map.drugUUID} </span>
                                           );
                                         }
                                       }
@@ -140,11 +140,11 @@ const FDA = () => {
                                       {
                                         if (patient._id === map.patientUUID) {
                                           return (
-                                            <p key={i}>
+                                            <span key={i}>
                                               {map.placebo
                                                 ? "Placebo"
                                                 : "Bavaria"}{" "}
-                                            </p>
+                                            </span>
                                           );
                                         }
                                       }

@@ -64,6 +64,7 @@ const JaneHopkinsAdmin = () => {
                 <th>Insured? </th>
                 <th>Height</th>
                 <th>Weight</th>
+                <th>Blood Pressure</th>
                 <th>Temperature</th>
                 <th>Oxygen Saturation</th>
                 <th>Currently Employed</th>
@@ -88,6 +89,7 @@ const JaneHopkinsAdmin = () => {
                     <td> {patient.currentlyInsured}</td>
                     <td> {patient.height}</td>
                     <td> {patient.weight}</td>
+                    <td> {patient.bloodPressure}</td>
                     <td> {patient.temperature}</td>
                     <td> {patient.oxygenSaturation}</td>
                     <td> {patient.currentlyEmployed}</td>
