@@ -9,8 +9,8 @@ import JaneHopkinsDoctor from "./pages/JaneHopkinsDoctor";
 import JaneHopkinsAdmin from "./pages/JaneHopkinsAdmin";
 import Bavaria from "./pages/Bavaria";
 import FDA from "./pages/FDA";
-import AddForm from "./pages/AddForm";
-import UpdateForm from "./pages/UpdateForm";
+import AddPatient from "./pages/AddPatient";
+import UpdatePatient from "./pages/UpdatePatient";
 import SendDrugs from "./pages/SendDrugs";
 import AssignDrug from "./pages/AssignDrug";
 import RequireAuth from "./components/RequireAuth";
@@ -20,12 +20,14 @@ import AddVisit from "./pages/AddVisit";
 import Footer from "./components/Footer";
 import Sidebar1 from "./components/Sidebar1";
 import AssignDoctor from "./pages/AssignDoctor";
-import FdaPostStudy from "./pages/FdaPostStudy";
+import PostStudy from "./pages/PostStudy";
+import ReviewPatient from "./pages/ReviewPatient";
 
 function App() {
   const { authorized, setAuth } = useAuth();
   const [user, setUser] = useState();
   const [id, setID] = useState();
+  const {completed, setCompleted} = useState("No");
 
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
@@ -44,6 +46,8 @@ function App() {
           setID: setID,
           authorized: authorized,
           setAuth: setAuth,
+          completed: completed,
+          setCompleted: setCompleted
         }}
       >
         <Navba/>
@@ -58,9 +62,15 @@ function App() {
               <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} /> }>
                 <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
               </Route>
+              {completed === "No" ?
               <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} /> }>
-                <Route path="/FDA/PostStudy" element={<FdaPostStudy />} />
+                <Route path="/PostStudy" element={<PostStudy />} />
+              </Route> 
+              :
+              <Route element={<RequireAuth allowedRoles={["FDA", "Admin", "Bavaria", "JaneHopkinsAdmin"]} /> }>
+                <Route path="/PostStudy" element={<PostStudy />} />
               </Route>
+              }
               <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} /> }>
                 <Route path="/Bavaria" element={<Bavaria />} />
               </Route>
@@ -71,13 +81,16 @@ function App() {
                 <Route path="/JaneHopkinsAdmin" element={<JaneHopkinsAdmin /> }/>
               </Route>
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
-                <Route path="/JaneHopkinsAdmin/AddPatient" element={<AddForm /> }/>
+                <Route path="/JaneHopkinsAdmin/AddPatient" element={<AddPatient /> }/>
               </Route>
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
                 <Route path="/JaneHopkinsAdmin/AssignDoctor" element={<AssignDoctor /> }/>
               </Route>
+              <Route element={ <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
+                <Route path="/JaneHopkinsAdmin/ReviewPatient" element={<ReviewPatient /> }/>
+              </Route>
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
-                <Route path="/JaneHopkinsDoctor/UpdatePatient" element={<UpdateForm />} />
+                <Route path="/JaneHopkinsDoctor/UpdatePatient" element={<UpdatePatient />} />
               </Route>
               <Route element={ <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
                 <Route path="/JaneHopkinsDoctor/AddPatientVisit" element={<AddVisit /> }/>

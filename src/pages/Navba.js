@@ -34,11 +34,14 @@ export default function Navba() {
             </div>
           )}
         </form>
-
-        <CustomLink to="/FDA">FDA</CustomLink>
-        <CustomLink to="/Bavaria">Bavaria</CustomLink>
-        <CustomLink to="/JaneHopkinsAdmin">JaneHopkinsAdmin</CustomLink>
-        <CustomLink to="/JaneHopkinsDoctor">JaneHopkinsDoctor</CustomLink>
+        {authorized?.role === "FDA" || authorized?.role === "Admin" ? 
+          <CustomLink to="/FDA">FDA</CustomLink> : ""}
+        {authorized?.role === "Bavaria" || authorized?.role === "Admin" ? 
+          <CustomLink to="/Bavaria">Bavaria</CustomLink> : "" }
+        {authorized?.role === "JaneHopkinsAdmin" || authorized?.role === "Admin" ? 
+        <CustomLink to="/JaneHopkinsAdmin">JaneHopkinsAdmin</CustomLink> : ""}
+        {authorized?.role === "JaneHopkinsDoctor" || authorized?.role === "Admin" ? 
+        <CustomLink to="/JaneHopkinsDoctor">JaneHopkinsDoctor</CustomLink> : ""}
         <CustomLink to="/">Home</CustomLink>
         {authorized === null ? (
           <Button variant="contained" component={Link} to="/Login">

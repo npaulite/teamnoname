@@ -26,7 +26,7 @@ const Bavaria = () => {
   };
 
   function noOfVisit(p) {
-    if (p.visits = "") return 0;
+    if (p.visits[0].dateTime === null) return 0;
     else {
       return p.visits.length;
     }
@@ -48,14 +48,13 @@ const Bavaria = () => {
     <div className="main">
       <h1 className="container">Bavaria</h1>
 
-      <Box sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+      <Box className="bavaria" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
         <Box>
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
                 <div className="appcontainer">
                   <div className="box1">
-                    <div className="app-container">
                       <h2>PATIENTS (FOR ONGOING TRIALS)</h2>
                       <table className="table-striped">
                         <thead>
@@ -64,6 +63,7 @@ const Bavaria = () => {
                             <th>Eligibility </th>
                             <th>Drug Assigned by FDA</th>
                             <th>Dosage</th>
+                            <th>Trial Status</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -87,22 +87,20 @@ const Bavaria = () => {
                                   })}
                         </td>
                                 <td> {noOfVisit(patient)} / 5</td>
+                                <td> {patient.trialStatus}</td>
                               </tr>
                             );
                           })}
                         </tbody>
                       </table>
-                    </div>
                   </div>
-
                   <div className="box2">
-                    <div className="app-container">
                       <h2>Drugs</h2>
                       <table className="table-striped">
                         <thead>
                           <tr>
                             <th>Drug ID sent to FDA </th>
-                            <th>Placebo </th>
+                            <th>Drug Type </th>
                             <th>BatchNumber </th>
                           </tr>
                         </thead>
@@ -130,7 +128,6 @@ const Bavaria = () => {
                           </Button>
                         </div>
                       </table>
-                    </div>
                   </div>
                 </div>
               </div>

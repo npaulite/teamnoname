@@ -3,10 +3,10 @@ import useJaneHopkins from "../hooks/useJaneHopkins";
 import { Box, Button, Container, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../cssFiles/janeHopkinsDoctor.css'
+import '../cssFiles/janeHopkinsAdmin.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
 
-function UpdateForm() {
+function ReviewPatient() {
 
     const nav = useNavigate()
     const location = useLocation()
@@ -147,31 +147,21 @@ function UpdateForm() {
         setVisits(list);
       };
 
-    const handleRemoveVisit = index => {
-        const list = [...visits];
-        list.splice(index, 1);
-        setVisits(list);
-      };
-       
-    const handleAddVisit = () => {
-        setVisits([...visits, {
-            patient: "",
-            dateTime: "",
-            notes: "",
-            hivViralLoad: ""
-        }]);
-      };
+    const handleSetComplete = () => {
+        setTrialStatus("Completed")
+    }
 
-    const handleSubmit= (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+        setTrialStatus("Completed");
         if(updatePatient()) {
         console.log(updatePatient);
-        setTimeout(() => {nav("/JaneHopkinsDoctor")}, 1000)
+        setTimeout(() => {nav("/JaneHopkinsAdmin")}, 1000)
         }
     }
 
     const goBack = () =>{ 
-        let path = `/JaneHopkinsDoctor`; 
+        let path = `/JaneHopkinsAdmin`; 
         nav(path);
     }
 
@@ -188,7 +178,7 @@ function UpdateForm() {
         </div>
         </Box>
         <Container>
-        <Typography component="h1" variant="h3">Update Patient Information</Typography>
+        <Typography component="h1" variant="h3">Review and Set Patient Trial Completion</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
         <Box component="form" mt={2} onSubmit={handleSubmit}>
             <div className="patientName" m={2} >
@@ -448,12 +438,6 @@ function UpdateForm() {
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             />
-                        <div className="visitButtons">
-                        {visits.length !== 1 && <Button variant="outlined"
-                            onClick={() => handleRemoveVisit(i)}>Remove</Button>}
-                        {(visits.length - 1 === i  && visits.length < 5) && <Button variant="outlined" 
-                            onClick={handleAddVisit}>Add</Button>}
-                    </div>
                     </div>
                     );
                 })}
@@ -463,8 +447,9 @@ function UpdateForm() {
                 variant="contained"  
                 type="submit"
                 fullWidth
+                onClick={handleSetComplete}
                 sx={{mt: 5, mb: 8}}>
-                    Update Patient
+                    Set Patient's Trial Completed
                 </Button>
             </div>
         </Box>
@@ -473,4 +458,4 @@ function UpdateForm() {
     );
 }
   
-export default UpdateForm;
+export default ReviewPatient;

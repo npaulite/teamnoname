@@ -56,7 +56,7 @@ import { ArrowLeftSharp } from "@mui/icons-material";
     e.preventDefault();
     if(updatePatient()) {
     console.log(updatePatient);
-    nav("/JaneHopkinsAdmin");
+    setTimeout(() => {nav("/JaneHopkinsAdmin")}, 1000)
     }
 }
 

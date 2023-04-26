@@ -15,7 +15,7 @@ function AssignDrug() {
     const [selection, setSelection] = useState(true)
     const [placeboDrugs, setPlaceboDrugs] = useState()
     const [bavariaDrugs, setBavariaDrugs] = useState()
-    const [postStudy, setPostStudy] = useState()
+    const [postStudy, setPostStudy] = useState("No")
         
     useEffect(() => {
         getMap()

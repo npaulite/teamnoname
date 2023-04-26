@@ -81,10 +81,18 @@ const JaneHopkinsDoctor = () => {
     nav(path, { state: { _id: p } });
   }
 
+  function noOfVisit(p) {
+    if (p.visits[0].dateTime === null) return 0;
+    else {
+      return p.visits.length;
+    }
+  }
+
   return (
     <div className="main">
       <h1 className="container">JaneHopkins Doctor Page</h1>
       {/* Grid list */}
+      <div className="format">
       {format === "list" ? (
         <Stack
           sx={{ pt: 4 }}
@@ -134,63 +142,31 @@ const JaneHopkinsDoctor = () => {
           </Button>
         </Stack>
       )}
-
+      </div>
       {format === "grid" ? (
         <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="black">
           <div className="patientsGrid">
             {patients?.map((patient, key) => {
               return(
                 <div className="grid-items" key={key}>
-              <Card key={key} style={{ margin: 20, padding: 5, height: "300px", width: "250px"}}>
-                <h4>Name: {patient.name}</h4>
-                <CopyToClipboard text = {patient._id}>
-                  <Button>{patient._id}</Button>
-                </CopyToClipboard>
-                <div>
-                  <div>IN: {patient.insuranceNumber }</div>
-                  <div>DOB: {patient.dob}</div>
-                  <div>HEIGHT: {patient.height}</div>
-                  <div>WEIGHT: {patient.weight}</div>
-                  <div>BP: {patient.bloodPressure}</div>
-                  <div>TEMP: {patient.temperature}</div>
-                  <div>OS: {patient.oxygenSaturation}</div>
-                  <div>UUID: {patient.uuid} </div>
-                  <div>ADDRESS: {patient.address}</div>
-                  <div>EMPLOYED?: {patient.currentlyEmployed}</div>
-                  <div>INSURED?: {patient.currentlyInsured}</div>
-                </div>
-                {/* <div>IDHC: {patient.icdHealthCodes}</div>
-              return (
-                <div className="grid-items" key={key}>
-                  <Card
-                    key={key}
-                    style={{
-                      margin: 20,
-                      padding: 5,
-                      height: "300px",
-                      width: "250px",
-                    }}
-                  >
+                  <Card key={key} style={{ margin: 20, padding: 5, height: "300px", width: "250px"}}>
                     <h4>Name: {patient.name}</h4>
-                    <CopyToClipboard text={patient._id}>
+                    <CopyToClipboard text = {patient._id}>
                       <Button>{patient._id}</Button>
                     </CopyToClipboard>
                     <div>
-                      <div>IN: {patient.insuranceNumber}</div>
+                      <div>IN: {patient.insuranceNumber }</div>
                       <div>DOB: {patient.dob}</div>
                       <div>HEIGHT: {patient.height}</div>
                       <div>WEIGHT: {patient.weight}</div>
                       <div>BP: {patient.bloodPressure}</div>
                       <div>TEMP: {patient.temperature}</div>
                       <div>OS: {patient.oxygenSaturation}</div>
-                      <div>UUID: {patient.uuid}</div>
+                      <div>UUID: {patient.uuid} </div>
                       <div>ADDRESS: {patient.address}</div>
                       <div>EMPLOYED?: {patient.currentlyEmployed}</div>
                       <div>INSURED?: {patient.currentlyInsured}</div>
                     </div>
-                    {/* <div>IDHC: {patient.icdHealthCodes}</div>
-                <div>ALLERGIES: {patient.allergies}</div>
-                <div>VISITS: {patient.visits}</div> */}
                   </Card>
                 </div>
               );
@@ -198,11 +174,13 @@ const JaneHopkinsDoctor = () => {
           </div>
         </Box>
       ) : (
-        <Box sx={{ pt: 4, pb: 6 }} bgcolor="grey">
-          {/* <Typography style = {{color: "white", marginLeft: 80}}>{format}</Typography> */}
+        <Box className="patientsList" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+        <div className="col-lg-12 grid-margin stretch-card">
+        <div className="card">
+        <div className="card-body">
+        <div className="appcontainer">
           <Box>
-            <div className="app-container">
-              <table>
+            <table className="table-striped">
                 <thead>
                   <tr>
                     <th>Name </th>
@@ -246,7 +224,7 @@ const JaneHopkinsDoctor = () => {
                             return "";
                           })}
                         </td>
-                        <td> {patient?.visits.length} / 5</td>
+                        <td> {noOfVisit(patient)} / 5</td>
                         <td>
                           <Button
                             variant="contained"
@@ -273,8 +251,11 @@ const JaneHopkinsDoctor = () => {
                   })}
                 </tbody>
               </table>
-            </div>
           </Box>
+          </div>
+          </div>
+          </div>
+          </div>
         </Box>
       )}
     </div>

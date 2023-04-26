@@ -7,7 +7,7 @@ import '../cssFiles/addForm.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
 
 
-function AddForm() {
+function AddPatient() {
 
     const nav = useNavigate()
     const { entities } = useJaneHopkins()
@@ -27,7 +27,7 @@ function AddForm() {
     const [currentlyInsured, setCurrentlyInsured] = useState('No')
     const [icdHealthCodes, setIcdHealthCodes] = useState([{code: ""}])
     const [allergies, setAllergies] = useState([{allergy: ""}])
-    const [visits, setVisits] = useState([])
+    const [visits, setVisits] = useState([{}])
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
     const [addFirstVisit, setAddFirstVisit] = useState(false)
@@ -621,4 +621,4 @@ function AddForm() {
 
 }
 
-export default AddForm;
+export default AddPatient;

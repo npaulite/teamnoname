@@ -48,7 +48,6 @@ function SendDrugs() {
 
     const checkPlacebo = () => {
         setPlacebo(placebo => !placebo)
-        console.log(placebo)
     }
 
     const handleSubmit = (e) => {
@@ -81,7 +80,7 @@ function SendDrugs() {
                 <div className="placebo">
                     <FormGroup>
                         <FormControlLabel 
-                            label="Placebo"
+                            label="Bavaria"
                             control={
                                 <Checkbox
                             id="placebo"

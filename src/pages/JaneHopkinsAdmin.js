@@ -26,6 +26,18 @@ const JaneHopkinsAdmin = () => {
     nav(path, {state: { _id: id }})
   }
 
+  function noOfVisit(p) {
+    if (p.visits[0].dateTime === null) return 0;
+    else {
+      return p.visits.length;
+    }
+  }
+
+  function handleSetCompletion(id) {
+    let path = `/JaneHopkinsAdmin/ReviewPatient`
+    nav(path, {state: { _id: id }})
+  }
+
   useEffect(() => {
     listPatients() 
     listDoctors()
@@ -45,15 +57,11 @@ const JaneHopkinsAdmin = () => {
           <AddIcon />
         </Button>
       </div>
-      {/*
-      <div className="assign"> 
-        <Button sx={{mb:2}} variant="contained" size="large" href={"JaneHopkinsAdmin/AssignDoctor"}>
-          <Typography variant="h5">AssignDoctor</Typography>
-        </Button>
-      </div>
-      */}
-      <div className="list">
-        <Box className="patientsList" sx={{ pt: 4, pb: 6 }} bgcolor="black">
+      <Box className="patientsList" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+      <div className="col-lg-12 grid-margin stretch-card">
+        <div className="card">
+        <div className="card-body">
+        <div className="appcontainer">
           <table>
             <thead>
               <tr>
@@ -123,19 +131,30 @@ const JaneHopkinsAdmin = () => {
                         }
                       })}
                     </td>
-                    <td> {patient?.visits.length} / 5</td>
+                    <td> {noOfVisit(patient)} / 5</td>
                     <td> {patient?.uuid? 
                             <Button variant="contained" sx={{m:1, mr:3}} disabled >Assign Doctor</Button>
                           :
                             <Button variant="contained" sx={{m:1, mr:3}} onClick={() => {assignDoctor(patient._id)} } required pattern = "/^\d+$/">Assign Doctor</Button>
-                          } </td>
+                          }
+                          {noOfVisit(patient) === 5 ? ( patient.trialStatus === "Ongoing" ? 
+                          <Button variant="contained" sx={{m:1}} onClick={() => {handleSetCompletion(patient._id)}}>Complete Trial</Button>
+                          :
+                          <Button variant="contained" disabled sx={{m:1}}>Trial Completed</Button>
+                          )
+                          :
+                          <Button variant="contained" disabled sx={{m:1}}>Trial Ongoing</Button>} 
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-        </Box>
-      </div>
+          </div>
+          </div>
+          </div>
+          </div>
+      </Box>
     </div>
   );
 };
