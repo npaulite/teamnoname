@@ -1,10 +1,6 @@
 import useJaneHopkins from '../hooks/useJaneHopkins';
 const { entities } = useJaneHopkins()
 
-jest.mock('Add', () => {
-    
-})
-
 it('Add Eligible Patient', async() => {
     const patient = {
         name: "John Doe",

@@ -4,25 +4,88 @@ import "../cssFiles/fda.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftSharp } from "@mui/icons-material";
-
+import useAuth from "../hooks/useAuth";
 
 function PostStudy() {
     const nav = useNavigate();
+    const {authorized,} = useAuth();
     const { entities } = useFDA();
     const [patients, setPatients] = useState([]);
     const [maps, setMaps] = useState();
     const [status, setStatus] = useState("Ongoing");
+    const [bavaria, setBavaria] = useState([]);
+    const [placebo, setPlacebo] = useState([]);
 
     const listPatients = async () => {
         let patientList = await entities.patient.list({
-        filter: {
-            eligibility: {
-            eq: true,
+            filter: {
+                eligibility: {
+                eq: true,
+                },
             },
-        },
         });
         setPatients(patientList.items);
     };
+
+    const listBavaria = async () => {
+        let bavariaList = await entities.map.list({
+            filter: {
+                placebo: {
+                eq: false,
+                },
+            },
+        });
+        setBavaria(bavariaList.items);
+    };
+
+    const listPlacebo = async () => {
+        let placeboList = await entities.map.list({
+            filter: {
+                placebo: {
+                eq: true,
+                },
+            },
+        });
+        setPlacebo(placeboList.items);
+    };
+
+    function calcEfficacy(p) {
+        let result = p.startingHIVLoad;
+        for (let index = 0; index < p.visits.length; index++) {
+            result = ((p.visits[index].hivViralLoad / result) * 100).toFixed(2);
+        }
+        result = (100 - result).toFixed(2)
+        return result;
+    }
+
+    function calcReduction(p) {
+        let result = (p.startingHIVLoad - p.visits[4].hivViralLoad)/ p.startingHIVLoad * 100;
+        return result.toFixed(2);
+    }
+
+    function calcTotalEfficacy(array) {
+        let result = 0;
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < patients.length; j++) {
+                if(array[i].patientUUID === patients[j]._id) {
+                    result += parseFloat(calcEfficacy(patients[j]))
+                }
+            }
+        }
+        return (result / array.length).toFixed(2);
+    }
+
+    function calcTotalReduction(array) {
+        let result = 0;
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < patients.length; j++) {
+                if(array[i].patientUUID === patients[j]._id) {
+                    result += parseFloat(calcReduction(patients[j]))
+                }
+            }
+        }
+        return (result / array.length).toFixed(2);
+    }
 
     const mapDrugs = async () => {
         let mapList = await entities.map.list();
@@ -37,7 +100,7 @@ function PostStudy() {
         }
     }
 
-    const goBack = () =>{ 
+    const goBack = () => {
         let path = `/FDA`; 
         nav(path);
     }
@@ -56,9 +119,13 @@ function PostStudy() {
     useEffect(() => {
         listPatients();
         mapDrugs();
+        listBavaria();
+        listPlacebo();
     }, []);
 
-    useMemo(() => currentTrialStatus(), [patients])
+    useMemo(() => {
+        currentTrialStatus()
+    },[patients])
 
     return (
         <div className="main">
@@ -72,6 +139,7 @@ function PostStudy() {
                 </div>
             </Box>
             <Box className="fda" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+                
                 <div className="col-lg-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
@@ -82,6 +150,7 @@ function PostStudy() {
                                     <h2>Trial Status: {status}</h2>
                                 </span>
                             </Box>
+                            <div className="box1">
                             <Box>
                             <Typography variant="h5">Patient Results</Typography>
                                     <table className="table-striped">
@@ -95,6 +164,10 @@ function PostStudy() {
                                         <th>Starting HIV Load</th>
                                         <th>Latest Viral Load</th>
                                         <th>Trial Completion Status</th>
+                                        {status === "Completed" ? 
+                                            <th>Efficacy</th> : "" }
+                                        {status === "Completed" ? 
+                                            <th>Total Load Reduction</th> : "" }
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,13 +210,18 @@ function PostStudy() {
                                             <td>{noOfVisit(patient) === 0 ? patient.startingHIVLoad :
                                                 patient.visits[patient.visits.length-1].hivViralLoad}</td>
                                             <td>{patient.trialStatus}</td>
+                                            {status === "Completed" ? 
+                                            <td>{calcEfficacy(patient)}%</td> : "" }
+                                            {status === "Completed" ? 
+                                            <td>{calcReduction(patient)}%</td> : "" }
                                             </tr>
                                         )
                                         })}
                                     </tbody>
                                     </table>
                                     </Box>
-                                    <Box sx={{mt:10}}>
+                                    </div>
+                                    <Box sx={{mt:10, mb:5}}>
                                         <Typography variant="h5">Drug Results</Typography>
                                         <table className="table-striped">
                                             <thead>
@@ -157,15 +235,15 @@ function PostStudy() {
                                             <tbody>
                                                 <tr>
                                                     <td>Bavaria</td>
-                                                    <td>#</td>
-                                                    <td>%</td>
-                                                    <td>%</td>
+                                                    <td>{bavaria.length}</td>
+                                                    <td>{calcTotalEfficacy(bavaria)}%</td>
+                                                    <td>{calcTotalReduction(bavaria)}%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Placebo</td>
-                                                    <td>#</td>
-                                                    <td>%</td>
-                                                    <td>%</td>
+                                                    <td>{placebo.length}</td>
+                                                    <td>{calcTotalEfficacy(placebo)}%</td>
+                                                    <td>{calcTotalReduction(placebo)}%</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "@firebase/auth";
 import Navba from "./pages/Navba";
@@ -24,10 +24,9 @@ import PostStudy from "./pages/PostStudy";
 import ReviewPatient from "./pages/ReviewPatient";
 
 function App() {
-  const { authorized, setAuth } = useAuth();
+  const { authorized, setAuth} = useAuth();
   const [user, setUser] = useState();
   const [id, setID] = useState();
-  const {completed, setCompleted} = useState("No");
 
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
@@ -35,6 +34,7 @@ function App() {
       setID(currentUser.uid);
     }
   });
+
 
   return (
     <div className="app">
@@ -46,8 +46,6 @@ function App() {
           setID: setID,
           authorized: authorized,
           setAuth: setAuth,
-          completed: completed,
-          setCompleted: setCompleted
         }}
       >
         <Navba/>
@@ -62,15 +60,9 @@ function App() {
               <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} /> }>
                 <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
               </Route>
-              {completed === "No" ?
-              <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} /> }>
-                <Route path="/PostStudy" element={<PostStudy />} />
-              </Route> 
-              :
               <Route element={<RequireAuth allowedRoles={["FDA", "Admin", "Bavaria", "JaneHopkinsAdmin"]} /> }>
                 <Route path="/PostStudy" element={<PostStudy />} />
               </Route>
-              }
               <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} /> }>
                 <Route path="/Bavaria" element={<Bavaria />} />
               </Route>
