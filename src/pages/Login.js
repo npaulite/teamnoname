@@ -10,6 +10,9 @@ import {setDoc, doc, getDoc} from "firebase/firestore"
 import { useNavigate } from 'react-router'
 import useAuth from '../hooks/useAuth';
 import useJaneHopkins from "../hooks/useJaneHopkins";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 const Login = () => {
   
@@ -30,6 +33,8 @@ const Login = () => {
     setUser(currentUser)}
     
   })
+
+  
 
   const login = async() => {
       await signInWithEmailAndPassword(auth, email, password).then(
@@ -105,6 +110,37 @@ const Login = () => {
     setRepeatPassword("")
   }
 
+
+  const validationSchema = Yup.object().shape({
+    fullname: Yup.string().required('Fullname is required'),
+    username: Yup.string()
+      .required('Username is required')
+      .min(6, 'Username must be at least 6 characters')
+      .max(20, 'Username must not exceed 20 characters'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email is invalid'),
+    password: Yup.string()
+      .required('Password is required')
+      .min(6, 'Password must be at least 6 characters')
+      .max(40, 'Password must not exceed 40 characters'),
+    confirmPassword: Yup.string()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
+    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+    role: Yup.string()
+      .required('Confirm Role')
+      .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
+  });
+
+  const {
+  //  control,
+  //  handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(validationSchema)
+  });
+
   return (
     <div className='loginPage'>
       <Container maxWidth="md">
@@ -117,11 +153,14 @@ const Login = () => {
         <TextField
           required
           id="email"
+          name="email"
           label="Email Address"
-          value={email || ''} pattern = "/^[a-zA-Z\d]+$/"
+          value={email || ''} 
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
+          {...register('email')}
+          error={errors.email ? true : false}
                 />
       </div>
       <div>
@@ -129,9 +168,10 @@ const Login = () => {
         <TextField
           required
           id="password"
+          name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={password || ''} pattern = "/^[a-zA-Z\d]+$/"
+          value={password || ''} 
           onChange={(e) => {setPassword(e.target.value);}} 
           fullWidth
           autoFocus
@@ -141,6 +181,8 @@ const Login = () => {
           onClick={handleClickShowPassword}
           onMouseDown={handleMouseDownPassword}
           edge="end"
+          {...register('password')}
+          error={errors.password ? true : false}
           >
             {showPassword ? <VisibilityOff /> : <Visibility />}
           </IconButton>
@@ -174,22 +216,28 @@ const Login = () => {
         <TextField
           required
           id="email"
+          name="email"
           label="Email Address"
-          value={email || ''} pattern = "/^[a-zA-Z\d]+$/"
+          value={email || ''} 
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
+          {...register('email')}
+          error={errors.email ? true : false}
                 />
       </div>
       <div>
         <Typography variant='h6'>Full Name</Typography>
         <TextField
           required
-          id="name"
+          id="fullname"
+          name="fullname"
           label="Full Name"
-          value={name || ''} pattern = "/^[a-zA-Z]+$/"
+          value={name || ''} 
           onChange={(e) => {setName(e.target.value);}}
           fullWidth
+          {...register('fullname')}
+          error={errors.fullname ? true : false}
                 />
       </div>
       <div>
@@ -197,12 +245,15 @@ const Login = () => {
         <TextField
           required
           id="password"
+          name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={password || ''} pattern = "/^[a-zA-Z\d]+$/"
+          value={password || ''} 
           onChange={(e) => {setPassword(e.target.value);}}
           fullWidth
           autoFocus
+          {...register('password')}
+          error={errors.password ? true : false}
           InputProps={{
             endAdornment: (
             <IconButton
@@ -221,12 +272,15 @@ const Login = () => {
         <TextField
           required
           id="password"
+          name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          value={repeatPassword || ''} pattern = "/^[a-zA-Z\d]+$/"
+          value={repeatPassword || ''} 
           onChange={(e) => {setRepeatPassword(e.target.value);}}
           fullWidth
           autoFocus
+          {...register('password')}
+          error={errors.password ? true : false}
           InputProps={{
             endAdornment: (
             <IconButton
@@ -246,9 +300,12 @@ const Login = () => {
           <Select
             required
             id="role"
+            name="role"
             label='Role'
-            value={role || ''} pattern = "/^[a-zA-Z]+$/"
+            value={role || ''} 
             onChange={(e) => {setRole(e.target.value);}}
+            {...register('role')}
+            error={errors.role ? true : false}
           >
             <MenuItem value={'JaneHopkinsDoctor'}>Jane Hopkins Doctor</MenuItem>
             <MenuItem value={'JaneHopkinsAdmin'}>Jane Hopkins Admin</MenuItem>

@@ -13,30 +13,10 @@ const JaneHopkinsDoctor = () => {
   const { authorized } = useContext(AuthContext);
   const [format, setFormat] = useState("list");
   const [patients, setPatients] = useState();
-<<<<<<< HEAD
-  const [doct, setDoct] = useState()
-  const [doctorID, setDoctorID] = useState() 
-  const nav = useNavigate();
-  
-  const listDoctors = async() => {
-    if(authorized.role === "JaneHopkinsDoctor") {
-    let docResponse = await entities.doctor.list({
-      filter: {
-        name: {
-          eq: authorized.name 
-        }
-      }
-    })
-    if(docResponse)
-      setDoctorID(docResponse.items[0]._id) 
-    }
-    else {
-      let docResponse = await entities.doctor.list()
-      setDoctorID(null)
-=======
   const [doctorID, setDoctorID] = useState();
   const nav = useNavigate();
   const [maps, setMaps] = useState();
+
 
   const listDoctors = async () => {
     if (authorized.role === "JaneHopkinsDoctor") {
@@ -51,18 +31,10 @@ const JaneHopkinsDoctor = () => {
     } else {
       await entities.doctor.list();
       setDoctorID(null);
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
     }
   };
 
   const listPatients = async () => {
-<<<<<<< HEAD
-    if(doctorID) {
-    let patientResponse = await entities.patient.list({
-      filter: {
-        uuid: {
-          eq: doctorID 
-=======
     if (doctorID) {
       let patientResponse = await entities.patient.list({
         filter: {
@@ -72,7 +44,6 @@ const JaneHopkinsDoctor = () => {
           bloodPressure: {
             gt: "1",
           },
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
         },
       });
       if (patientResponse) setPatients(patientResponse.items);
@@ -106,14 +77,9 @@ const JaneHopkinsDoctor = () => {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
-    getPatients()
-  }, [doctorID] );
-=======
     getPatients();
     getMap();
   }, [doctorID]);
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
 
   function handleUpdate(p) {
     let path = `/JaneHopkinsDoctor/UpdatePatient`;
@@ -183,30 +149,6 @@ const JaneHopkinsDoctor = () => {
         <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="black">
           <div className="patientsGrid">
             {patients?.map((patient, key) => {
-<<<<<<< HEAD
-              return(
-                <div className="grid-items" key={key}>
-              <Card key={key} style={{ margin: 20, padding: 5, height: "300px", width: "250px"}}>
-                <h4>Name: {patient.name}</h4>
-                <CopyToClipboard text = {patient._id}>
-                  <Button>{patient._id}</Button>
-                </CopyToClipboard>
-                <div>
-                  <div>IN: {patient.insuranceNumber }</div>
-                  <div>DOB: {patient.dob}</div>
-                  <div>HEIGHT: {patient.height}</div>
-                  <div>WEIGHT: {patient.weight}</div>
-                  <div>BP: {patient.bloodPressure}</div>
-                  <div>TEMP: {patient.temperature}</div>
-                  <div>OS: {patient.oxygenSaturation}</div>
-                  <div>UUID: {patient.uuid} </div>
-                  <div>ADDRESS: {patient.address}</div>
-                  <div>EMPLOYED?: {patient.currentlyEmployed}</div>
-                  <div>INSURED?: {patient.currentlyInsured}</div>
-                </div>
-                {/* <div>IDHC: {patient.icdHealthCodes}</div>
-=======
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
               return (
                 <div className="grid-items" key={key}>
                   <Card
@@ -303,13 +245,6 @@ const JaneHopkinsDoctor = () => {
                             View / Edit Patient Information
                           </Button>
                           {patient.eligibility ? (
-<<<<<<< HEAD
-                              (patient?.visits.length < 5 ?
-                              ( <Button variant="contained" sx={{m:1}}  onClick={() => handleAddVisit(patient._id)} required pattern = "/^\d+$/">Add Visit</Button>)
-                              :
-                              ( <Button variant="contained" sx={{m:1}}  disabled >Add Visit</Button>)
-                              )
-=======
                             patient?.visits.length !== 5 ? (
                               maps?.map((map, i) => {
                                 if (patient._id === map.patientUUID)
@@ -337,7 +272,6 @@ const JaneHopkinsDoctor = () => {
                               >
                                 5 Visits Reached
                               </Button>
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
                             )
                           ) : (
                             <Button variant="contained" sx={{ m: 1 }} disabled>
@@ -350,16 +284,9 @@ const JaneHopkinsDoctor = () => {
                   })}
                 </tbody>
               </table>
-<<<<<<< HEAD
-              </div>
-              </Box>
-              </Box>
-      
-=======
             </div>
           </Box>
         </Box>
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
       )}
     </div>
   );

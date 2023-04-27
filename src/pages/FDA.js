@@ -5,6 +5,9 @@ import "../cssFiles/fda.css";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../cssFiles/styles.css";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 const Tab = styled.button`
   background-color: #9fa8da;

@@ -23,16 +23,6 @@ const JaneHopkinsAdmin = () => {
   };
 
   function assignDoctor(id) {
-<<<<<<< HEAD
-    let path = `/JaneHopkinsAdmin/AssignDoctor`
-    nav(path, {state: { _id: id }})
-  }
-
-  useEffect(() => {
-    listPatients() 
-    listDoctors()
-  }, [])
-=======
     let path = `/JaneHopkinsAdmin/AssignDoctor`;
     nav(path, { state: { _id: id } });
   }
@@ -41,7 +31,6 @@ const JaneHopkinsAdmin = () => {
     listPatients();
     listDoctors();
   }, []);
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
 
   return (
     <div className="main">
@@ -134,13 +123,6 @@ const JaneHopkinsAdmin = () => {
                       })}
                     </td>
                     <td> {patient?.visits.length} / 5</td>
-<<<<<<< HEAD
-                    <td> {patient?.uuid? 
-                            <Button variant="contained" sx={{m:1, mr:3}} disabled >Assign Doctor</Button>
-                          :
-                            <Button variant="contained" sx={{m:1, mr:3}} onClick={() => {assignDoctor(patient._id)} } required pattern = "/^\d+$/">Assign Doctor</Button>
-                          } </td>
-=======
                     <td>
                       {" "}
                       {patient?.uuid ? (
@@ -163,7 +145,6 @@ const JaneHopkinsAdmin = () => {
                         </Button>
                       )}{" "}
                     </td>
->>>>>>> 5664b671add7e83d86258a539723c51b2ef1dc56
                   </tr>
                 );
               })}
