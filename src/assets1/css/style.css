@@ -737,6 +737,7 @@ a:focus {
 }
 
 .info_section .info_logo h3 {
+  color: #ffffff;
   text-transform: uppercase;
   font-weight: bold;
 }
