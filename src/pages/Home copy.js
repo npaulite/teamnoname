@@ -9,7 +9,9 @@ export default function Home() {
     <div>
       <h1 className="container">
         <div className="home">
-          <Typography variant="h2">HOME PAGE</Typography>
+          <a href="https://www.vendia.com/">
+            <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/cpuf13twbf75y9bjau7h.png" />
+          </a>
           {authorized == null ? (
             <></>
           ) : (
