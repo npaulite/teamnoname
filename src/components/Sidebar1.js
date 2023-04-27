@@ -111,12 +111,12 @@ const Sidebar1 = ({ children }) => {
       icon: <FaPills />,
       authorizedRoles: "Bavaria",
     },
-    // {
-    //   path: "/PostStudy",
-    //   name: "PostStudy",
-    //   icon: <FaFileContract />,
-    //   authorizedRoles: ["Admin", "Bavaria"],
-    // },
+    {
+      path: "/PostStudy",
+      name: "PostStudy",
+      icon: <FaFileContract />,
+      authorizedRoles: "Bavaria",
+    },
     //jha
     {
       path: "/JaneHopkinsAdmin",

@@ -4,11 +4,9 @@ import "../cssFiles/fda.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftSharp } from "@mui/icons-material";
-import useAuth from "../hooks/useAuth";
 
 function PostStudy() {
     const nav = useNavigate();
-    const {authorized,} = useAuth();
     const { entities } = useFDA();
     const [patients, setPatients] = useState([]);
     const [maps, setMaps] = useState();

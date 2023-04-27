@@ -1,8 +1,7 @@
 import useJaneHopkins from "../hooks/useJaneHopkins";
 import "../cssFiles/janeHopkinsAdmin.css";
 import { useEffect, useState } from "react";
-import { Button, Typography, Box } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const JaneHopkinsAdmin = () => {
@@ -46,17 +45,6 @@ const JaneHopkinsAdmin = () => {
   return (
     <div className="main">
       <h1 className="container">JaneHopkins Admin Page</h1>
-      <div className="add">
-        <Button
-          sx={{ mb: 2 }}
-          variant="contained"
-          size="large"
-          href={"JaneHopkinsAdmin/AddPatient"}
-        >
-          <Typography variant="h5">Add New Patient</Typography>
-          <AddIcon />
-        </Button>
-      </div>
       <Box className="patientsList" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
       <div className="col-lg-12 grid-margin stretch-card">
         <div className="card">
