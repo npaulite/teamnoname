@@ -93,20 +93,20 @@ const JaneHopkinsAdmin = () => {
                     <td>
                       {" "}
                       {patient?.currentMedications.map((meds, key) => {
-                        return <span key={key}>{meds.medication}</span>;
+                        return <span className="spanClass" key={key}>{meds.medication} </span>;
                       })}
                     </td>
                     <td>
                       {" "}
                       {patient?.allergies.map((all, key) => {
-                        return <span key={key}>{all.allergy}</span>;
+                        return <span className="spanClass" key={key}>{all.allergy}</span>;
                       })}
                     </td>
 
                     <td>
                       {" "}
                       {patient?.icdHealthCodes.map((codes, key) => {
-                        return <span key={key}>{codes.code}</span>;
+                        return <span className="spanClass" key={key}>{codes.code}</span>;
                       })}
                     </td>
                     <td> {patient?.eligibility ? "Yes" : "No"} </td>

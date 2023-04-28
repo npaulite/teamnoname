@@ -111,7 +111,7 @@ function AddVisit() {
                         (visits.map((x, i) => {
                             return(
                                 <div className="visit" key={i}>
-                                    <Typography variant="subtitle1"> Visit #{i+1}</Typography>
+                                    <Typography variant="subtitle1" sx={{mt:5, mb:1}}> Visit #{i+1}</Typography>
                                     <TextField
                                         name="patient" 
                                         label="Patient Name" 

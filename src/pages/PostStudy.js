@@ -4,12 +4,13 @@ import "../cssFiles/fda.css";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftSharp } from "@mui/icons-material";
+import useAuth from "../hooks/useAuth";
 
 function PostStudy() {
     const nav = useNavigate();
     const { entities } = useFDA();
     const [patients, setPatients] = useState([]);
-    const [maps, setMaps] = useState();
+    const [maps, setMaps] = useState([]);
     const [status, setStatus] = useState("Ongoing");
     const [bavaria, setBavaria] = useState([]);
     const [placebo, setPlacebo] = useState([]);
@@ -29,8 +30,11 @@ function PostStudy() {
         let bavariaList = await entities.map.list({
             filter: {
                 placebo: {
-                eq: false,
+                    eq: false,
                 },
+                postStudy: {
+                    eq: "Yes"
+                }
             },
         });
         setBavaria(bavariaList.items);
@@ -42,6 +46,9 @@ function PostStudy() {
                 placebo: {
                 eq: true,
                 },
+                postStudy: {
+                    eq: "Yes"
+                }
             },
         });
         setPlacebo(placeboList.items);
@@ -86,7 +93,13 @@ function PostStudy() {
     }
 
     const mapDrugs = async () => {
-        let mapList = await entities.map.list();
+        let mapList = await entities.map.list({
+            filter: {
+                postStudy: {
+                    eq: "Yes"
+                }
+            },
+        });
         setMaps(mapList.items);
 
     };
@@ -104,12 +117,12 @@ function PostStudy() {
     }
 
     function currentTrialStatus() {
-        for(const patient of patients) {
-            if(patient.trialStatus === "Ongoing"){
-                setStatus("Ongoing")
+        for(const map of maps) {
+            if(map.postStudy === "Yes"){
+                setStatus("Completed")
                 break;
             }
-            setStatus("Completed")
+            setStatus("Ongoing")
         }
         
     }
@@ -162,59 +175,84 @@ function PostStudy() {
                                         <th>Starting HIV Load</th>
                                         <th>Latest Viral Load</th>
                                         <th>Trial Completion Status</th>
-                                        {status === "Completed" ? 
-                                            <th>Efficacy</th> : "" }
-                                        {status === "Completed" ? 
-                                            <th>Total Load Reduction</th> : "" }
+                                        <th>Efficacy</th>
+                                        <th>Total Load Reduction</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {patients?.map((patient, key) => {
-                                        return (
-                                            <tr key={key}>
-                                            <td> {patient._id} </td>
-                                            <td>
-                                                {" "}
-                                                {patient.eligibility ? "Yes" : "No"}{" "}
-                                            </td>
-                                            <td>
-                                                {maps?.map((map, i) => {
-                                                {
-                                                    if (patient._id === map.patientUUID) {
-                                                    return (
-                                                        <span key={i}> {map.drugUUID} </span>
-                                                    );
-                                                    }
-                                                }
-                                                })}
-                                            </td>
-                                            <td>
-                                                {maps?.map((map, i) => {
-                                                {
-                                                    if (patient._id === map.patientUUID) {
-                                                    return (
-                                                        <span key={i}>
-                                                        {map.placebo
-                                                            ? "Placebo"
-                                                            : "Bavaria"}{" "}
-                                                        </span>
-                                                    );
-                                                    }
-                                                }
-                                                })}
-                                            </td>
-                                            <td>{noOfVisit(patient)} / 5</td>
-                                            <td>{patient.startingHIVLoad}</td>
-                                            <td>{noOfVisit(patient) === 0 ? patient.startingHIVLoad :
-                                                patient.visits[patient.visits.length-1].hivViralLoad}</td>
-                                            <td>{patient.trialStatus}</td>
-                                            {status === "Completed" ? 
-                                            <td>{calcEfficacy(patient)}%</td> : "" }
-                                            {status === "Completed" ? 
-                                            <td>{calcReduction(patient)}%</td> : "" }
-                                            </tr>
-                                        )
-                                        })}
+                                        {maps?.map((m, key) => {
+                                            return (
+                                                <tr key={key}>
+                                                    <td>{m.patientUUID}</td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{patient.eligibility ? "Yes" : "No" }</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>{m.drugUUID}</td>
+                                                    <td>{m.placebo ? "Placebo" : "Bavaria"}</td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{noOfVisit(patient)}/5</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{patient.startingHIVLoad}</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{noOfVisit(patient) === 0 ? patient.startingHIVLoad :
+                                                                        patient.visits[patient.visits.length-1].hivViralLoad}</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{patient.trialStatus}</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{calcEfficacy(patient)}%</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                    <td>
+                                                        {patients?.map((patient, i) => {
+                                                            {if (patient._id === m.patientUUID) {
+                                                                return (
+                                                                    <span key={i}>{calcReduction(patient)}%</span>
+                                                                )
+                                                            }}
+                                                        })}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })} 
                                     </tbody>
                                     </table>
                                     </Box>
@@ -246,6 +284,7 @@ function PostStudy() {
                                             </tbody>
                                         </table>
                                     </Box>
+                                    {/*<Button variant="contained" onClick={()=>setCompletedTrue()}>Share Results</Button> */}
                                 </div>
                             </div>
                         </div>

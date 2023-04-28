@@ -55,7 +55,21 @@ const FDA = () => {
     }
   }
 
+  const setPostStudy = async() => {
+    for(const map of maps) {
+      for(const patient of patients){
+        if(map.patientUUID === patient._id && patient.trialStatus ==="Completed") {
+          await entities.map.update({
+            _id: map._id,
+            postStudy: "Yes"
+          })
+        }
+      }
+    }
+  }
+
   const compile = () =>{ 
+    setPostStudy();
     let path = `/PostStudy`; 
     nav(path);
   }
@@ -80,7 +94,7 @@ const FDA = () => {
                     {status === "Completed"?
                       <Button variant="contained"
                       onClick={compile}
-                      >Compile Report</Button>
+                      >Update Post Report</Button>
                     : ""}
                   </span>
                   <table className="table-striped">

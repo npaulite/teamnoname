@@ -143,6 +143,12 @@ const Sidebar1 = ({ children }) => {
       icon: <FaHospitalAlt />,
       authorizedRoles: "JaneHopkinsDoctor",
     },
+    {
+      path: "/PostStudy",
+      name: "PostStudy",
+      icon: <FaFileContract />,
+      authorizedRoles: "JaneHopkinsDoctor",
+    },
   ];
 
   const filteredMenuItems = menuItem.filter((item) => {

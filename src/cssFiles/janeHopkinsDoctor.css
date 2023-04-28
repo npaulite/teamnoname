@@ -41,6 +41,11 @@
     column-gap: 1px;
 }
 
+.spanClass 
+{
+   display:block;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

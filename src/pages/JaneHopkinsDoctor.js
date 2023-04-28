@@ -206,7 +206,7 @@ const JaneHopkinsDoctor = () => {
                         <td> {patient.currentlyInsured}</td>
                         <td>
                           {patient?.icdHealthCodes.map((codes, key) => {
-                            return <span key={key}>{codes.code}</span>;
+                            return <span className="spanClass" key={key}>{codes.code}</span>;
                           })}
                         </td>
                         <td> {patient?.eligibility ? "Yes" : "No"} </td>

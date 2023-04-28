@@ -30,7 +30,6 @@ function AddPatient() {
     const [visits, setVisits] = useState([{}])
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
-    const [addFirstVisit, setAddFirstVisit] = useState(false)
     const [trialStatus, setTrialStatus] = useState()
 
     const addPatient = async() => {
@@ -249,27 +248,7 @@ function AddPatient() {
     const handleAddAllergy = () => {
         setAllergies([...allergies, {allergy: "" }]);
       };
-    const handleVisit = (e, index) => {
-        const { name, value } = e.target;
-        const list = [...visits];
-        list[index][name] = value;
-        setVisits(list);
-      };
 
-    const handleRemoveVisit = index => {
-        const list = [...visits];
-        list.splice(index, 1);
-        setVisits(list);
-      };
-       
-    const handleAddVisit = () => {
-        setVisits([...visits, {
-            patient: "",
-            dateTime: "",
-            notes: "",
-            hivViralLoad: ""
-        }]);
-      };
     const handleEligibility = () => {
         const date = new Date("2005-01-01")
         let birth = dob.split('-')
@@ -391,7 +370,7 @@ function AddPatient() {
                         required
                         id="bloodPressure"
                         label="Systolic/Diastolic"
-                        value={bloodPressure || ''} pattern="/^\d+$/"
+                        value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
                     />   
@@ -549,59 +528,6 @@ function AddPatient() {
                     </div>
                     );
                 })}
-            </div>
-            <div className="visits">
-                <Typography variant="h6">Visits</Typography>
-                {addFirstVisit === false? 
-                    <div className="addVisitButton">
-                        <Button variant="outlined" onClick={() => setAddFirstVisit(true)}>Add First Visit</Button>
-                    </div>
-                : 
-                <div className="addVisit">
-                <Typography variant="subtitle1"> Add First Visit</Typography>
-                {visits.map((x, i) => {
-                    return(
-                    <div className="visit" key={i}>
-                        <TextField
-                            name="patient"
-                            label="Patient Name"
-                            value={x.patient}
-                            onChange={e => handleVisit(e, i)}
-                            fullWidth
-                            />
-                        <TextField
-                            name="dateTime"
-                            type='date'
-                            value={x.dateTime}
-                            onChange={e => handleVisit(e, i)}
-                            fullWidth
-                            />
-                        <TextField
-                            name="notes"
-                            label="Notes"
-                            value={x.notes}
-                            onChange={e => handleVisit(e, i)}
-                            fullWidth
-                            />
-                        <TextField
-                            name="hivViralLoad"
-                            type="number"
-                            label="HIV Viral Load"
-                            value={x.hivViralLoad}
-                            onChange={e => handleVisit(e, i)}
-                            fullWidth
-                            />
-                        <div className="visitButtons">
-                        {visits.length !== 1 && <Button variant="outlined"
-                            onClick={() => handleRemoveVisit(i)}>Remove</Button>}
-                        {visits.length - 1 === i && <Button variant="outlined" 
-                            onClick={handleAddVisit}>Add</Button>}
-                    </div>
-                    </div>
-                    );
-                })}
-                </div>
-                }
             </div>
             <div className="submitButton">
                 <Button onClick={handleEligibility}

@@ -420,7 +420,6 @@ function UpdatePatient() {
                         <Typography variant="subtitle1"> Visit #{i+1}</Typography>
                         <TextField sx={{mt:1, mb:1}}
                             name="patient"
-                            label="Patient Name"
                             value={x.patient || patientName}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -428,7 +427,7 @@ function UpdatePatient() {
                             />
                         <TextField sx={{mb:1}}
                             name="dateTime"
-                            type='date'
+                            type="date"
                             value={x.dateTime}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -436,7 +435,7 @@ function UpdatePatient() {
                         <TextField sx={{mb:1}}
                             name="notes"
                             label="Notes"
-                            value={x.notes}
+                            value={x.notes || ""}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             />
@@ -444,7 +443,7 @@ function UpdatePatient() {
                             name="hivViralLoad"
                             type="number"
                             label="HIV Viral Load"
-                            value={x.hivViralLoad}
+                            value={"" || x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             />

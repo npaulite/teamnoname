@@ -190,7 +190,7 @@ function ReviewPatient() {
                         value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
-                        autoFocus
+                        disabled
                 />    
             </div>
             <div className="patientPicture">
@@ -201,6 +201,7 @@ function ReviewPatient() {
                         value={patientPicture || ''}
                         onChange={(e) => setPatientPicture(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="dob">
@@ -212,6 +213,7 @@ function ReviewPatient() {
                         value={dob || ''}
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
+                        disabled
                 />
             </div>
             <div className="insuranceNumber">
@@ -224,6 +226,7 @@ function ReviewPatient() {
                         value={insuranceNumber || ''}
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
+                        disabled
                     />  
             </div>
             <div className="height">
@@ -236,6 +239,7 @@ function ReviewPatient() {
                         value={height || ''}
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="weight">
@@ -248,6 +252,7 @@ function ReviewPatient() {
                         value={weight || ''}
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="bloodPressure">
@@ -259,6 +264,7 @@ function ReviewPatient() {
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
+                        disabled
                     />   
             </div>
             <div className="temperature">
@@ -271,6 +277,7 @@ function ReviewPatient() {
                         value={temperature || ''}
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="oxygenSaturation">
@@ -283,6 +290,7 @@ function ReviewPatient() {
                         value={oxygenSaturation || ''}
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="address">
@@ -294,6 +302,7 @@ function ReviewPatient() {
                         value={address || ''}
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
+                        disabled
                     />  
             </div>            
             <div className="currentMedication">
@@ -307,12 +316,13 @@ function ReviewPatient() {
                             value={x.medication}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
+                            disabled
                             />
                         <div className="medButtons">
                         {currentMedications.length !== 1 && <Button variant="outlined"
-                            onClick={() => handleRemoveMedication(i)}>Remove</Button>}
+                            onClick={() => handleRemoveMedication(i)} disabled>Remove</Button>}
                         {currentMedications.length - 1 === i && <Button variant="outlined" 
-                            onClick={handleAddMedication}>Add</Button>}
+                            onClick={handleAddMedication} disabled>Add</Button>}
                     </div>
                     </div>
                     );
@@ -326,6 +336,7 @@ function ReviewPatient() {
                         value={familyHistory || ''}
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
+                        disabled
                     />
             </div>
             <div className="currentlyEmployed">
@@ -338,6 +349,7 @@ function ReviewPatient() {
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
                     fullWidth
+                    disabled
                     >
                         <MenuItem value={'Yes'}>Yes</MenuItem>
                         <MenuItem value={'No'}>No</MenuItem>
@@ -352,6 +364,7 @@ function ReviewPatient() {
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
                     fullWidth
+                    disabled
                     >
                         <MenuItem value={'Yes'}>Yes</MenuItem>
                         <MenuItem value={'No'}>No</MenuItem>
@@ -368,13 +381,14 @@ function ReviewPatient() {
                             value={x.code}
                             onChange={e => handleICD(e, i)}
                             fullWidth
+                            disabled
                             />
                         <div className="icdButtons">
                         {icdHealthCodes.length !== 1 && <Button variant="outlined"
-                            onClick={() => handleRemoveICD(i)}>Remove</Button>}
+                            onClick={() => handleRemoveICD(i)} disabled>Remove</Button>}
                         {icdHealthCodes.length - 1 === i && <Button variant="outlined" 
-                            onClick={handleAddICD}>Add</Button>}
-                    </div>
+                            onClick={handleAddICD} disabled>Add</Button>}
+                        </div>
                     </div>
                     );
                 })}
@@ -390,13 +404,14 @@ function ReviewPatient() {
                             value={x.allergy}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
+                            disabled
                             />
                         <div className="allergyButtons">
                         {allergies.length !== 1 && <Button variant="outlined"
-                            onClick={() => handleRemoveAllergy(i)}>Remove</Button>}
+                            onClick={() => handleRemoveAllergy(i)} disabled>Remove</Button>}
                         {allergies.length - 1 === i && <Button variant="outlined" 
-                            onClick={handleAddAllergy}>Add</Button>}
-                    </div>
+                            onClick={handleAddAllergy} disabled>Add</Button>}
+                        </div>
                     </div>
                     );
                 })}
@@ -410,7 +425,6 @@ function ReviewPatient() {
                         <Typography variant="subtitle1"> Visit #{i+1}</Typography>
                         <TextField sx={{mt:1, mb:1}}
                             name="patient"
-                            label="Patient Name"
                             value={x.patient || patientName}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -422,6 +436,7 @@ function ReviewPatient() {
                             value={x.dateTime}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
+                            disabled
                             />
                         <TextField sx={{mb:1}}
                             name="notes"
@@ -429,6 +444,7 @@ function ReviewPatient() {
                             value={x.notes}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
+                            disabled
                             />
                         <TextField sx={{mb:1}}
                             name="hivViralLoad"
@@ -437,6 +453,7 @@ function ReviewPatient() {
                             value={x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
+                            disabled
                             />
                     </div>
                     );
