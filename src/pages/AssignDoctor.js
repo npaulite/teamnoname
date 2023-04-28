@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useJaneHopkins from '../hooks/useJaneHopkins';
 import { ArrowLeftSharp } from "@mui/icons-material";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
  function AssignDoctor() {
   
@@ -21,7 +24,36 @@ import { ArrowLeftSharp } from "@mui/icons-material";
     getPatient()
 
   }, [])
+  const validationSchema = Yup.object().shape({
+    patientName: Yup.string().required('Fullname is required'),
+    username: Yup.string()
+      .required('Username is required')
+      .min(6, 'Username must be at least 6 characters')
+      .max(20, 'Username must not exceed 20 characters'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email is invalid'),
+    password: Yup.string()
+      .required('Password is required')
+      .min(6, 'Password must be at least 6 characters')
+      .max(40, 'Password must not exceed 40 characters'),
+    doctor: Yup.string()
+      .required('Confirm Doctor')
+      .oneOf([Yup.ref('doctor'), null], 'Confirm Doctor'),
+    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+    role: Yup.string()
+      .required('Confirm Role')
+      .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
+  });
 
+  const {
+    register,
+  //  control,
+  //  handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(validationSchema)
+  });
 
   const listDoctors = async() => {
     let doctorList = await entities.doctor.list();
@@ -84,9 +116,11 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                               disabled
                               id="patientUUID"
                               label="Patient UUID"
-                              value={id || ''} required pattern="/^\d+$/"
+                              value={id || ''} 
                               onChange={(e) => {setID(e.target.value);}}
                               fullWidth
+                              {...register('patientUUID')}
+                            error={errors.patientUUID? true : false}
                               
                       />    
                   </div>
@@ -95,11 +129,14 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                       <TextField
                               disabled
                               id="patientName"
+                              name="patientName"
+                              type="patientName"
                               label="Patient Name"
-                              value={name || ''} required pattern="/^[a-zA-Z]+$/"
+                              value={name || ''} 
                               onChange={(e) => {setName(e.target.value);}}
                               fullWidth
-                              
+                              {...register('patientName')}
+                            error={errors.patientName? true : false}
                       />    
                   </div>
                   <div className="doctors" m={2}>
@@ -109,11 +146,15 @@ import { ArrowLeftSharp } from "@mui/icons-material";
                         <Autocomplete 
                             key={doctors}
                             id="doctor"
+                            name="doctor"
+                            type="doctor"
                             label="Doctor"
                             clearOnEscape
-                            inputValue={doctor || ''} required pattern="/^[a-zA-Z]+$/"
+                            inputValue={doctor || ''} 
                             onInputChange={(e, newValue) => setDoctor(newValue)}
                             options={doctors || []}
+                            {...register('doctor')}
+                            error={errors.doctor? true : false}
                             getOptionLabel={option => option.name}
                             renderInput={(params) => 
                             <TextField 

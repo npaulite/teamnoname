@@ -99,7 +99,7 @@ function AddVisit() {
                                 required
                                 id="patientName"
                                 label="Name"
-                                value={patientName || ''} pattern = "/^[a-zA-Z]+$/"
+                                value={patientName || ''} 
                                 onChange={(e) => {setPatientName(e.target.value);}} 
                                 fullWidth
                                 disabled

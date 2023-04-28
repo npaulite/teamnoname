@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import useFDA from "../hooks/useFDA";
 import { ArrowLeftSharp } from "@mui/icons-material";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import React, { Fragment } from 'react';
 
 function AssignDrug() {
 
@@ -17,6 +21,37 @@ function AssignDrug() {
     const [bavariaDrugs, setBavariaDrugs] = useState()
     const [postStudy, setPostStudy] = useState("No")
         
+    const {
+        register,
+        control,
+        formState: { errors }
+      } = useForm({
+        resolver: yupResolver(validationSchema)
+      });
+
+    const validationSchema = Yup.object().shape({
+        fullname: Yup.string().required('Fullname is required'),
+        username: Yup.string()
+          .required('Username is required')
+          .min(6, 'Username must be at least 6 characters')
+          .max(20, 'Username must not exceed 20 characters'),
+        email: Yup.string()
+          .required('Email is required')
+          .email('Email is invalid'),
+        bavariaDrugs: Yup.string()
+          .required('Drugs are required')
+          .oneOf([Yup.ref('bavariaDrugs'), null], 'Confirm it is not a placebo'),
+        placebo: Yup.string()
+          .required('Confirm Placebo')
+          .oneOf([Yup.ref('placebo'), null], 'Confirm it is a placebo'),
+        patientUUID: Yup.string() 
+            .required('Patient UUID required')
+            .oneOf([Yup.ref('patientUUID'), null], 'UUID is required'),
+        role: Yup.string()
+          .required('Confirm Role')
+          .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
+      });
+
     useEffect(() => {
         getMap()
         listPlacebo()
@@ -130,10 +165,14 @@ function AssignDrug() {
                     <TextField
                             disabled
                             id="patientUUID"
+                            name="patientUUID"
                             label="Patient UUID"
-                            value={patient || ''} required pattern="/^\d+$/"
+                            type ="patientUUID"
+                            value={patient || ''} 
                             onChange={(e) => {setPatient(e.target.value);}}
                             fullWidth
+                            {...register('patientUUID')}
+                            error={errors.patientUUID ? true : false}
                             
                     />    
                 </div>
@@ -156,11 +195,15 @@ function AssignDrug() {
                         <Autocomplete 
                             key={placeboDrugs}
                             id="placebo"
+                            name="placebo"
+                            type="placebo"
                             label="Placebo"
                             clearOnEscape
-                            inputValue={drug || ''} required pattern="/^[a-zA-Z]+$/"
+                            inputValue={drug || ''} 
                             onInputChange={(e, newValue) => setDrug(newValue)}
-                            options={placeboDrugs || []} 
+                            options={placeboDrugs || []}
+                            {...register('placebo')} 
+                            error={errors.placebo ? true : false}
                             getOptionLabel={option => option._id} 
                             renderInput={(params) => 
                             <TextField 
@@ -179,12 +222,16 @@ function AssignDrug() {
                         fullWidth>
                         <Autocomplete 
                             key={bavariaDrugs}
-                            id="placebo"
+                            id="bavariaDrugs"
+                            type="drugs"
+                            name="bavariaDrugs"
                             label="Bavaria"
+                            {...register('bavariaDrugs')}
                             clearOnEscape
                             inputValue={drug || ''} required pattern="/^[a-zA-Z]+$/"
                             onInputChange={(e, newValue) => setDrug(newValue)}
                             options={bavariaDrugs || []}
+                            error={errors.bavariaDrugs ? true : false}
                             getOptionLabel={option => option._id}
                             renderInput={(params) => 
                             <TextField 

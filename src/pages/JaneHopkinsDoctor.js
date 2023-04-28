@@ -16,6 +16,7 @@ const JaneHopkinsDoctor = () => {
   const nav = useNavigate();
   const [maps, setMaps] = useState();
 
+
   const listDoctors = async () => {
     if (authorized.role === "JaneHopkinsDoctor") {
       let docResponse = await entities.doctor.list({
@@ -67,9 +68,9 @@ const JaneHopkinsDoctor = () => {
   };
 
   useEffect(() => {
-    getPatients()
-    getMap()
-  }, [doctorID] );
+    getPatients();
+    getMap();
+  }, [doctorID]);
 
   function handleUpdate(p) {
     let path = `/JaneHopkinsDoctor/UpdatePatient`;

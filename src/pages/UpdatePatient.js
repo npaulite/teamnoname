@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../cssFiles/janeHopkinsDoctor.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 function UpdatePatient() {
 
@@ -175,6 +178,79 @@ function UpdatePatient() {
         nav(path);
     }
 
+    const validationSchema = Yup.object().shape({
+        patientname: Yup.string().required('Fullname is required'),
+//        username: Yup.string()
+//          .required('Username is required')
+//          .min(6, 'Username must be at least 6 characters')
+//          .max(20, 'Username must not exceed 20 characters'),
+        address: Yup.string()
+            .required('address is required')
+            .oneOf([Yup.ref('address'), null], 'Confirm dob'), 
+        dob: Yup.date()
+            .required('date is required')
+            .oneOf([Yup.ref('dob'), null], 'Confirm dob'), 
+        email: Yup.string()
+          .required('Email is required')
+          .oneOf([Yup.ref('email'), null], 'Confirm email'), 
+        weight: Yup.number()
+          .required('weight is required')
+          .oneOf([Yup.ref('weight'), null], 'Confirm weight'),  
+        height: Yup.number()
+          .required('Height is required')
+          .oneOf([Yup.ref('height'), null], 'Confirm height'), 
+        bloodPressure: Yup.number()
+          .required('BP is required')
+          .oneOf([Yup.ref('bloodPressure'), null], 'Confirm BP'),
+        temperature: Yup.number()
+          .required('Temperature is required')
+          .oneOf([Yup.ref('temperature'), null], 'Confirm temperature'),      
+        oxygenSaturation: Yup.number()
+          .required('H20 saturation are required')
+          .oneOf([Yup.ref('oxygenSaturation'), null], 'Confirm Insurance #'),
+        insuranceNumber: Yup.number()
+          .required('insuranceNumber are required')
+          .oneOf([Yup.ref('insuranceNumber'), null], 'Confirm Insurance #'),
+        icd: Yup.number()
+          .required('ICD is required')
+          .oneOf([Yup.ref('icd'), null], 'Confirm Insurance #'),        
+        hivLoad: Yup.number()
+          .required('hivLoad are required')
+          .oneOf([Yup.ref('hivLoad'), null], 'Confirm Insurance #'),
+        allergies: Yup.string()
+          .required('allergies are required')
+          .oneOf([Yup.ref('allergies'), null], 'Confirm Insurance #'),
+          bavariaDrugs: Yup.string()
+          .required('Drugs are required')
+          .oneOf([Yup.ref('bavariaDrugs'), null], 'Confirm it is not a placebo'),
+        medications: Yup.string()
+          .required('Drugs are required')
+          .oneOf([Yup.ref('medications'), null], 'Confirm it is not a placebo'),
+        familyHistory: Yup.string()
+            .require('Family History')
+            .oneof([Yup.ref('familyHistory'), null], 'Confirm Family History'),
+        placebo: Yup.string()
+          .required('Confirm Placebo')
+          .oneOf([Yup.ref('placebo'), null], 'Confirm it is a placebo'),
+        patientUUID: Yup.string() 
+            .required('Patient UUID required')
+            .oneOf([Yup.ref('patientUUID'), null], 'UUID is required'),
+        currentlyEmployed: Yup.bool().oneOf([true], 'Employed?'),
+        currentlyInsured: Yup.bool().oneOf([true], 'Insured?'),
+        role: Yup.string()
+          .required('Confirm Role')
+          .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
+      });
+
+
+      const {
+        register,
+        control,
+        formState: { errors }
+      } = useForm({
+        resolver: yupResolver(validationSchema)
+      });
+
     return (
     <div className="update">
         <Box>
@@ -201,6 +277,8 @@ function UpdatePatient() {
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
                         autoFocus
+                        {...register('patientName')}
+                        error={errors.patientname? true : false}
                 />    
             </div>
             <div className="patientPicture">
@@ -222,6 +300,8 @@ function UpdatePatient() {
                         value={dob || ''}
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
+                        {...register('dob')}
+                        error={errors.dob? true : false}
                 />
             </div>
             <div className="insuranceNumber">
@@ -234,6 +314,8 @@ function UpdatePatient() {
                         value={insuranceNumber || ''}
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
+                        {...register('insuranceNumber')}
+                        error={errors.insuranceNumber? true : false}
                     />  
             </div>
             <div className="height">
@@ -246,6 +328,8 @@ function UpdatePatient() {
                         value={height || ''}
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
+                        {...register('height')}
+                        error={errors.height? true : false}
                     />
             </div>
             <div className="weight">
@@ -258,6 +342,8 @@ function UpdatePatient() {
                         value={weight || ''}
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
+                        {...register('weight')}
+                        error={errors.weight? true : false}
                     />
             </div>
             <div className="bloodPressure">
@@ -269,6 +355,8 @@ function UpdatePatient() {
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
+                        {...register('bloodPressure')}
+                        error={errors.bloodPressure? true : false}
                     />   
             </div>
             <div className="temperature">
@@ -281,6 +369,8 @@ function UpdatePatient() {
                         value={temperature || ''}
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
+                        {...register('temperature')}
+                        error={errors.temperature? true : false}
                     />
             </div>
             <div className="oxygenSaturation">
@@ -293,6 +383,8 @@ function UpdatePatient() {
                         value={oxygenSaturation || ''}
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
+                        {...register('oxygenSaturation')}
+                        error={errors.oxygenSaturation? true : false}
                     />
             </div>
             <div className="address">
@@ -304,6 +396,8 @@ function UpdatePatient() {
                         value={address || ''}
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
+                        {...register('address')}
+                        error={errors.address? true : false}
                     />  
             </div>            
             <div className="currentMedication">
@@ -314,9 +408,12 @@ function UpdatePatient() {
                         <TextField
                             name="medication"
                             label="Medications"
+                            
                             value={x.medication}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
+                            {...register('medication')}
+                            error={errors.medication? true : false}
                             />
                         <div className="medButtons">
                         {currentMedications.length !== 1 && <Button variant="outlined"
@@ -336,6 +433,8 @@ function UpdatePatient() {
                         value={familyHistory || ''}
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
+                        {...register('familyHistory')}
+                        error={errors.familyHistory? true : false}
                     />
             </div>
             <div className="currentlyEmployed">
@@ -347,6 +446,8 @@ function UpdatePatient() {
                     label="CurrentLy Employed"
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
+                    {...register('currentlyEmployed')}
+                        error={errors.currentlyEmployed? true : false}
                     fullWidth
                     >
                         <MenuItem value={'Yes'}>Yes</MenuItem>
@@ -361,6 +462,8 @@ function UpdatePatient() {
                     label="CurrentLy Insured"    
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
+                    {...register('currentlyInsured')}
+                        error={errors.currentlyInsured? true : false}
                     fullWidth
                     >
                         <MenuItem value={'Yes'}>Yes</MenuItem>
@@ -377,6 +480,8 @@ function UpdatePatient() {
                             label="ICD Health Code"
                             value={x.code}
                             onChange={e => handleICD(e, i)}
+                            {...register('icd')}
+                        error={errors.icd? true : false}
                             fullWidth
                             />
                         <div className="icdButtons">
@@ -400,6 +505,8 @@ function UpdatePatient() {
                             value={x.allergy}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
+                            {...register('allergies')}
+                        error={errors.allergies? true : false}
                             />
                         <div className="allergyButtons">
                         {allergies.length !== 1 && <Button variant="outlined"
@@ -424,6 +531,8 @@ function UpdatePatient() {
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             disabled
+                            {...register('patientName')}
+                        error={errors.patientName? true : false}
                             />
                         <TextField sx={{mb:1}}
                             name="dateTime"
@@ -446,6 +555,8 @@ function UpdatePatient() {
                             value={"" || x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
+                            {...register('hivViralLoad')}
+                        error={errors.hivViralLoad? true : false}
                             />
                         <div className="visitButtons">
                         {visits.length !== 1 && <Button variant="outlined"

@@ -5,7 +5,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../cssFiles/addForm.css'
 import { ArrowLeftSharp } from "@mui/icons-material";
-
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 function AddPatient() {
 
@@ -31,6 +33,76 @@ function AddPatient() {
     const [eligibility, setEligibility] = useState(false)
     const [startingHIVLoad, setStartingHIVLoad] = useState()
     const [trialStatus, setTrialStatus] = useState()
+
+    const validationSchema = Yup.object().shape({
+        fullname: Yup.string().required('Fullname is required'),
+//        username: Yup.string()
+//          .required('Username is required')
+//          .min(6, 'Username must be at least 6 characters')
+//          .max(20, 'Username must not exceed 20 characters'),
+        address: Yup.string()
+            .required('address is required')
+            .oneOf([Yup.ref('address'), null], 'Confirm dob'), 
+        dob: Yup.date()
+            .required('date is required')
+            .oneOf([Yup.ref('dob'), null], 'Confirm dob'), 
+        email: Yup.string()
+          .required('Email is required')
+          .oneOf([Yup.ref('email'), null], 'Confirm email'), 
+        weight: Yup.number()
+          .required('weight is required')
+          .oneOf([Yup.ref('weight'), null], 'Confirm weight'),  
+        height: Yup.number()
+          .required('Height is required')
+          .oneOf([Yup.ref('height'), null], 'Confirm height'), 
+        bloodPressure: Yup.number()
+          .required('BP is required')
+          .oneOf([Yup.ref('bloodPressure'), null], 'Confirm BP'),
+        temperature: Yup.number()
+          .required('Temperature is required')
+          .oneOf([Yup.ref('temperature'), null], 'Confirm temperature'),      
+        oxygenSaturation: Yup.number()
+          .required('H20 saturation are required')
+          .oneOf([Yup.ref('oxygenSaturation'), null], 'Confirm Insurance #'),
+        insuranceNumber: Yup.number()
+          .required('insuranceNumber are required')
+          .oneOf([Yup.ref('insuranceNumber'), null], 'Confirm Insurance #'),
+        hivLoad: Yup.number()
+          .required('hivLoad are required')
+          .oneOf([Yup.ref('hivLoad'), null], 'Confirm Insurance #'),
+        allergies: Yup.string()
+          .required('allergies are required')
+          .oneOf([Yup.ref('allergies'), null], 'Confirm Insurance #'),
+          bavariaDrugs: Yup.string()
+          .required('Drugs are required')
+          .oneOf([Yup.ref('bavariaDrugs'), null], 'Confirm it is not a placebo'),
+        medications: Yup.string()
+          .required('Drugs are required')
+          .oneOf([Yup.ref('medications'), null], 'Confirm it is not a placebo'),
+        familyHistory: Yup.string()
+            .require('Family History')
+            .oneof([Yup.ref('familyHistory'), null], 'Confirm Family History'),
+        placebo: Yup.string()
+          .required('Confirm Placebo')
+          .oneOf([Yup.ref('placebo'), null], 'Confirm it is a placebo'),
+        patientUUID: Yup.string() 
+            .required('Patient UUID required')
+            .oneOf([Yup.ref('patientUUID'), null], 'UUID is required'),
+        currentlyEmployed: Yup.bool().oneOf([true], 'Employed?'),
+        currentlyInsured: Yup.bool().oneOf([true], 'Insured?'),
+        role: Yup.string()
+          .required('Confirm Role')
+          .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
+      });
+
+
+      const {
+        register,
+        control,
+        formState: { errors }
+      } = useForm({
+        resolver: yupResolver(validationSchema)
+      });
 
     const addPatient = async() => {
 
@@ -300,11 +372,15 @@ function AddPatient() {
                 <TextField
                         required
                         id="patientName"
+                        name="patientName"
+                        type="fullname"
                         label="Name"
-                        value={patientName || ''} pattern="/^[a-zA-Z]+$/"
+                        value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
                         autoFocus
+                        {...register('patientName')}
+                        error={errors.fullname? true : false}
                 />    
             </div>
             <div className="patientPicture">
@@ -322,10 +398,14 @@ function AddPatient() {
                 <TextField
                         required
                         id="dob"
+                        name="dob"
+                        label="dob"
                         type="date"
-                        value={dob || ''} pattern="/^\d{2}-\d{2}-\d{4}$/"
+                        value={dob || ''} 
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
+                        {...register('dob')}
+                        error={errors.dob? true : false}
                 />
             </div>
             <div className="insuranceNumber">
@@ -338,6 +418,8 @@ function AddPatient() {
                         value={insuranceNumber || ''} pattern="/^\d+$/"
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
+                        {...register('insuranceNumber')}
+                        error={errors.insuranceNumber? true : false}
                     />  
             </div>
             <div className="height">
@@ -347,9 +429,11 @@ function AddPatient() {
                         id="height"
                         type="number"
                         label="Height (in cm)"
-                        value={height || ''} pattern="/^\d+$/"
+                        value={height || ''} 
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
+                        {...register('height')}
+                        error={errors.height? true : false}
                     />
             </div>
             <div className="weight">
@@ -359,9 +443,11 @@ function AddPatient() {
                         id="weight"
                         type="number"
                         label="Weight (in kg)"
-                        value={weight || ''} pattern="/^\d+$/"
+                        value={weight || ''} 
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
+                        {...register('weight')}
+                        error={errors.weight? true : false}
                     />
             </div>
             <div className="bloodPressure">
@@ -373,6 +459,8 @@ function AddPatient() {
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
+                        {...register('bloodPressure')}
+                        error={errors.bloodPressure? true : false}
                     />   
             </div>
             <div className="temperature">
@@ -385,6 +473,8 @@ function AddPatient() {
                         value={temperature || ''} pattern="/^\d+$/"
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
+                        {...register('temperature')}
+                        error={errors.temperature? true : false}
                     />
             </div>
             <div className="oxygenSaturation">
@@ -397,6 +487,8 @@ function AddPatient() {
                         value={oxygenSaturation || ''} pattern="/^\d+$/"
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
+                        {...register('oxygenSaturation')}
+                        error={errors.oxygenSaturation? true : false}
                     />
             </div>
             <div className="address">
@@ -404,10 +496,13 @@ function AddPatient() {
                 <TextField
                         required
                         id="address"
+                        type="address"
                         label="Address"
-                        value={address || ''} pattern = "/^[a-zA-Z\d]+$/"
+                        value={address || ''} 
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
+                        {...register('address')}
+                        error={errors.address? true : false}
                     />  
             </div>            
             <div className="currentMedication">
@@ -418,10 +513,13 @@ function AddPatient() {
                         <TextField
                             required
                             name="medication"
+                            type="medications"
                             label="Medications"
-                            value={x.medication} pattern = "/^[a-zA-Z\d]+$/"
+                            value={x.medication || ''}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
+                            {...register('medications')}
+                            error={errors.medications? true : false}
                             />
                         <div className="medButtons">
                         {currentMedications.length !== 1 && <Button variant="outlined"
@@ -438,10 +536,13 @@ function AddPatient() {
                 <TextField
                         required
                         id="familyHistory"
+                        type="familyHistory"
                         label="Family History"
-                        value={familyHistory || ''}  pattern = "/^[a-zA-Z\d]+$/"
+                        value={familyHistory || ''} 
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
+                        {...register('familyHistory')}
+                        error={errors.familyHistory? true : false}
                     />
             </div>
             <div className="currentlyEmployed">
@@ -481,9 +582,11 @@ function AddPatient() {
                             required
                             name="code"
                             label="ICD Health Code"
-                            value={x.code}  pattern = "/^\d+$/"
+                            value={x.code} 
                             onChange={e => handleICD(e, i)}
                             fullWidth
+                            {...register('icd')}
+                            error={errors.icd? true : false}
                             />
                         <div className="icdButtons">
                         {icdHealthCodes.length !== 1 && <Button variant="outlined"
@@ -505,6 +608,8 @@ function AddPatient() {
                         value={startingHIVLoad || ''} pattern = "/^\d+$/"
                         onChange={(e) => setStartingHIVLoad(e.target.value)}
                         fullWidth
+                        {...register('hivLoad')}
+                        error={errors.hivLoad? true : false}
                     />
             </div>
             <div className="allergies">
@@ -515,9 +620,11 @@ function AddPatient() {
                         <TextField
                             name="allergy"
                             label="Allergy"
-                            value={x.allergy || ''} required pattern = "/^[a-zA-Z]+$/"
+                            value={x.allergy || ''}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
+                            {...register('allergy')}
+                            error={errors.allergies? true : false}
                             />
                         <div className="allergyButtons">
                         {allergies.length !== 1 && <Button variant="outlined"
