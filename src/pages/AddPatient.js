@@ -81,7 +81,7 @@ function AddPatient() {
           .oneOf([Yup.ref('medications'), null], 'Confirm it is not a placebo'),
         familyHistory: Yup.string()
             .require('Family History')
-            .oneof([Yup.ref('familyHistory'), null], 'Confirm Family History'),
+            .oneOf([Yup.ref('familyHistory'), null], 'Confirm Family History'),
         placebo: Yup.string()
           .required('Confirm Placebo')
           .oneOf([Yup.ref('placebo'), null], 'Confirm it is a placebo'),
