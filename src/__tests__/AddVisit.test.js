@@ -5,6 +5,28 @@ const { entities } = useJaneHopkins()
 const setVisits = jest.fn()
 
 it('Add Patient Visit', async() => {
+    const patient = {
+        name: "John Doe",
+        patientPicture: "",
+        dob: new Date(1990,1,1),
+        insuranceNumber: "1234567",
+        height: "112cm",
+        weight: "100 kg",
+        bloodPressure: "120/80",
+        temperature: "33 C",
+        oxygenSaturation: "100%",
+        address: "Random St. Sacramento CA",
+        currentMedications: {"medication" : "None"},
+        familyHistory: "None",
+        currentlyEmployed: "Yes",
+        currentlyInsured: "Yes",
+        icdHealthCodes: {"code" : "B20"},
+        allergies: {"allergy" : "None"},
+        visits: [],
+        eligibility: true,
+        startingHIVLoad: "100000",
+        trialStatus: "Ongoing"
+    }
     const visitsSpy = jest.spyOn(React, 'useState')
     visitsSpy.mockImplementation((visits) => [visits, setVisits])
     const visit = {
@@ -18,15 +40,21 @@ it('Add Patient Visit', async() => {
         visitsSpy(visit)
     };
 
-    const patient = await entities.patient.get("01877854-7f06-db60-7999-fd54ab408ddc")
+    const patientResponse = entities.patient.add(patient)
+    await expect(patientResponse).resolves.not.toThrow().then(
         async() => {
-            visitsSpy(patient.visits)
-            addVisit();
-            await entities.patient.update({
-                _id: patient._id,
-                visits: visitsSpy
-            })
+            entities.patient.get((await patientResponse).transaction._id).then(
+                async(result) => {
+                    visitsSpy(result.visits)
+                    addVisit();
+                    await entities.patient.update({
+                        _id: result._id,
+                        visits: visitsSpy
+                    })
+                }
+            )
+            entities.patient.remove((await patientResponse).transaction._id)
         }
-    
+    )
 
 }, 20000)
