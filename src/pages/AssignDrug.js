@@ -21,14 +21,7 @@ function AssignDrug() {
     const [bavariaDrugs, setBavariaDrugs] = useState()
     const [postStudy, setPostStudy] = useState("No")
         
-    const {
-        register,
-        control,
-        formState: { errors }
-      } = useForm({
-        resolver: yupResolver(validationSchema)
-      });
-
+   
     const validationSchema = Yup.object().shape({
         fullname: Yup.string().required('Fullname is required'),
         username: Yup.string()
@@ -51,6 +44,15 @@ function AssignDrug() {
           .required('Confirm Role')
           .oneOf([Yup.ref('Doctor', "Patient", "Administrator"), null], 'Confirm Role does not match'),
       });
+
+      const {
+        register,
+        control,
+        formState: { errors }
+      } = useForm({
+        resolver: yupResolver(validationSchema)
+      });
+
 
     useEffect(() => {
         getMap()
