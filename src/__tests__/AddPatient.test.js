@@ -19,7 +19,7 @@ it('Add Eligible Patient', async() => {
         currentlyInsured: "Yes",
         icdHealthCodes: {"code" : "B20"},
         allergies: {"allergy" : "None"},
-        visits: [],
+        visits: [{}],
         eligibility: true,
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
@@ -27,7 +27,7 @@ it('Add Eligible Patient', async() => {
     const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
-            entities.patient.remove((await addPatient).transaction._id)
+            entities.patient.remove((await addPatient).result._id)
         }
     )
 }, 20000)
@@ -58,7 +58,7 @@ it('Add Non-Eligible Patient', async() => {
     const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
-            entities.patient.remove((await addPatient).transaction._id)
+            entities.patient.remove((await addPatient).result._id)
         }
     )
 }, 20000)
