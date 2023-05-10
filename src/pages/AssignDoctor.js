@@ -119,7 +119,7 @@ import * as Yup from 'yup';
                               value={id || ''} 
                               onChange={(e) => {setID(e.target.value);}}
                               fullWidth
-                              {...register('patientUUID')}
+                              //{...register('patientUUID')}
                             error={errors.patientUUID? true : false}
                               
                       />    
@@ -135,7 +135,7 @@ import * as Yup from 'yup';
                               value={name || ''} 
                               onChange={(e) => {setName(e.target.value);}}
                               fullWidth
-                              {...register('patientName')}
+                              //{...register('patientName')}
                             error={errors.patientName? true : false}
                       />    
                   </div>
@@ -153,7 +153,7 @@ import * as Yup from 'yup';
                             inputValue={doctor || ''} 
                             onInputChange={(e, newValue) => setDoctor(newValue)}
                             options={doctors || []}
-                            {...register('doctor')}
+                            //{...register('doctor')}
                             error={errors.doctor? true : false}
                             getOptionLabel={option => option.name}
                             renderInput={(params) => 

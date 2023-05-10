@@ -173,7 +173,7 @@ function AssignDrug() {
                             value={patient || ''} 
                             onChange={(e) => {setPatient(e.target.value);}}
                             fullWidth
-                            {...register('patientUUID')}
+                            //{...register('patientUUID')}
                             error={errors.patientUUID ? true : false}
                             
                     />    
@@ -204,7 +204,7 @@ function AssignDrug() {
                             inputValue={drug || ''} 
                             onInputChange={(e, newValue) => setDrug(newValue)}
                             options={placeboDrugs || []}
-                            {...register('placebo')} 
+                            //{...register('placebo')} 
                             error={errors.placebo ? true : false}
                             getOptionLabel={option => option._id} 
                             renderInput={(params) => 
@@ -228,7 +228,7 @@ function AssignDrug() {
                             type="drugs"
                             name="bavariaDrugs"
                             label="Bavaria"
-                            {...register('bavariaDrugs')}
+                            //{...register('bavariaDrugs')}
                             clearOnEscape
                             inputValue={drug || ''} required pattern="/^[a-zA-Z]+$/"
                             onInputChange={(e, newValue) => setDrug(newValue)}

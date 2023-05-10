@@ -277,7 +277,7 @@ function UpdatePatient() {
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
                         autoFocus
-                        {...register('patientName')}
+                        //{...register('patientName')}
                         error={errors.patientname? true : false}
                 />    
             </div>
@@ -300,7 +300,7 @@ function UpdatePatient() {
                         value={dob || ''}
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
-                        {...register('dob')}
+                        //{...register('dob')}
                         error={errors.dob? true : false}
                 />
             </div>
@@ -314,7 +314,7 @@ function UpdatePatient() {
                         value={insuranceNumber || ''}
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
-                        {...register('insuranceNumber')}
+                        //{...register('insuranceNumber')}
                         error={errors.insuranceNumber? true : false}
                     />  
             </div>
@@ -328,7 +328,7 @@ function UpdatePatient() {
                         value={height || ''}
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
-                        {...register('height')}
+                        //{...register('height')}
                         error={errors.height? true : false}
                     />
             </div>
@@ -342,7 +342,7 @@ function UpdatePatient() {
                         value={weight || ''}
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
-                        {...register('weight')}
+                        //{...register('weight')}
                         error={errors.weight? true : false}
                     />
             </div>
@@ -355,7 +355,7 @@ function UpdatePatient() {
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
-                        {...register('bloodPressure')}
+                        //{...register('bloodPressure')}
                         error={errors.bloodPressure? true : false}
                     />   
             </div>
@@ -369,7 +369,7 @@ function UpdatePatient() {
                         value={temperature || ''}
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
-                        {...register('temperature')}
+                        //{...register('temperature')}
                         error={errors.temperature? true : false}
                     />
             </div>
@@ -383,7 +383,7 @@ function UpdatePatient() {
                         value={oxygenSaturation || ''}
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
-                        {...register('oxygenSaturation')}
+                        //{...register('oxygenSaturation')}
                         error={errors.oxygenSaturation? true : false}
                     />
             </div>
@@ -396,7 +396,7 @@ function UpdatePatient() {
                         value={address || ''}
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
-                        {...register('address')}
+                        //{...register('address')}
                         error={errors.address? true : false}
                     />  
             </div>            
@@ -412,7 +412,7 @@ function UpdatePatient() {
                             value={x.medication}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
-                            {...register('medication')}
+                            //{...register('medication')}
                             error={errors.medication? true : false}
                             />
                         <div className="medButtons">
@@ -433,7 +433,7 @@ function UpdatePatient() {
                         value={familyHistory || ''}
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
-                        {...register('familyHistory')}
+                        //{...register('familyHistory')}
                         error={errors.familyHistory? true : false}
                     />
             </div>
@@ -446,7 +446,7 @@ function UpdatePatient() {
                     label="CurrentLy Employed"
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
-                    {...register('currentlyEmployed')}
+                    //{...register('currentlyEmployed')}
                         error={errors.currentlyEmployed? true : false}
                     fullWidth
                     >
@@ -462,7 +462,7 @@ function UpdatePatient() {
                     label="CurrentLy Insured"    
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
-                    {...register('currentlyInsured')}
+                    //{...register('currentlyInsured')}
                         error={errors.currentlyInsured? true : false}
                     fullWidth
                     >
@@ -480,8 +480,8 @@ function UpdatePatient() {
                             label="ICD Health Code"
                             value={x.code}
                             onChange={e => handleICD(e, i)}
-                            {...register('icd')}
-                        error={errors.icd? true : false}
+                            //{...register('icd')}
+                            error={errors.icd? true : false}
                             fullWidth
                             />
                         <div className="icdButtons">
@@ -505,7 +505,7 @@ function UpdatePatient() {
                             value={x.allergy}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
-                            {...register('allergies')}
+                            //{...register('allergies')}
                         error={errors.allergies? true : false}
                             />
                         <div className="allergyButtons">
@@ -531,7 +531,7 @@ function UpdatePatient() {
                             onChange={e => handleVisit(e, i)}
                             fullWidth
                             disabled
-                            {...register('patientName')}
+                            //{...register('patientName')}
                         error={errors.patientName? true : false}
                             />
                         <TextField sx={{mb:1}}
@@ -555,7 +555,7 @@ function UpdatePatient() {
                             value={"" || x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
-                            {...register('hivViralLoad')}
+                            //{...register('hivViralLoad')}
                         error={errors.hivViralLoad? true : false}
                             />
                         <div className="visitButtons">
