@@ -50,7 +50,7 @@ it('Add Non-Eligible Patient', async() => {
         currentlyInsured: "Yes",
         icdHealthCodes: {"code" : "B20"},
         allergies: {"allergy" : "None"},
-        visits: [],
+        visits: [{}],
         eligibility: false,
         startingHIVLoad: "100000",
         trialStatus: "Non-Eligible"

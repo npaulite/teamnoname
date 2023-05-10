@@ -113,14 +113,14 @@ const JaneHopkinsAdmin = () => {
                     <td>
                       {doctors?.map((doctor, i) => {
                         {
-                          if (patient.uuid === doctor._id) {
+                          if (patient.doctorUUID === doctor._id) {
                             return <span key={i}> {doctor.name} </span>;
                           }
                         }
                       })}
                     </td>
                     <td> {noOfVisit(patient)} / 5</td>
-                    <td> {patient?.uuid? 
+                    <td> {patient?.doctorUUID? 
                             <Button variant="contained" sx={{m:1, mr:3}} disabled >Assign Doctor</Button>
                           :
                             <Button variant="contained" sx={{m:1, mr:3}} onClick={() => {assignDoctor(patient._id)} }>Assign Doctor</Button>

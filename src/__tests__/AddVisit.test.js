@@ -22,7 +22,7 @@ it('Add Patient Visit', async() => {
         currentlyInsured: "Yes",
         icdHealthCodes: {"code" : "B20"},
         allergies: {"allergy" : "None"},
-        visits: [],
+        visits: [{}],
         eligibility: true,
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
@@ -43,7 +43,7 @@ it('Add Patient Visit', async() => {
     const patientResponse = entities.patient.add(patient)
     await expect(patientResponse).resolves.not.toThrow().then(
         async() => {
-            entities.patient.get((await patientResponse).transaction._id).then(
+            entities.patient.get((await patientResponse).result._id).then(
                 async(result) => {
                     visitsSpy(result.visits)
                     addVisit();
@@ -53,7 +53,7 @@ it('Add Patient Visit', async() => {
                     })
                 }
             )
-            entities.patient.remove((await patientResponse).transaction._id)
+            entities.patient.remove((await patientResponse).result._id)
         }
     )
 

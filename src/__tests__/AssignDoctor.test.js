@@ -1,10 +1,9 @@
-import useFDA from '../hooks/useFDA';
+import useJaneHopkins from '../hooks/useJaneHopkins';
+const { entities } = useJaneHopkins()
 
-const { entities } = useFDA();
-
-it('Assign Bavaria Drug to Patient', async() => {
+it('Assign Doctor to Patient', async() => {
     const patient = {
-        name: "John Done",
+        name: "John Doe",
         patientPicture: "",
         dob: new Date(1990,1,1),
         insuranceNumber: "1234567",
@@ -25,20 +24,18 @@ it('Assign Bavaria Drug to Patient', async() => {
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
     }
-    const bavariaDrug = entities.drug.get("01877ca6-6756-e387-493c-8089a79b1714")
-    await expect(bavariaDrug).resolves.not.toThrow()
+    const getDoctor = entities.patient.get("01877ca1-27bc-8d99-b5d3-dd208dd4414f")
     const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
-            const mapResponse = entities.map.add({
-                patientUUID: (await addPatient).result._id,
-                drugUUID: (await bavariaDrug)._id,
-                placebo: false,
-                postStudy: "No"
+            const doctorAssigned = entities.patient.update({
+                _id: (await addPatient)._id,
+                UUID: getDoctor._id
             })
-            await expect(mapResponse).resolves.not.toThrow()
+            await expect(doctorAssigned).resolves.not.toThrow().then(
+                await expect((await doctorAssigned).result.UUID).toBe(getDoctor._id)
+            )
             entities.patient.remove((await addPatient).result._id)
-            entities.map.remove((await mapResponse).result._id)
         }
     )
 }, 20000)

@@ -19,7 +19,7 @@ it('Add & Update Patient Name', async() => {
         currentlyInsured: "Yes",
         icdHealthCodes: {"code" : "B20"},
         allergies: {"allergy" : "None"},
-        visits: [],
+        visits: [{}],
         eligibility: true,
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
