@@ -159,7 +159,7 @@ const Login = () => {
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
-          {...register('email')}
+          //{...register('email')}
           error={errors.email ? true : false}
                 />
       </div>
@@ -181,7 +181,7 @@ const Login = () => {
           onClick={handleClickShowPassword}
           onMouseDown={handleMouseDownPassword}
           edge="end"
-          {...register('password')}
+          //{...register('password')}
           error={errors.password ? true : false}
           >
             {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -222,7 +222,7 @@ const Login = () => {
           onChange={(e) => {setEmail(e.target.value);}}
           fullWidth
           autoFocus
-          {...register('email')}
+          //{...register('email')}
           error={errors.email ? true : false}
                 />
       </div>
@@ -236,7 +236,7 @@ const Login = () => {
           value={name || ''} 
           onChange={(e) => {setName(e.target.value);}}
           fullWidth
-          {...register('fullname')}
+          //{...register('fullname')}
           error={errors.fullname ? true : false}
                 />
       </div>
@@ -252,7 +252,7 @@ const Login = () => {
           onChange={(e) => {setPassword(e.target.value);}}
           fullWidth
           autoFocus
-          {...register('password')}
+          //{...register('password')}
           error={errors.password ? true : false}
           InputProps={{
             endAdornment: (
@@ -279,7 +279,7 @@ const Login = () => {
           onChange={(e) => {setRepeatPassword(e.target.value);}}
           fullWidth
           autoFocus
-          {...register('password')}
+          //{...register('password')}
           error={errors.password ? true : false}
           InputProps={{
             endAdornment: (
@@ -304,7 +304,7 @@ const Login = () => {
             label='Role'
             value={role || ''} 
             onChange={(e) => {setRole(e.target.value);}}
-            {...register('role')}
+            //{...register('role')}
             error={errors.role ? true : false}
           >
             <MenuItem value={'JaneHopkinsDoctor'}>Jane Hopkins Doctor</MenuItem>
