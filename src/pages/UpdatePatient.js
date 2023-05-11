@@ -45,7 +45,7 @@ function UpdatePatient() {
             setInsuranceNumber(getResponse.insuranceNumber)
             setHeight(getResponse.height.replace(/\D/g,''))
             setWeight(getResponse.weight.replace(/\D/g,''))
-            setBloodPressure(getResponse.bloodPressure.replace(/\D/g,''))
+            setBloodPressure(getResponse.bloodPressure)
             setTemperature(getResponse.temperature.replace(/\D/g,''))
             setOxygenSaturation(getResponse.oxygenSaturation.replace(/\D/g,''))
             setAddress(getResponse.address)
@@ -270,7 +270,7 @@ function UpdatePatient() {
             <div className="patientName" m={2} >
                 <Typography variant="h6">Patient Name *</Typography>
                 <TextField
-                        required
+                        disabled
                         id="patientName"
                         label="Name"
                         value={patientName || ''} 
