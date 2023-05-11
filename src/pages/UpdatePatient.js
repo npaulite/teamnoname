@@ -211,9 +211,9 @@ function UpdatePatient() {
         insuranceNumber: Yup.number()
           .required('insuranceNumber are required')
           .oneOf([Yup.ref('insuranceNumber'), null], 'Confirm Insurance #'),
-        icd: Yup.number()
+        icd: Yup.string()
           .required('ICD is required')
-          .oneOf([Yup.ref('icd'), null], 'Confirm Insurance #'),        
+          .oneOf([Yup.ref('icd'), null], 'Confirm ICD #'),        
         hivLoad: Yup.number()
           .required('hivLoad are required')
           .oneOf([Yup.ref('hivLoad'), null], 'Confirm Insurance #'),
@@ -302,6 +302,8 @@ function UpdatePatient() {
                         fullWidth
                         //{...register('dob')}
                         error={errors.dob? true : false}
+
+                        
                 />
             </div>
             <div className="insuranceNumber">
@@ -448,6 +450,7 @@ function UpdatePatient() {
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
                     //{...register('currentlyEmployed')}
                         error={errors.currentlyEmployed? true : false}
+                        
                     fullWidth
                     >
                         <MenuItem value={'Yes'}>Yes</MenuItem>
@@ -482,7 +485,10 @@ function UpdatePatient() {
                             onChange={e => handleICD(e, i)}
                             //{...register('icd')}
                             error={errors.icd? true : false}
-                            fullWidth
+                        
+                            
+
+                        
                             />
                         <div className="icdButtons">
                         {icdHealthCodes.length !== 1 && <Button variant="outlined"
@@ -557,6 +563,7 @@ function UpdatePatient() {
                             fullWidth
                             //{...register('hivViralLoad')}
                         error={errors.hivViralLoad? true : false}
+                        
                             />
                         <div className="visitButtons">
                         {visits.length !== 1 && <Button variant="outlined"
@@ -578,8 +585,12 @@ function UpdatePatient() {
                 </Button>
             </div>
         </Box>
+        
+        
+
         </Container>
       </div>
+      
     );
 }
   
