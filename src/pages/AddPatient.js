@@ -185,7 +185,7 @@ function AddPatient() {
                             nodes: ["Bavaria", "FDA"]
                         },
                         operations: ["READ"],
-                        path: "uuid"
+                        path: "doctorUUID"
                     },
                     {
                         principal: {
@@ -374,7 +374,8 @@ function AddPatient() {
                         id="patientName"
                         name="patientName"
                         type="fullname"
-                        label="Name"
+                        //label="Name"
+                        InputLabelProps={{ shrink: true }}
                         value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
@@ -387,7 +388,8 @@ function AddPatient() {
                 <Typography variant="h6">Patient Picture</Typography>
                 <TextField
                         id="patientPicture"
-                        label="Patient Picture"
+                        //label="Patient Picture"
+                        InputLabelProps={{ shrink: true }}
                         value={patientPicture || ''}
                         onChange={(e) => setPatientPicture(e.target.value)}
                         fullWidth
@@ -398,9 +400,8 @@ function AddPatient() {
                 <TextField
                         required
                         id="dob"
-                        name="dob"
-                        label="dob"
                         type="date"
+                        InputLabelProps={{ shrink: true }}
                         value={dob || ''} 
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
@@ -414,7 +415,8 @@ function AddPatient() {
                         required
                         id="insuranceNumber"
                         type="number"
-                        label="Insurance Number"
+                        //label="Insurance Number"
+                        InputLabelProps={{ shrink: true }}
                         value={insuranceNumber || ''} pattern="/^\d+$/"
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
@@ -428,7 +430,8 @@ function AddPatient() {
                         required
                         id="height"
                         type="number"
-                        label="Height (in cm)"
+                        label="in cm"
+                        InputLabelProps={{ shrink: true }}
                         value={height || ''} 
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
@@ -442,7 +445,8 @@ function AddPatient() {
                         required
                         id="weight"
                         type="number"
-                        label="Weight (in kg)"
+                        label="in kg"
+                        InputLabelProps={{ shrink: true }}
                         value={weight || ''} 
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
@@ -456,6 +460,7 @@ function AddPatient() {
                         required
                         id="bloodPressure"
                         label="Systolic/Diastolic"
+                        InputLabelProps={{ shrink: true }}
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
@@ -469,7 +474,8 @@ function AddPatient() {
                         required
                         id="temperature"
                         type="number"
-                        label="Temperature (in Celsius)"
+                        label="in Celsius"
+                        InputLabelProps={{ shrink: true }}
                         value={temperature || ''} pattern="/^\d+$/"
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
@@ -483,7 +489,8 @@ function AddPatient() {
                         required
                         id="oxygenSaturation"
                         type="number"
-                        label="Oxygen Saturation (%)"
+                        label="%"
+                        InputLabelProps={{ shrink: true }}
                         value={oxygenSaturation || ''} pattern="/^\d+$/"
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
@@ -497,7 +504,8 @@ function AddPatient() {
                         required
                         id="address"
                         type="address"
-                        label="Address"
+                        //label="Address"
+                        InputLabelProps={{ shrink: true }}
                         value={address || ''} 
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
@@ -514,7 +522,8 @@ function AddPatient() {
                             required
                             name="medication"
                             type="medications"
-                            label="Medications"
+                            //label="Medications"
+                            InputLabelProps={{ shrink: true }}
                             value={x.medication || ''}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
@@ -537,7 +546,8 @@ function AddPatient() {
                         required
                         id="familyHistory"
                         type="familyHistory"
-                        label="Family History"
+                        //label="Family History"
+                        InputLabelProps={{ shrink: true }}
                         value={familyHistory || ''} 
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
@@ -549,8 +559,8 @@ function AddPatient() {
                 <Typography variant="h6">Currently Employed *</Typography>
                 <Select
                    required
-                   id="currentlyEmployed"
-                    label="CurrentLy Employed"
+                    id="currentlyEmployed"
+                    InputLabelProps={{ shrink: true }}
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
                     fullWidth
@@ -563,8 +573,8 @@ function AddPatient() {
                 <Typography variant="h6">Currently Insured *</Typography>
                 <Select
                     required
-                    id="currentlyInsured"
-                    label="CurrentLy Insured"    
+                    id="currentlyInsured"   
+                    InputLabelProps={{ shrink: true }}
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
                     fullWidth
@@ -581,7 +591,8 @@ function AddPatient() {
                         <TextField
                             required
                             name="code"
-                            label="ICD Health Code"
+                            //label="ICD Health Code"
+                            InputLabelProps={{ shrink: true }}
                             value={x.code} 
                             onChange={e => handleICD(e, i)}
                             fullWidth
@@ -604,7 +615,8 @@ function AddPatient() {
                         required
                         id="hivLoad"
                         type="number"
-                        label="HIV LOAD "
+                        //label="HIV LOAD "
+                        InputLabelProps={{ shrink: true }}
                         value={startingHIVLoad || ''} pattern = "/^\d+$/"
                         onChange={(e) => setStartingHIVLoad(e.target.value)}
                         fullWidth
@@ -619,7 +631,8 @@ function AddPatient() {
                     <div className="allergy" key={i}>
                         <TextField
                             name="allergy"
-                            label="Allergy"
+                            //label="Allergy"
+                            InputLabelProps={{ shrink: true }}
                             value={x.allergy || ''}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth

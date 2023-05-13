@@ -272,7 +272,8 @@ function UpdatePatient() {
                 <TextField
                         disabled
                         id="patientName"
-                        label="Name"
+                        //label="Name"
+                        InputLabelProps={{ shrink: true }}
                         value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
@@ -285,7 +286,8 @@ function UpdatePatient() {
                 <Typography variant="h6">Patient Picture</Typography>
                 <TextField
                         id="patientPicture"
-                        label="Patient Picture"
+                        //label="Patient Picture"
+                        InputLabelProps={{ shrink: true }}
                         value={patientPicture || ''}
                         onChange={(e) => setPatientPicture(e.target.value)}
                         fullWidth
@@ -297,6 +299,7 @@ function UpdatePatient() {
                         required
                         id="dob"
                         type="date"
+                        InputLabelProps={{ shrink: true }}
                         value={dob || ''}
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
@@ -312,7 +315,8 @@ function UpdatePatient() {
                         required
                         id="insuranceNumber"
                         type="number"
-                        label="Insurance Number"
+                        //label="Insurance Number"
+                        InputLabelProps={{ shrink: true }}
                         value={insuranceNumber || ''}
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
@@ -326,8 +330,9 @@ function UpdatePatient() {
                         required
                         id="height"
                         type="number"
-                        label="Height (in cm)"
+                        label="in cm"
                         value={height || ''}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
                         //{...register('height')}
@@ -340,8 +345,9 @@ function UpdatePatient() {
                         required
                         id="weight"
                         type="number"
-                        label="Weight (in kg)"
+                        label="in kg"
                         value={weight || ''}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
                         //{...register('weight')}
@@ -354,6 +360,7 @@ function UpdatePatient() {
                         required
                         id="bloodPressure"
                         label="Systolic/Diastolic"
+                        InputLabelProps={{ shrink: true }}
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
@@ -367,7 +374,8 @@ function UpdatePatient() {
                         required
                         id="temperature"
                         type="number"
-                        label="Temperature (in Celsius)"
+                        label="in Celsius"
+                        InputLabelProps={{ shrink: true }}
                         value={temperature || ''}
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
@@ -381,7 +389,8 @@ function UpdatePatient() {
                         required
                         id="oxygenSaturation"
                         type="number"
-                        label="Oxygen Saturation (%)"
+                        label=" % "
+                        InputLabelProps={{ shrink: true }}
                         value={oxygenSaturation || ''}
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
@@ -394,7 +403,8 @@ function UpdatePatient() {
                 <TextField
                         required
                         id="address"
-                        label="Address"
+                        //label="Address"
+                        InputLabelProps={{ shrink: true }}
                         value={address || ''}
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
@@ -409,8 +419,8 @@ function UpdatePatient() {
                     <div className="medications" key={i}>
                         <TextField
                             name="medication"
-                            label="Medications"
-                            
+                            //label="Medications"
+                            InputLabelProps={{ shrink: true }}
                             value={x.medication}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
@@ -431,7 +441,8 @@ function UpdatePatient() {
                 <Typography variant="h6">Family History</Typography>
                 <TextField
                         id="familyHistory"
-                        label="Family History"
+                        //label="Family History"
+                        InputLabelProps={{ shrink: true }}
                         value={familyHistory || ''}
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
@@ -445,7 +456,8 @@ function UpdatePatient() {
                 <Select
                    required
                    id="currentlyEmployed"
-                    label="CurrentLy Employed"
+                    //label="CurrentLy Employed"
+                    InputLabelProps={{ shrink: true }}
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
                     //{...register('currentlyEmployed')}
@@ -462,7 +474,8 @@ function UpdatePatient() {
                 <Select
                     required
                     id="currentlyInsured"
-                    label="CurrentLy Insured"    
+                    //label="CurrentLy Insured" 
+                    InputLabelProps={{ shrink: true }}   
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
                     //{...register('currentlyInsured')}
@@ -480,15 +493,12 @@ function UpdatePatient() {
                     <div className="icd" key={i}>
                         <TextField
                             name="code"
-                            label="ICD Health Code"
+                            //label="ICD Health Code"
+                            InputLabelProps={{ shrink: true }}
                             value={x.code}
                             onChange={e => handleICD(e, i)}
                             //{...register('icd')}
                             error={errors.icd? true : false}
-                        
-                            
-
-                        
                             />
                         <div className="icdButtons">
                         {icdHealthCodes.length !== 1 && <Button variant="outlined"
@@ -507,7 +517,8 @@ function UpdatePatient() {
                     <div className="allergy" key={i}>
                         <TextField
                             name="allergy"
-                            label="Allergy"
+                            //label="Allergy"
+                            InputLabelProps={{ shrink: true }}
                             value={x.allergy}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
@@ -533,6 +544,7 @@ function UpdatePatient() {
                         <Typography variant="subtitle1"> Visit #{i+1}</Typography>
                         <TextField sx={{mt:1, mb:1}}
                             name="patient"
+                            InputLabelProps={{ shrink: true }}
                             value={x.patient || patientName}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -543,6 +555,8 @@ function UpdatePatient() {
                         <TextField sx={{mb:1}}
                             name="dateTime"
                             type="date"
+                            label="Date of Visit"
+                            InputLabelProps={{ shrink: true }}
                             value={x.dateTime}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -550,6 +564,7 @@ function UpdatePatient() {
                         <TextField sx={{mb:1}}
                             name="notes"
                             label="Notes"
+                            InputLabelProps={{ shrink: true }}
                             value={x.notes || ""}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -558,6 +573,7 @@ function UpdatePatient() {
                             name="hivViralLoad"
                             type="number"
                             label="HIV Viral Load"
+                            InputLabelProps={{ shrink: true }}
                             value={"" || x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth

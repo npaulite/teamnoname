@@ -168,8 +168,9 @@ function AssignDrug() {
                             disabled
                             id="patientUUID"
                             name="patientUUID"
-                            label="Patient UUID"
+                            //label="Patient UUID"
                             type ="patientUUID"
+                            InputLabelProps={{ shrink: true }}
                             value={patient || ''} 
                             onChange={(e) => {setPatient(e.target.value);}}
                             fullWidth
@@ -199,7 +200,7 @@ function AssignDrug() {
                             id="placebo"
                             name="placebo"
                             type="placebo"
-                            label="Placebo"
+                            //label="Placebo"
                             clearOnEscape
                             inputValue={drug || ''} 
                             onInputChange={(e, newValue) => setDrug(newValue)}

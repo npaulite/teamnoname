@@ -1,5 +1,4 @@
 import useFDA from '../hooks/useFDA';
-
 const { entities } = useFDA();
 
 it('Assign Bavaria Drug to Patient', async() => {

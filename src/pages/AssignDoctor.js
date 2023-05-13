@@ -64,13 +64,13 @@ import * as Yup from 'yup';
     const getResponse = await entities.patient.get(location.state._id)
     setID(getResponse._id)
     setName(getResponse.name)
-    setDoctorID(getResponse.uuid)
+    setDoctorID(getResponse.doctorUUID)
   }
 
   const updatePatient = async() => {
     const updateResponse = await entities.patient.update({
       _id: id,
-      uuid: doctorID
+      doctorUUID: doctorID
     })
     console.log(updateResponse)
   }
@@ -116,6 +116,7 @@ import * as Yup from 'yup';
                               disabled
                               id="patientUUID"
                               label="Patient UUID"
+                              InputLabelProps={{ shrink: true }}
                               value={id || ''} 
                               onChange={(e) => {setID(e.target.value);}}
                               fullWidth
@@ -132,6 +133,7 @@ import * as Yup from 'yup';
                               name="patientName"
                               type="patientName"
                               label="Patient Name"
+                              InputLabelProps={{ shrink: true }}
                               value={name || ''} 
                               onChange={(e) => {setName(e.target.value);}}
                               fullWidth

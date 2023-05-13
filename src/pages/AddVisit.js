@@ -112,32 +112,37 @@ function AddVisit() {
                             return(
                                 <div className="visit" key={i}>
                                     <Typography variant="subtitle1" sx={{mt:5, mb:1}}> Visit #{i+1}</Typography>
-                                    <TextField
+                                    {/*<TextField sx={{mb:1}}
                                         name="patient" 
-                                        label="Patient Name" 
+                                        //label="Patient Name" 
+                                        InputLabelProps={{ shrink: true }}
                                         value={patientName  || ''} required pattern = "/^[a-zA-Z]+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         disabled
-                                        />
-                                    <TextField
+                            /> */}
+                                    <TextField sx={{mb:1}}
                                         name="dateTime"
                                         type='date'
+                                        label="Date of Visit"
+                                        InputLabelProps={{ shrink: true }}
                                         value={x.dateTime} required pattern = "/^\d{2}-\d{2}-\d{4}$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         />
-                                    <TextField
+                                    <TextField sx={{mb:1}}
                                         name="notes"
                                         label="Notes"
+                                        InputLabelProps={{ shrink: true }}
                                         value={x.notes} required pattern = "/^[a-zA-Z]+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth
                                         />
-                                    <TextField
+                                    <TextField sx={{mb:1}}
                                         name="hivViralLoad"
                                         type="number"
                                         label="HIV Viral Load"
+                                        InputLabelProps={{ shrink: true }}
                                         value={x.hivViralLoad} required pattern = "/^\d+$/"
                                         onChange={e => handleVisit(e, i)}
                                         fullWidth

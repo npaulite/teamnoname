@@ -32,13 +32,6 @@ function SendDrugs() {
                     },
                     operations: ["READ"],
                     path: "batchNumber"
-                    },
-                    {
-                        principal: {
-                            nodes: ["JaneHopkins", "FDA"]
-                        },
-                        operations: ["READ"],
-                        path: "id"
                     }
                 ]
             }

@@ -187,6 +187,7 @@ function ReviewPatient() {
                         required
                         id="patientName"
                         label="Name"
+                        InputLabelProps={{ shrink: true }}
                         value={patientName || ''} 
                         onChange={(e) => {setPatientName(e.target.value);}}
                         fullWidth
@@ -198,6 +199,7 @@ function ReviewPatient() {
                 <TextField
                         id="patientPicture"
                         label="Patient Picture"
+                        InputLabelProps={{ shrink: true }}
                         value={patientPicture || ''}
                         onChange={(e) => setPatientPicture(e.target.value)}
                         fullWidth
@@ -210,6 +212,7 @@ function ReviewPatient() {
                         required
                         id="dob"
                         type="date"
+                        InputLabelProps={{ shrink: true }}
                         value={dob || ''}
                         onChange={(e) => setDob(e.target.value)}
                         fullWidth
@@ -223,6 +226,7 @@ function ReviewPatient() {
                         id="insuranceNumber"
                         type="number"
                         label="Insurance Number"
+                        InputLabelProps={{ shrink: true }}
                         value={insuranceNumber || ''}
                         onChange={(e) => setInsuranceNumber(e.target.value)}
                         fullWidth
@@ -236,6 +240,7 @@ function ReviewPatient() {
                         id="height"
                         type="number"
                         label="Height (in cm)"
+                        InputLabelProps={{ shrink: true }}
                         value={height || ''}
                         onChange={(e) => setHeight(e.target.value)}
                         fullWidth
@@ -249,6 +254,7 @@ function ReviewPatient() {
                         id="weight"
                         type="number"
                         label="Weight (in kg)"
+                        InputLabelProps={{ shrink: true }}
                         value={weight || ''}
                         onChange={(e) => setWeight(e.target.value)}
                         fullWidth
@@ -261,6 +267,7 @@ function ReviewPatient() {
                         required
                         id="bloodPressure"
                         label="Systolic/Diastolic"
+                        InputLabelProps={{ shrink: true }}
                         value={bloodPressure || ''}
                         onChange={(e) => setBloodPressure(e.target.value)}
                         fullWidth
@@ -274,6 +281,7 @@ function ReviewPatient() {
                         id="temperature"
                         type="number"
                         label="Temperature (in Celsius)"
+                        InputLabelProps={{ shrink: true }}
                         value={temperature || ''}
                         onChange={(e) => setTemperature(e.target.value)}
                         fullWidth
@@ -287,6 +295,7 @@ function ReviewPatient() {
                         id="oxygenSaturation"
                         type="number"
                         label="Oxygen Saturation (%)"
+                        InputLabelProps={{ shrink: true }}
                         value={oxygenSaturation || ''}
                         onChange={(e) => setOxygenSaturation(e.target.value)}
                         fullWidth
@@ -299,6 +308,7 @@ function ReviewPatient() {
                         required
                         id="address"
                         label="Address"
+                        InputLabelProps={{ shrink: true }}
                         value={address || ''}
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
@@ -313,6 +323,7 @@ function ReviewPatient() {
                         <TextField
                             name="medication"
                             label="Medications"
+                            InputLabelProps={{ shrink: true }}
                             value={x.medication}
                             onChange={e => handleMedication(e, i)}
                             fullWidth
@@ -333,6 +344,7 @@ function ReviewPatient() {
                 <TextField
                         id="familyHistory"
                         label="Family History"
+                        InputLabelProps={{ shrink: true }}
                         value={familyHistory || ''}
                         onChange={(e) => setFamilyHistory(e.target.value)}
                         fullWidth
@@ -346,6 +358,7 @@ function ReviewPatient() {
                    required
                    id="currentlyEmployed"
                     label="CurrentLy Employed"
+                    InputLabelProps={{ shrink: true }}
                     value={currentlyEmployed || ''}
                     onChange={(e) => setCurrentlyEmployed(e.target.value)}
                     fullWidth
@@ -361,6 +374,7 @@ function ReviewPatient() {
                     required
                     id="currentlyInsured"
                     label="CurrentLy Insured"    
+                    InputLabelProps={{ shrink: true }}
                     value={currentlyInsured || ''}
                     onChange={(e) => setCurrentlyInsured(e.target.value)}
                     fullWidth
@@ -378,6 +392,7 @@ function ReviewPatient() {
                         <TextField
                             name="code"
                             label="ICD Health Code"
+                            InputLabelProps={{ shrink: true }}
                             value={x.code}
                             onChange={e => handleICD(e, i)}
                             fullWidth
@@ -401,6 +416,7 @@ function ReviewPatient() {
                         <TextField
                             name="allergy"
                             label="Allergy"
+                            InputLabelProps={{ shrink: true }}
                             value={x.allergy}
                             onChange={e => handleAllergy(e, i)}
                             fullWidth
@@ -425,6 +441,7 @@ function ReviewPatient() {
                         <Typography variant="subtitle1"> Visit #{i+1}</Typography>
                         <TextField sx={{mt:1, mb:1}}
                             name="patient"
+                            InputLabelProps={{ shrink: true }}
                             value={x.patient || patientName}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -432,7 +449,9 @@ function ReviewPatient() {
                             />
                         <TextField sx={{mb:1}}
                             name="dateTime"
-                            type='date'
+                            type="date"
+                            label="Date of Visit"
+                            InputLabelProps={{ shrink: true }}
                             value={x.dateTime}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -441,6 +460,7 @@ function ReviewPatient() {
                         <TextField sx={{mb:1}}
                             name="notes"
                             label="Notes"
+                            InputLabelProps={{ shrink: true }}
                             value={x.notes}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
@@ -450,6 +470,7 @@ function ReviewPatient() {
                             name="hivViralLoad"
                             type="number"
                             label="HIV Viral Load"
+                            InputLabelProps={{ shrink: true }}
                             value={x.hivViralLoad}
                             onChange={e => handleVisit(e, i)}
                             fullWidth
