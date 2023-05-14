@@ -16,8 +16,8 @@ function renderAuth(user) {
 it('renders Auth', () => {
   const user = {
     user: "Test Doctor 1",
-    id: "tav93aBIRSWiwDMiNOgAoMc25a53",
-    authorized: "urayujaymteuvwmdby@tcwlx.com"
+    id: "757H8Fdp4aPbCoDqn73WC0aR2S42",
+    authorized: "ilduvvkmcwamtqejng@tcwlx.com"
   }
   renderAuth(user)
   expect(screen.getByText(`Vendia`)).toBeInTheDocument();
