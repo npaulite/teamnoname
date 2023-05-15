@@ -160,13 +160,13 @@ const JaneHopkinsDoctor = () => {
           <Button
             variant="contained" sx={{m:1}}
             onClick={() => handleAddVisit(patient._id)}>
-            Add Visit
+            Add New Visit
           </Button>
           <Button
             variant="contained"
             sx={{ m: 1 }}
             onClick={() => handleUpdate(patient._id) } required pattern = "/^\d+$/">
-            Edit 
+            Edit Patient Info
           </Button>
           
         </Stack>
