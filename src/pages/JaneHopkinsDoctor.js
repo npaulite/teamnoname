@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 import { Stack } from "@mui/system";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import AuthContext from "../components/AuthProvider";
+import logo from "../assets/images/pp.webp";
 
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();
@@ -150,35 +151,11 @@ const JaneHopkinsDoctor = () => {
             {patients?.map((patient, key) => {
               return (
                 <div className="grid-items" key={key}>
-                  <div className="updateColumnForm">
-                    <Stack
-                      sx={{ pt: 4 }}
-                      direction="column"
-                      spacing={2}
-                      justifyContent="center"
-                    >
-                      <Button
-                        variant="contained"
-                        sx={{ m: 1 }}
-                        onClick={() => handleAddVisit(patient._id)}
-                      >
-                        Add
-                      </Button>
-                      <Button
-                        variant="contained"
-                        sx={{ m: 1 }}
-                        onClick={() => handleUpdate(patient._id)}
-                        required
-                        pattern="/^\d+$/"
-                      >
-                        Edit
-                      </Button>
-                    </Stack>
-                    ) : (
-                  </div>
                   <Card
                     key={key}
                     style={{
+                      boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+                      transition: "0.3s",
                       margin: 20,
                       padding: 5,
                       height: "300px",
@@ -191,14 +168,76 @@ const JaneHopkinsDoctor = () => {
                     </CopyToClipboard>
 
                     <div>
-                      <div>DOB: {patient.dob}</div>
-                      <div>IN: {patient.insuranceNumber}</div>
-                      <div>HEIGHT: {patient.height}</div>
-                      <div>WEIGHT: {patient.weight}</div>
-                      <div>BP: {patient.bloodPressure}</div>
-                      <div>TEMP: {patient.temperature}</div>
-                      <div>OS: {patient.oxygenSaturation}</div>
-                      <div>ALLERGY: {patient.allergy}</div>
+                      <div class="container1">
+                        <img
+                          src={logo}
+                          alt="ProfilePic"
+                          className="logo"
+                          style={{
+                            borderRadius: "20%",
+                            width: "30%",
+                            height: "30%",
+                            display: "block",
+                            margin: "0 auto",
+                          }}
+                        />
+                        <div
+                          className={
+                            patient?.eligibility ? "status open" : "status dead"
+                          }
+                        >
+                          {" "}
+                          {patient?.eligibility
+                            ? "Patient Eligibility: Yes"
+                            : "Patient Eligibility: No"}{" "}
+                        </div>
+                        {/* <div>
+                                {maps?.map((map, i) => {
+                                  {
+                                    if (patient._id === map.patientUUID) {
+                                      return (
+                                        <span key={i}>
+                                          {map.patientUUID ? "Yes" : "No"}
+                                        </span>
+                                      );
+                                    }
+                                  }
+                                  return "";
+                                })}
+                              </div> */}
+                        <div
+                          className={
+                            noOfVisit(patient) === 5
+                              ? "status open"
+                              : "status in-progress"
+                          }
+                        >
+                          Number of Visits: {noOfVisit(patient)} / 5
+                        </div>
+
+                        <Stack
+                          sx={{ pt: 4 }}
+                          direction="row"
+                          spacing={2}
+                          justifyContent="center"
+                        >
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            onClick={() => handleAddVisit(patient._id)}
+                          >
+                            Add Visit
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            onClick={() => handleUpdate(patient._id)}
+                            required
+                          >
+                            Edit
+                          </Button>
+                        </Stack>
+                      </div>
                     </div>
                   </Card>
                 </div>

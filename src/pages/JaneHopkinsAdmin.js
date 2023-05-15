@@ -146,55 +146,59 @@ const JaneHopkinsAdmin = () => {
                             {noOfVisit(patient)} / 5
                           </td>
                           <td>
-                            {" "}
-                            {patient?.doctorUUID ? (
-                              <Button
-                                variant="contained"
-                                sx={{ m: 1, mr: 3 }}
-                                disabled
-                              >
-                                Assign Doctor
-                              </Button>
-                            ) : (
-                              <Button
-                                variant="contained"
-                                sx={{ m: 1, mr: 3 }}
-                                onClick={() => {
-                                  assignDoctor(patient._id);
-                                }}
-                              >
-                                Assign Doctor
-                              </Button>
-                            )}
-                            {noOfVisit(patient) === 5 ? (
-                              patient.trialStatus === "Ongoing" ? (
+                            <div
+                              style={{ display: "flex", flexDirection: "row" }}
+                            >
+                              {" "}
+                              {patient?.doctorUUID ? (
                                 <Button
                                   variant="contained"
-                                  sx={{ m: 1 }}
+                                  sx={{ m: 1, mr: 3 }}
+                                  disabled
+                                >
+                                  Assign Doctor
+                                </Button>
+                              ) : (
+                                <Button
+                                  variant="contained"
+                                  sx={{ m: 1, mr: 3 }}
                                   onClick={() => {
-                                    handleSetCompletion(patient._id);
+                                    assignDoctor(patient._id);
                                   }}
                                 >
-                                  Complete Trial
+                                  Assign Doctor
                                 </Button>
+                              )}
+                              {noOfVisit(patient) === 5 ? (
+                                patient.trialStatus === "Ongoing" ? (
+                                  <Button
+                                    variant="contained"
+                                    sx={{ m: 1 }}
+                                    onClick={() => {
+                                      handleSetCompletion(patient._id);
+                                    }}
+                                  >
+                                    Complete Trial
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    variant="contained"
+                                    disabled
+                                    sx={{ m: 1 }}
+                                  >
+                                    Trial Completed
+                                  </Button>
+                                )
                               ) : (
                                 <Button
                                   variant="contained"
                                   disabled
                                   sx={{ m: 1 }}
                                 >
-                                  Trial Completed
+                                  Trial Ongoing
                                 </Button>
-                              )
-                            ) : (
-                              <Button
-                                variant="contained"
-                                disabled
-                                sx={{ m: 1 }}
-                              >
-                                Trial Ongoing
-                              </Button>
-                            )}
+                              )}
+                            </div>
                           </td>
                         </tr>
                       );

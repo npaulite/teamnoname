@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "@firebase/auth";
 import Navba from "./pages/Navba";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import JaneHopkinsDoctor from "./pages/JaneHopkinsDoctor";
@@ -22,10 +22,10 @@ import Sidebar1 from "./components/Sidebar1";
 import AssignDoctor from "./pages/AssignDoctor";
 import PostStudy from "./pages/PostStudy";
 import ReviewPatient from "./pages/ReviewPatient";
-// import Home from "./pages/Home copy";
+import Home from "./pages/Home copy";
 
 function App() {
-  const { authorized, setAuth} = useAuth();
+  const { authorized, setAuth } = useAuth();
   const [user, setUser] = useState();
   const [id, setID] = useState();
   /*const [completed, setCompleted] = useState(false);
@@ -46,7 +46,7 @@ function App() {
     }
   });
 
-/*  useEffect(() => {
+  /*  useEffect(() => {
     setCompletedTrue()
   },[])
 */
@@ -77,34 +77,99 @@ function App() {
               <Route element={<RequireAuth allowedRoles={["FDA", "Admin"]} />}>
                 <Route path="/FDA/AssignDrug" element={<AssignDrug />} />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["FDA", "Admin", "Bavaria", "JaneHopkinsAdmin", "JaneHopkinsDoctor"]} /> }>
+              <Route
+                element={
+                  <RequireAuth
+                    allowedRoles={[
+                      "FDA",
+                      "Admin",
+                      "Bavaria",
+                      "JaneHopkinsAdmin",
+                      "JaneHopkinsDoctor",
+                    ]}
+                  />
+                }
+              >
                 <Route path="/PostStudy" element={<PostStudy />} />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} /> }>
+              <Route
+                element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
+              >
                 <Route path="/Bavaria" element={<Bavaria />} />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
-                <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor"
+                  element={<JaneHopkinsDoctor />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
-                <Route path="/JaneHopkinsAdmin" element={<JaneHopkinsAdmin />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin"
+                  element={<JaneHopkinsAdmin />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
-                <Route path="/JaneHopkinsAdmin/AddPatient" element={<AddPatient />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin/AddPatient"
+                  element={<AddPatient />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
-                <Route path="/JaneHopkinsAdmin/AssignDoctor" element={<AssignDoctor />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin/AssignDoctor"
+                  element={<AssignDoctor />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} /> }>
-                <Route path="/JaneHopkinsAdmin/ReviewPatient" element={<ReviewPatient />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsAdmin", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsAdmin/ReviewPatient"
+                  element={<ReviewPatient />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
-                <Route path="/JaneHopkinsDoctor/UpdatePatient" element={<UpdatePatient />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor/UpdatePatient"
+                  element={<UpdatePatient />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} /> }>
-                <Route path="/JaneHopkinsDoctor/AddPatientVisit" element={<AddVisit />} />
+              <Route
+                element={
+                  <RequireAuth allowedRoles={["JaneHopkinsDoctor", "Admin"]} />
+                }
+              >
+                <Route
+                  path="/JaneHopkinsDoctor/AddPatientVisit"
+                  element={<AddVisit />}
+                />
               </Route>
-              <Route element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />} >
+              <Route
+                element={<RequireAuth allowedRoles={["Bavaria", "Admin"]} />}
+              >
                 <Route path="/Bavaria/SendDrugs" element={<SendDrugs />} />
               </Route>
             </Routes>

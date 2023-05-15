@@ -50,3 +50,8 @@ body{
       position: fixed;
       z-index: -1;   
     }
+    .pie-chart-container {
+        margin-top: 20px;
+        text-align: center;
+      }
+      
