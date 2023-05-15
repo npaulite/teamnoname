@@ -158,15 +158,16 @@ const JaneHopkinsDoctor = () => {
           justifyContent="center"
         >
           <Button
-            variant="contained" sx={{m:1}}
+            variant="contained" 
+            sx={{m:1}}
             onClick={() => handleAddVisit(patient._id)}>
-            Add New Visit
+            Add 
           </Button>
           <Button
             variant="contained"
-            sx={{ m: 1 }}
+            sx={{m:1}}
             onClick={() => handleUpdate(patient._id) } required pattern = "/^\d+$/">
-            Edit Patient Info
+            Edit 
           </Button>
           
         </Stack>
@@ -180,17 +181,15 @@ const JaneHopkinsDoctor = () => {
                     </CopyToClipboard>
                     
                     <div>
-                      <div>IN: {patient.insuranceNumber }</div>
                       <div>DOB: {patient.dob}</div>
+                      <div>IN: {patient.insuranceNumber }</div>
                       <div>HEIGHT: {patient.height}</div>
                       <div>WEIGHT: {patient.weight}</div>
                       <div>BP: {patient.bloodPressure}</div>
                       <div>TEMP: {patient.temperature}</div>
                       <div>OS: {patient.oxygenSaturation}</div>
-                      <div>UUID: {patient.uuid} </div>
-                      <div>ADDRESS: {patient.address}</div>
-                      <div>EMPLOYED?: {patient.currentlyEmployed}</div>
-                      <div>INSURED?: {patient.currentlyInsured}</div>
+                      <div>ALLERGY: {patient.allergy}</div>
+                      
                     </div>
                    
                   </Card>
