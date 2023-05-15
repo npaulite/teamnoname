@@ -145,16 +145,40 @@ const JaneHopkinsDoctor = () => {
       )}
       </div>
       {format === "grid" ? (
-        <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="black">
+        <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="#cbebfd">
           <div className="patientsGrid">
             {patients?.map((patient, key) => {
               return(
                 <div className="grid-items" key={key}>
+                  <div className="updateColumnForm">
+                    <Stack
+          sx={{ pt: 4 }}
+          direction="column"
+          spacing={2}
+          justifyContent="center"
+        >
+          <Button
+            variant="contained" sx={{m:1}}
+            onClick={() => handleAddVisit(patient._id)}>
+            Add Visit
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ m: 1 }}
+            onClick={() => handleUpdate(patient._id) } required pattern = "/^\d+$/">
+            Edit 
+          </Button>
+          
+        </Stack>
+      ) : (
+        
+        </div>
                   <Card key={key} style={{ margin: 20, padding: 5, height: "300px", width: "250px"}}>
                     <h4>Name: {patient.name}</h4>
                     <CopyToClipboard text = {patient._id}>
                       <Button>{patient._id}</Button>
                     </CopyToClipboard>
+                    
                     <div>
                       <div>IN: {patient.insuranceNumber }</div>
                       <div>DOB: {patient.dob}</div>
@@ -168,6 +192,7 @@ const JaneHopkinsDoctor = () => {
                       <div>EMPLOYED?: {patient.currentlyEmployed}</div>
                       <div>INSURED?: {patient.currentlyInsured}</div>
                     </div>
+                   
                   </Card>
                 </div>
               );
