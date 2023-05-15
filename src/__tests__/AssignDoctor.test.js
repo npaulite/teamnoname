@@ -24,17 +24,16 @@ it('Assign Doctor to Patient', async() => {
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
     }
-    const getDoctor = entities.patient.get("01877ca1-27bc-8d99-b5d3-dd208dd4414f")
+    const getDoctor = entities.doctor.get("0188126b-f51b-02c8-4259-82760312031c")
+    await expect(getDoctor).resolves.not.toThrow()
     const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
         async() => {
-            const doctorAssigned = entities.patient.update({
-                _id: (await addPatient)._id,
-                UUID: getDoctor._id
+            const updatePatient = entities.patient.update({
+                _id: (await addPatient).result._id,
+                doctorUUID: (await getDoctor)._id
             })
-            await expect(doctorAssigned).resolves.not.toThrow().then(
-                await expect((await doctorAssigned).result.UUID).toBe(getDoctor._id)
-            )
+            expect((await updatePatient).result.doctorUUID).toBe((await getDoctor)._id)
             entities.patient.remove((await addPatient).result._id)
         }
     )

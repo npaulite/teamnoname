@@ -145,11 +145,37 @@ const JaneHopkinsDoctor = () => {
         )}
       </div>
       {format === "grid" ? (
-        <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="black">
+        <Box className="grid" sx={{ pt: 4, pb: 6 }} bgcolor="#cbebfd">
           <div className="patientsGrid">
             {patients?.map((patient, key) => {
               return (
                 <div className="grid-items" key={key}>
+                  <div className="updateColumnForm">
+                    <Stack
+                      sx={{ pt: 4 }}
+                      direction="column"
+                      spacing={2}
+                      justifyContent="center"
+                    >
+                      <Button
+                        variant="contained"
+                        sx={{ m: 1 }}
+                        onClick={() => handleAddVisit(patient._id)}
+                      >
+                        Add
+                      </Button>
+                      <Button
+                        variant="contained"
+                        sx={{ m: 1 }}
+                        onClick={() => handleUpdate(patient._id)}
+                        required
+                        pattern="/^\d+$/"
+                      >
+                        Edit
+                      </Button>
+                    </Stack>
+                    ) : (
+                  </div>
                   <Card
                     key={key}
                     style={{
@@ -163,18 +189,16 @@ const JaneHopkinsDoctor = () => {
                     <CopyToClipboard text={patient._id}>
                       <Button>{patient._id}</Button>
                     </CopyToClipboard>
+
                     <div>
-                      <div>IN: {patient.insuranceNumber}</div>
                       <div>DOB: {patient.dob}</div>
+                      <div>IN: {patient.insuranceNumber}</div>
                       <div>HEIGHT: {patient.height}</div>
                       <div>WEIGHT: {patient.weight}</div>
                       <div>BP: {patient.bloodPressure}</div>
                       <div>TEMP: {patient.temperature}</div>
                       <div>OS: {patient.oxygenSaturation}</div>
-                      <div>UUID: {patient.uuid} </div>
-                      <div>ADDRESS: {patient.address}</div>
-                      <div>EMPLOYED?: {patient.currentlyEmployed}</div>
-                      <div>INSURED?: {patient.currentlyInsured}</div>
+                      <div>ALLERGY: {patient.allergy}</div>
                     </div>
                   </Card>
                 </div>

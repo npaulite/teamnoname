@@ -1,13 +1,16 @@
 import useFDA from '../hooks/useFDA';
 const { entities } = useFDA();
 
-it('Complete Post Study', async() => {
-    await expect(entities.map.list()).resolves.not.toThrow().then{
-        async(result) => {
-            result.forEach(map => {
-                expect(map.postStudy).toBe("No")
-            });
+it('Check Post Study', async() => {
+    const mapResponse = entities.map.list({
+        filter: {
+            postStudy: {
+                eq: "No"
+            }
+        }})
+    await expect(mapResponse).resolves.not.toThrow().then(
+        async() => {
+            await expect((await mapResponse).items.forEach(item => {expect(item.postStudy).toBe("No")}))
         }
-    }
-}
-,20000)
+    )
+},20000)

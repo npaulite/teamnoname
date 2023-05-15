@@ -3,7 +3,7 @@ const { entities } = useFDA();
 
 it('Assign Bavaria Drug to Patient', async() => {
     const patient = {
-        name: "John Done",
+        name: "John Doe",
         patientPicture: "",
         dob: new Date(1990,1,1),
         insuranceNumber: "1234567",
@@ -24,7 +24,7 @@ it('Assign Bavaria Drug to Patient', async() => {
         startingHIVLoad: "100000",
         trialStatus: "Ongoing"
     }
-    const bavariaDrug = entities.drug.get("01877ca6-6756-e387-493c-8089a79b1714")
+    const bavariaDrug = entities.drug.get("01881276-bb8e-2b77-e835-f52aa3f3a9c7")
     await expect(bavariaDrug).resolves.not.toThrow()
     const addPatient = entities.patient.add(patient)
     await expect(addPatient).resolves.not.toThrow().then(
@@ -40,4 +40,4 @@ it('Assign Bavaria Drug to Patient', async() => {
             entities.map.remove((await mapResponse).result._id)
         }
     )
-}, 20000)
+})
