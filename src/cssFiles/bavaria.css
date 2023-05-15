@@ -32,3 +32,32 @@ table {
     margin-left: 200px;
     margin-top: 50px;
 }
+.highlighted-doses {
+    background-color: rgb(80, 206, 75);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+  }
+.red-dose {
+    background-color: rgb(180, 28, 28);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+.goodstatus {
+    background-color: rgb(80, 206, 75);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+  }
+body{
+    background-color : #90a8eb; 
+    }
+    body::after {
+      content: "";
+      background: url(../assets/images/backgroundBav.jpg);
+      opacity: 0.1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: fixed;
+      z-index: -1;   
+    }

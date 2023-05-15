@@ -109,4 +109,18 @@
   .Allergies {
       margin-bottom: 10px;
   }
-  
+  .highlighted-doses {
+    background-color: rgb(80, 206, 75);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+  }
+.red-dose {
+    background-color: rgb(177, 84, 84);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+.goodstatus {
+    background-color: rgb(80, 206, 75);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+  }

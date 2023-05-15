@@ -22,3 +22,8 @@
 {
    display:block;
 }
+.goodstatus {
+    background-color: rgb(80, 206, 75);
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+  }

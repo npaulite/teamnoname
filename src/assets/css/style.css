@@ -1856,7 +1856,7 @@ body {
   line-height: 1.5;
   color: #030303;
   text-align: left;
-  background-color: #fff; }
+  background-color: #849df1; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -5756,7 +5756,9 @@ input[type="button"].btn-block {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem; }
+  padding: 1.25rem; 
+  background-color: #003a25;
+}
 
 .card-title {
   margin-bottom: 0.75rem; }

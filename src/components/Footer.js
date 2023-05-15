@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets1/css/style.css";
+import "../assets/css/demo_2/style.css";
 
 export default function () {
   return (

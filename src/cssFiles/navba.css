@@ -46,17 +46,23 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: .25rem;
+    padding: .5rem;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 10px;
+
   }
   
   .nav li.active {
-    background-color: #555;
+    background-color: #b3a9a9;
+    border-radius: 10px;
+
   }
   
   .nav li:hover {
     background-color: #fff;
     color: #242424;
-    border-radius: 0;
+    border-radius: 10px;
   }
 /* grid */
   .wrapper {

@@ -14,7 +14,7 @@ import {
 import { NavLink } from "react-router-dom";
 import "../cssFiles/app.css";
 import useAuth from "../hooks/useAuth";
-import "../assets/css/demo_1/style.css";
+// import "../assets/css/demo_1/style.css";
 
 const Sidebar1 = ({ children }) => {
   const { authorized } = useAuth();

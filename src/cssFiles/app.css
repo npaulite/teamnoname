@@ -42,10 +42,12 @@ main{
     background:lightskyblue;
     color: #000;
     transition: all 0.5s;
+    border-radius: 12px;
 }
 .active{
     background: lightskyblue;
     color: #000;
+    border-radius: 12px;
 }
 .icon, .link_text{
     font-size: 20px;

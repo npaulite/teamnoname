@@ -84,8 +84,24 @@ const Bavaria = () => {
                                 return "";
                               })}
                             </td>
-                            <td> {noOfVisit(patient)} / 5</td>
-                            <td> {patient.trialStatus}</td>
+                            <td
+                              className={
+                                noOfVisit(patient) === 5
+                                  ? "highlighted-doses"
+                                  : "red-dose"
+                              }
+                            >
+                              {noOfVisit(patient)} / 5
+                            </td>
+                            <td
+                              className={
+                                patient.trialStatus === "Completed"
+                                  ? "goodstatus"
+                                  : ""
+                              }
+                            >
+                              {patient.trialStatus}
+                            </td>
                           </tr>
                         );
                       })}

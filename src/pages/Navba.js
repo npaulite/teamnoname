@@ -4,7 +4,7 @@ import { auth } from "../firebase-config";
 import "../cssFiles/navba.css";
 import { Button } from "@mui/material";
 import useAuth from "../hooks/useAuth";
-import "../assets/css/demo_1/style.css";
+// import "../assets/css/demo_1/style.css";
 
 export default function Navba() {
   const { authorized, setAuth } = useAuth();
@@ -22,7 +22,7 @@ export default function Navba() {
       <ul>
         <form className="form-inline">
           {authorized == null ? (
-           <></>
+            <></>
           ) : (
             <div className="nav-profile-text">
               <p className="text-white font-weight-semibold m-0">
@@ -34,14 +34,28 @@ export default function Navba() {
             </div>
           )}
         </form>
-        {authorized?.role === "FDA" || authorized?.role === "Admin" ? 
-          <CustomLink to="/FDA">FDA</CustomLink> : ""}
-        {authorized?.role === "Bavaria" || authorized?.role === "Admin" ? 
-          <CustomLink to="/Bavaria">Bavaria</CustomLink> : "" }
-        {authorized?.role === "JaneHopkinsAdmin" || authorized?.role === "Admin" ? 
-        <CustomLink to="/JaneHopkinsAdmin">JaneHopkinsAdmin</CustomLink> : ""}
-        {authorized?.role === "JaneHopkinsDoctor" || authorized?.role === "Admin" ? 
-        <CustomLink to="/JaneHopkinsDoctor">JaneHopkinsDoctor</CustomLink> : ""}
+        {authorized?.role === "FDA" || authorized?.role === "Admin" ? (
+          <CustomLink to="/FDA">FDA</CustomLink>
+        ) : (
+          ""
+        )}
+        {authorized?.role === "Bavaria" || authorized?.role === "Admin" ? (
+          <CustomLink to="/Bavaria">Bavaria</CustomLink>
+        ) : (
+          ""
+        )}
+        {authorized?.role === "JaneHopkinsAdmin" ||
+        authorized?.role === "Admin" ? (
+          <CustomLink to="/JaneHopkinsAdmin">JaneHopkinsAdmin</CustomLink>
+        ) : (
+          ""
+        )}
+        {authorized?.role === "JaneHopkinsDoctor" ||
+        authorized?.role === "Admin" ? (
+          <CustomLink to="/JaneHopkinsDoctor">JaneHopkinsDoctor</CustomLink>
+        ) : (
+          ""
+        )}
         <CustomLink to="/">Home</CustomLink>
         {authorized === null ? (
           <Button variant="contained" component={Link} to="/Login">
