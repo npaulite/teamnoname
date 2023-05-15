@@ -15,7 +15,7 @@
     "@vendia/client": "^0.8.5",
     "babel-jest": "^27.5.1",
     "dotenv": "^16.0.3",
-    "firebase": "^9.17.2",
+    "firebase": "^9.22.0",
     "firebase-admin": "^11.5.0",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
