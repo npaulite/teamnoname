@@ -37,7 +37,7 @@ const JaneHopkinsDoctor = () => {
     if (doctorID) {
       let patientResponse = await entities.patient.list({
         filter: {
-          uuid: {
+          doctorUUID: {
             eq: doctorID,
           },
           bloodPressure: {
