@@ -16,9 +16,6 @@ import { Container } from "@mui/material";
         <div className="img2">
           <img src="https://www.vendia.com/images/illustrations/Vendia_HPIcon.svg"/>
         </div>
-        <div className="img3">
-          <img src="https://www.thegatewaydigital.com/wp-content/uploads/2020/07/Services-Level-Page-1_professional-services_CoE_4.1.webp"/>
-        </div>
       </div> 
       <div className="myBox">
         <Container>
@@ -50,13 +47,6 @@ import { Container } from "@mui/material";
           <h2 className="text2">Track and trace product DNA, inventory, customers, and shipping information 
           across supply chain partners. Vendia Share provides a fully auditable, versioned, and immutable 
           source of truth.</h2>
-        </div>
-        <div className="box3">
-          <h1 className="text3">Vendia included in "Gartner Cool Vendor in Cloud Computing</h1>
-          <h2 className="text3">A multicloud strategy is becoming inevitable for most global 
-          enterprises, but it brings security, integration, cost and governance challenges. 
-          CIOs should assess these Cool Vendors that are disrupting the cloud market through 
-          robust multicloud implementation products. -Gartner 2021</h2>
         </div>
   </div>
   );

@@ -1,18 +1,17 @@
-import { Box, Button, Card } from "@mui/material";
+import { Box, Button, Card, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useJaneHopkins from "../hooks/useJaneHopkins";
 import "../cssFiles/janeHopkinsDoctor.css";
 import "../cssFiles/navba.css";
 import { useState, useEffect, useContext } from "react";
 import { Stack } from "@mui/system";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import AuthContext from "../components/AuthProvider";
 import logo from "../assets/images/pp.webp";
 
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();
   const { authorized } = useContext(AuthContext);
-  const [format, setFormat] = useState("list");
+  const [format, setFormat] = useState("grid");
   const [patients, setPatients] = useState();
   const [doctorID, setDoctorID] = useState();
   const nav = useNavigate();
@@ -38,7 +37,7 @@ const JaneHopkinsDoctor = () => {
     if (doctorID) {
       let patientResponse = await entities.patient.list({
         filter: {
-          uuid: {
+          doctorUUID: {
             eq: doctorID,
           },
           bloodPressure: {
@@ -90,6 +89,18 @@ const JaneHopkinsDoctor = () => {
     }
   }
 
+  function assigned(p) {
+    let x = false
+    maps?.map((m) => {
+      {
+        if (p._id === m.patientUUID) {
+          x = true;
+        }
+      }
+    })
+    return x;
+  }
+
   return (
     <div className="main">
       <h1 className="container">JaneHopkins Doctor Page</h1>
@@ -104,19 +115,19 @@ const JaneHopkinsDoctor = () => {
           >
             <Button
               onClick={() => {
-                setFormat("list");
-              }}
-              variant="contained"
-            >
-              List
-            </Button>
-            <Button
-              onClick={() => {
                 setFormat("grid");
               }}
               variant="outlined"
             >
               Grid
+            </Button>
+            <Button
+              onClick={() => {
+                setFormat("list");
+              }}
+              variant="contained"
+            >
+              List
             </Button>
           </Stack>
         ) : (
@@ -126,6 +137,14 @@ const JaneHopkinsDoctor = () => {
             spacing={2}
             justifyContent="center"
           >
+                        <Button
+              onClick={() => {
+                setFormat("grid");
+              }}
+              variant="contained"
+            >
+              Grid
+            </Button>
             <Button
               onClick={() => {
                 setFormat("list");
@@ -133,14 +152,6 @@ const JaneHopkinsDoctor = () => {
               variant="outlined"
             >
               List
-            </Button>
-            <Button
-              onClick={() => {
-                setFormat("grid");
-              }}
-              variant="contained"
-            >
-              Grid
             </Button>
           </Stack>
         )}
@@ -162,10 +173,7 @@ const JaneHopkinsDoctor = () => {
                       width: "250px",
                     }}
                   >
-                    <h4>Name: {patient.name}</h4>
-                    <CopyToClipboard text={patient._id}>
-                      <Button>{patient._id}</Button>
-                    </CopyToClipboard>
+                    <Typography variant="h5" sx={{mb:3}}>{patient.name}</Typography>
 
                     <div>
                       <div class="container1">
@@ -178,33 +186,30 @@ const JaneHopkinsDoctor = () => {
                             width: "30%",
                             height: "30%",
                             display: "block",
-                            margin: "0 auto",
+                            margin: "0 auto 25px auto",
                           }}
+                          
                         />
                         <div
                           className={
                             patient?.eligibility ? "status open" : "status dead"
                           }
                         >
-                          {" "}
                           {patient?.eligibility
-                            ? "Patient Eligibility: Yes"
-                            : "Patient Eligibility: No"}{" "}
+                            ? "Trial Eligibility: Yes"
+                            : "Trial Eligibility: No"}{" "}
                         </div>
-                        {/* <div>
-                                {maps?.map((map, i) => {
-                                  {
-                                    if (patient._id === map.patientUUID) {
-                                      return (
-                                        <span key={i}>
-                                          {map.patientUUID ? "Yes" : "No"}
-                                        </span>
-                                      );
-                                    }
-                                  }
-                                  return "";
-                                })}
-                              </div> */}
+                        
+                        <div
+                          className={
+                            assigned(patient)
+                            ? "status open"
+                            : "status dead" 
+                          }
+                        >
+                          Drug Assigned: {assigned(patient) ? "Yes" : "No"}
+                        </div>
+                        {patient?.eligibility ?
                         <div
                           className={
                             noOfVisit(patient) === 5
@@ -214,6 +219,11 @@ const JaneHopkinsDoctor = () => {
                         >
                           Number of Visits: {noOfVisit(patient)} / 5
                         </div>
+                        :
+                        <div>
+                          &nbsp;
+                        </div>
+                        }
 
                         <Stack
                           sx={{ pt: 4 }}
@@ -221,6 +231,7 @@ const JaneHopkinsDoctor = () => {
                           spacing={2}
                           justifyContent="center"
                         >
+                          {assigned(patient) ?
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
@@ -228,6 +239,15 @@ const JaneHopkinsDoctor = () => {
                           >
                             Add Visit
                           </Button>
+                          :
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            disabled
+                          >
+                            Add Visit
+                          </Button>
+                          }
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
