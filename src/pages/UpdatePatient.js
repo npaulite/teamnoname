@@ -583,7 +583,7 @@ function UpdatePatient() {
                       );
                     })}
                   </div>
-
+                  
                   <div className="visits">
                     <Typography variant="h6">Visits</Typography>
                     {visits.map((x, i) => {

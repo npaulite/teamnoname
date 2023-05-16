@@ -22,13 +22,13 @@ const Sidebar1 = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
-    {
+    /**{
       path: "/",
       name: "",
       icon: <FaUserAlt />,
       authorizedRoles: null,
       // icon: <img src="images/faces/face1.jpg" alt="profile" />,
-    },
+    },**/
 
     {
       path: "/",

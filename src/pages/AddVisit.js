@@ -64,6 +64,7 @@ function AddVisit() {
       },
     ]);
   };
+  /**
   const handleAddVisit1 = () => {
     if (visits.length < 5) {
       const newVisits = Array.from({ length: 5 }, () => ({
@@ -74,7 +75,7 @@ function AddVisit() {
       }));
       setVisits(newVisits);
     }
-  };
+  };  */
 
   const goBack = () => {
     let path = `/JaneHopkinsDoctor`;
@@ -164,7 +165,7 @@ function AddVisit() {
                               label="Date of Visit"
                               InputLabelProps={{ shrink: true }}
                               value={x.dateTime}
-                              //   required
+                              required
                               pattern="/^\d{2}-\d{2}-\d{4}$/"
                               onChange={(e) => handleVisit(e, i)}
                               fullWidth
@@ -209,14 +210,6 @@ function AddVisit() {
                                   Add
                                 </Button>
                               )}
-                            </div>
-                            <div className="visitButtons">
-                              <Button
-                                variant="outlined"
-                                onClick={handleAddVisit1}
-                              >
-                                Add
-                              </Button>
                             </div>
                           </div>
                         );

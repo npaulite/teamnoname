@@ -231,7 +231,16 @@ const JaneHopkinsDoctor = () => {
                           spacing={2}
                           justifyContent="center"
                         >
-                          {assigned(patient) ?
+                          {assigned(patient) ? 
+                          (noOfVisit(patient) === 5 ?
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            disabled
+                          >
+                            Add Visit
+                          </Button>
+                          :
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
@@ -239,6 +248,8 @@ const JaneHopkinsDoctor = () => {
                           >
                             Add Visit
                           </Button>
+
+                          )
                           :
                           <Button
                             variant="contained"
