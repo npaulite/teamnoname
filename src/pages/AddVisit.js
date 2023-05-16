@@ -98,47 +98,57 @@ function AddVisit() {
     <div className="visits">
       <Box>
         <div className="return">
-          <Button variant="outlined" size="large" onClick={goBack}>
+          <Button variant="contained" size="large" onClick={goBack}>
             <Typography>Go Back</Typography>
             <ArrowLeftSharp />
           </Button>
         </div>
       </Box>
       <Container>
-        <Typography component="h1" variant="h3">
-          Add Patient Visit
-        </Typography>
-        <Box component="form" mt={2} onSubmit={handleSubmit}>
-          <div className="patientName" m={2}>
-            <Typography variant="h6">Patient Name</Typography>
-            <TextField
-              required
-              id="patientName"
-              label="Name"
-              value={patientName || ""}
-              onChange={(e) => {
-                setPatientName(e.target.value);
-              }}
-              fullWidth
-              disabled
-            />
-          </div>
-          <div className="visit" m={2}>
-            <Typography variant="h6">Patient Visits</Typography>
-            {visits.length === 0 ? (
-              <Button variant="outlined" onClick={() => handleAddVisit()}>
-                {" "}
-                Add First Visit
-              </Button>
-            ) : (
-              visits.map((x, i) => {
-                return (
-                  <div className="visit" key={i}>
-                    <Typography variant="subtitle1" sx={{ mt: 5, mb: 1 }}>
-                      {" "}
-                      Visit #{i + 1}
-                    </Typography>
-                    {/*<TextField sx={{mb:1}}
+        <Box className="fda" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+          <div className="col-lg-12 grid-margin stretch-card">
+            <div className="card">
+              <div className="card-body">
+                <Typography component="h1" variant="h3">
+                  Add Patient Visit
+                </Typography>
+                <Box component="form" mt={2} onSubmit={handleSubmit}>
+                  <div className="patientName" m={2}>
+                    <Typography variant="h6">Patient Name</Typography>
+                    <TextField
+                      required
+                      id="patientName"
+                      label="Name"
+                      value={patientName || ""}
+                      onChange={(e) => {
+                        setPatientName(e.target.value);
+                      }}
+                      fullWidth
+                      disabled
+                    />
+                  </div>
+                  <div className="visit" m={2}>
+                    <Typography variant="h6">Patient Visits</Typography>
+                    {visits.length === 0 ? (
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddVisit()}
+                      >
+                        {" "}
+                        Add First Visit
+                      </Button>
+                    ) : (
+                      visits.map((x, i) => {
+                        return (
+                          <div className="visit" key={i}>
+                            <Typography
+                              variant="subtitle1"
+                              sx={{ mt: 5, mb: 1 }}
+                            >
+                              {" "}
+                              Visit #{i + 1}
+                            </Typography>
+                            {/*<TextField sx={{mb:1}}
                                         name="patient" 
                                         //label="Patient Name" 
                                         InputLabelProps={{ shrink: true }}
@@ -147,75 +157,85 @@ function AddVisit() {
                                         fullWidth
                                         disabled
                             /> */}
-                    <TextField
-                      sx={{ mb: 1 }}
-                      name="dateTime"
-                      type="date"
-                      label="Date of Visit"
-                      InputLabelProps={{ shrink: true }}
-                      value={x.dateTime}
-                      //   required
-                      pattern="/^\d{2}-\d{2}-\d{4}$/"
-                      onChange={(e) => handleVisit(e, i)}
-                      fullWidth
-                    />
-                    <TextField
-                      sx={{ mb: 1 }}
-                      name="notes"
-                      label="Notes"
-                      InputLabelProps={{ shrink: true }}
-                      value={x.notes}
-                      required
-                      pattern="/^[a-zA-Z]+$/"
-                      onChange={(e) => handleVisit(e, i)}
-                      fullWidth
-                    />
-                    <TextField
-                      sx={{ mb: 1 }}
-                      name="hivViralLoad"
-                      type="number"
-                      label="HIV Viral Load"
-                      InputLabelProps={{ shrink: true }}
-                      value={x.hivViralLoad}
-                      required
-                      pattern="/^\d+$/"
-                      onChange={(e) => handleVisit(e, i)}
-                      fullWidth
-                    />
-                    <div className="visitButtons">
-                      {visits.length !== 1 && (
-                        <Button
-                          variant="outlined"
-                          onClick={() => handleRemoveVisit(i)}
-                        >
-                          Remove
-                        </Button>
-                      )}
-                      {visits.length - 1 === i && visits.length < 5 && (
-                        <Button variant="outlined" onClick={handleAddVisit}>
-                          Add
-                        </Button>
-                      )}
-                    </div>
-                    <div className="visitButtons">
-                      <Button variant="outlined" onClick={handleAddVisit1}>
-                        Add
-                      </Button>
-                    </div>
+                            <TextField
+                              sx={{ mb: 1 }}
+                              name="dateTime"
+                              type="date"
+                              label="Date of Visit"
+                              InputLabelProps={{ shrink: true }}
+                              value={x.dateTime}
+                              //   required
+                              pattern="/^\d{2}-\d{2}-\d{4}$/"
+                              onChange={(e) => handleVisit(e, i)}
+                              fullWidth
+                            />
+                            <TextField
+                              sx={{ mb: 1 }}
+                              name="notes"
+                              label="Notes"
+                              InputLabelProps={{ shrink: true }}
+                              value={x.notes}
+                              required
+                              pattern="/^[a-zA-Z]+$/"
+                              onChange={(e) => handleVisit(e, i)}
+                              fullWidth
+                            />
+                            <TextField
+                              sx={{ mb: 1 }}
+                              name="hivViralLoad"
+                              type="number"
+                              label="HIV Viral Load"
+                              InputLabelProps={{ shrink: true }}
+                              value={x.hivViralLoad}
+                              required
+                              pattern="/^\d+$/"
+                              onChange={(e) => handleVisit(e, i)}
+                              fullWidth
+                            />
+                            <div className="visitButtons">
+                              {visits.length !== 1 && (
+                                <Button
+                                  variant="outlined"
+                                  onClick={() => handleRemoveVisit(i)}
+                                >
+                                  Remove
+                                </Button>
+                              )}
+                              {visits.length - 1 === i && visits.length < 5 && (
+                                <Button
+                                  variant="outlined"
+                                  onClick={handleAddVisit}
+                                >
+                                  Add
+                                </Button>
+                              )}
+                            </div>
+                            <div className="visitButtons">
+                              <Button
+                                variant="outlined"
+                                onClick={handleAddVisit1}
+                              >
+                                Add
+                              </Button>
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
                   </div>
-                );
-              })
-            )}
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              sx={{ mt: 5, mb: 8 }}
-            >
-              Update Visits
-            </Button>
+                  <div>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      fullWidth
+                      sx={{ mt: 5, mb: 8 }}
+                    >
+                      Update Visits
+                    </Button>
+                  </div>
+                </Box>
+              </div>
+            </div>
           </div>
         </Box>
       </Container>
