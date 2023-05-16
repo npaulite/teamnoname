@@ -343,20 +343,21 @@ function PostStudy() {
                       justifyContent="center"
                       paddingBottom={15}
                     >
+                      {calcTotalReduction(bavaria) === "NaN" ? "" :
                       <div style={{ width: "400px", height: "400px" }}>
                         <Typography variant="h6" align="center">
                           Bavaria Data
                         </Typography>
                         <Pie data={bavariaData} options={options} />
-                      </div>
+                      </div>}
                       {/* Add the Placebo Pie chart */}
-
+                      {calcTotalReduction(placebo) === "NaN" ? "" :
                       <div style={{ width: "400px", height: "400px" }}>
                         <Typography variant="h6" align="center">
                           Placebo Data
                         </Typography>
                         <Pie data={placeboData} options={options} />
-                      </div>
+                      </div>}
                     </Stack>
                     <table className="table-striped">
                       <thead>
