@@ -21,7 +21,7 @@ export default function Home() {
             <a href="https://www.vendia.com/">
               <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/cpuf13twbf75y9bjau7h.png" />
             </a>
-            {authorized == null ? (
+            {/**authorized == null ? (
               <></>
             ) : (
               <div style={{ paddingTop: "100px" }}>
@@ -30,7 +30,7 @@ export default function Home() {
                 </Typography>
                 <Typography variant="h5">Role: {authorized?.role} </Typography>
               </div>
-            )}
+            )**/}
           </div>
         </div>
       </h1>

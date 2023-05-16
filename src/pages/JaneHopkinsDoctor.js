@@ -231,11 +231,13 @@ const JaneHopkinsDoctor = () => {
                           spacing={2}
                           justifyContent="center"
                         >
-                          {assigned(patient) ?
+                          {patient?.eligibility ? (
+                          assigned(patient) ? 
+                          (noOfVisit(patient) === 5 ?
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
-                            onClick={() => handleAddVisit(patient._id)}
+                            disabled
                           >
                             Add Visit
                           </Button>
@@ -243,9 +245,28 @@ const JaneHopkinsDoctor = () => {
                           <Button
                             variant="contained"
                             sx={{ m: 1 }}
+                            onClick={() => handleAddVisit(patient._id)}
+                          >
+                            Add Visit
+                          </Button>
+
+                          )
+                          :
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
                             disabled
                           >
                             Add Visit
+                          </Button>
+                          )
+                          :
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            disabled
+                          >
+                            Ineligible
                           </Button>
                           }
                           <Button

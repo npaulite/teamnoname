@@ -169,7 +169,8 @@ const JaneHopkinsAdmin = () => {
                                   Assign Doctor
                                 </Button>
                               )}
-                              {noOfVisit(patient) === 5 ? (
+                              {patient?.eligibility === true ? (
+                              noOfVisit(patient) === 5 ? (
                                 patient.trialStatus === "Ongoing" ? (
                                   <Button
                                     variant="contained"
@@ -197,7 +198,17 @@ const JaneHopkinsAdmin = () => {
                                 >
                                   Trial Ongoing
                                 </Button>
-                              )}
+                              ))
+                            :
+                            (
+                              <Button
+                                variant="contained"
+                                disabled
+                                sx={{ m: 1 }}
+                              >
+                                Trial Exempted
+                              </Button>
+                            )}
                             </div>
                           </td>
                         </tr>
