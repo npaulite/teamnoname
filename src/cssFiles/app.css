@@ -18,6 +18,11 @@ main{
     width: 200px;
     transition: all 0.5s;
 }
+ @media (max-height: 1200px) {
+    .sidebar {
+      height: 3800px; /* Adjust width for larger screens */
+    }
+  }
 .top_section{
     display: flex;
     align-items:center;
