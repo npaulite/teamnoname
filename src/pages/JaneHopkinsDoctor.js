@@ -5,7 +5,6 @@ import "../cssFiles/janeHopkinsDoctor.css";
 import "../cssFiles/navba.css";
 import { useState, useEffect, useContext } from "react";
 import { Stack } from "@mui/system";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import AuthContext from "../components/AuthProvider";
 import logo from "../assets/images/pp.webp";
 
@@ -91,14 +90,15 @@ const JaneHopkinsDoctor = () => {
   }
 
   function assigned(p) {
-    maps?.map((map, i) => {
+    let x = false
+    maps?.map((m) => {
       {
-        if (p._id === map.patientUUID) {
-          return true;
+        if (p._id === m.patientUUID) {
+          x = true;
         }
       }
-      return false;
     })
+    return x;
   }
 
   return (
@@ -195,21 +195,21 @@ const JaneHopkinsDoctor = () => {
                             patient?.eligibility ? "status open" : "status dead"
                           }
                         >
-                          {" "}
                           {patient?.eligibility
-                            ? "Patient Eligibility: Yes"
-                            : "Patient Eligibility: No"}{" "}
+                            ? "Trial Eligibility: Yes"
+                            : "Trial Eligibility: No"}{" "}
                         </div>
                         
                         <div
                           className={
-                            assigned(patient) 
+                            assigned(patient)
                             ? "status open"
-                            : "status dead"
-                          }>
-                            Drug Assigned: {assigned(patient) ? "Yes": "No"}
+                            : "status dead" 
+                          }
+                        >
+                          Drug Assigned: {assigned(patient) ? "Yes" : "No"}
                         </div>
-
+                        {patient?.eligibility ?
                         <div
                           className={
                             noOfVisit(patient) === 5
@@ -219,6 +219,11 @@ const JaneHopkinsDoctor = () => {
                         >
                           Number of Visits: {noOfVisit(patient)} / 5
                         </div>
+                        :
+                        <div>
+                          &nbsp;
+                        </div>
+                        }
 
                         <Stack
                           sx={{ pt: 4 }}

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged } from "@firebase/auth";
 import Navba from "./pages/Navba";
-import Home from "./pages/Home";
+//import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import JaneHopkinsDoctor from "./pages/JaneHopkinsDoctor";
@@ -22,7 +22,7 @@ import Sidebar1 from "./components/Sidebar1";
 import AssignDoctor from "./pages/AssignDoctor";
 import PostStudy from "./pages/PostStudy";
 import ReviewPatient from "./pages/ReviewPatient";
-// import Home from "./pages/Home copy";
+import Home from "./pages/Home copy";
 
 function App() {
   const { authorized, setAuth} = useAuth();
