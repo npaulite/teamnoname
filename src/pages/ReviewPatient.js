@@ -42,7 +42,7 @@ function ReviewPatient() {
             setInsuranceNumber(getResponse.insuranceNumber)
             setHeight(getResponse.height.replace(/\D/g,''))
             setWeight(getResponse.weight.replace(/\D/g,''))
-            setBloodPressure(getResponse.bloodPressure.replace(/\D/g,''))
+            setBloodPressure(getResponse.bloodPressure)
             setTemperature(getResponse.temperature.replace(/\D/g,''))
             setOxygenSaturation(getResponse.oxygenSaturation.replace(/\D/g,''))
             setAddress(getResponse.address)
@@ -170,7 +170,7 @@ function ReviewPatient() {
         <Box>
         <div className="return">
             
-            <Button variant="outlined" size="large" onClick={goBack}>
+            <Button variant="contained" size="large" onClick={goBack}>
                 <Typography>Go Back</Typography>
                 <ArrowLeftSharp/>
             </Button>
@@ -178,6 +178,10 @@ function ReviewPatient() {
         </div>
         </Box>
         <Container>
+        <Box className="fda" sx={{ pt: 4, pb: 6 }} bgcolor="grey">
+          <div className="col-lg-12 grid-margin stretch-card">
+            <div className="card">
+              <div className="card-body">
         <Typography component="h1" variant="h3">Review and Set Patient Trial Completion</Typography>
         <Typography component="h5">Asterisk(*) is required</Typography>
         <Box component="form" mt={2} onSubmit={handleSubmit}>
@@ -328,13 +332,14 @@ function ReviewPatient() {
                             onChange={e => handleMedication(e, i)}
                             fullWidth
                             disabled
+                            sx={{mb:1}}
                             />
-                        <div className="medButtons">
+                        {/* <div className="medButtons">
                         {currentMedications.length !== 1 && <Button variant="outlined"
                             onClick={() => handleRemoveMedication(i)} disabled>Remove</Button>}
                         {currentMedications.length - 1 === i && <Button variant="outlined" 
                             onClick={handleAddMedication} disabled>Add</Button>}
-                    </div>
+                    </div> */}
                     </div>
                     );
                 })}
@@ -397,13 +402,14 @@ function ReviewPatient() {
                             onChange={e => handleICD(e, i)}
                             fullWidth
                             disabled
+                            sx={{mb:1}}
                             />
-                        <div className="icdButtons">
+                        {/* <div className="icdButtons">
                         {icdHealthCodes.length !== 1 && <Button variant="outlined"
                             onClick={() => handleRemoveICD(i)} disabled>Remove</Button>}
                         {icdHealthCodes.length - 1 === i && <Button variant="outlined" 
                             onClick={handleAddICD} disabled>Add</Button>}
-                        </div>
+                    </div> */}
                     </div>
                     );
                 })}
@@ -422,12 +428,12 @@ function ReviewPatient() {
                             fullWidth
                             disabled
                             />
-                        <div className="allergyButtons">
+                        {/*<div className="allergyButtons">
                         {allergies.length !== 1 && <Button variant="outlined"
                             onClick={() => handleRemoveAllergy(i)} disabled>Remove</Button>}
                         {allergies.length - 1 === i && <Button variant="outlined" 
                             onClick={handleAddAllergy} disabled>Add</Button>}
-                        </div>
+                    </div>*/}
                     </div>
                     );
                 })}
@@ -490,6 +496,10 @@ function ReviewPatient() {
                     Set Patient's Trial Completed
                 </Button>
             </div>
+        </Box>
+        </div>
+            </div>
+          </div>
         </Box>
         </Container>
       </div>
