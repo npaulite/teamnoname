@@ -231,7 +231,8 @@ const JaneHopkinsDoctor = () => {
                           spacing={2}
                           justifyContent="center"
                         >
-                          {assigned(patient) ? 
+                          {patient?.eligibility ? (
+                          assigned(patient) ? 
                           (noOfVisit(patient) === 5 ?
                           <Button
                             variant="contained"
@@ -257,6 +258,15 @@ const JaneHopkinsDoctor = () => {
                             disabled
                           >
                             Add Visit
+                          </Button>
+                          )
+                          :
+                          <Button
+                            variant="contained"
+                            sx={{ m: 1 }}
+                            disabled
+                          >
+                            Ineligible
                           </Button>
                           }
                           <Button

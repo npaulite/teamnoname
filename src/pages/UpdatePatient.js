@@ -583,7 +583,8 @@ function UpdatePatient() {
                       );
                     })}
                   </div>
-                  
+                  {trialStatus === "Non-Eligible" ? " " : 
+                  ((trialStatus === "Completed") ? "" :
                   <div className="visits">
                     <Typography variant="h6">Visits</Typography>
                     {visits.map((x, i) => {
@@ -656,7 +657,7 @@ function UpdatePatient() {
                         </div>
                       );
                     })}
-                  </div>
+                  </div>)}
                   <div>
                     <Button
                       variant="contained"
