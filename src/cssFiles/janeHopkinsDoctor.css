@@ -47,9 +47,10 @@
 
 .patientsGrid {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     grid-auto-rows: auto;
     column-gap: 1px;
+    margin-left: 125px;
     color: antiquewhite;
 }
 
